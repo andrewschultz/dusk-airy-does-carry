@@ -1,0 +1,142 @@
+start_at = "start_room"
+start_theme = my_theme
+
+#cch.py makes sure of things
+
+game_information {
+   game_name                    = ?
+   game_version                 = 1.0.0
+   game_shortname               = ?
+   written_by                   = Andrew Schultz
+   year_of_release              = 2025
+   copyright_message            = Free to distribute, voluntary payments welcome
+   short_synopsis               = EctoComp 2025 Petite Mort entry, in the vein of {wp} and {ut}
+}
+
+
+## Defines locations in the world
+
+strings {
+}
+
+integers {
+}
+
+booleans {
+   # game state (noncritical)
+   warn_score : boolean "false" ;
+
+   # rendering
+   show_overlay : boolean "false" ;
+}
+
+vocabulary {
+}
+
+locations {
+}
+
+# Defines things in the world (scenery cannot be carried)
+
+objects {
+}
+
+connections {
+}
+
+barriers {
+}
+
+subroutines {
+}
+
+themes {
+   my_theme : theme {
+      status_bar {
+         : header_text ;
+         : dynamic_text "my_score" ;
+      }
+      theme_settings {
+         parser_delay  = 0
+      }
+      colors {
+         status_bar_pen   = 15
+         status_bar_paper = #222
+      }
+      system_messages {
+
+   i_cant_do_that = That's a valid command, but not right here and now.
+   not_present = You can't see ${entity} here.
+   ask_new_game                                   = Would you like to restart {cdsa}?
+   ask_quit                                       = Do you wish to quit {cdsa}?
+   invalid_choice                                 = {yn_or_12_or_14}
+   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {cdsa}.
+   unknown_verb                                   = {custom_unknown_verb_error}
+   you_cant_go_that_direction                     = {exits_err}
+   you_see_nothing_special = {nospecial_custom}
+   you_see_nothing_special_2 = {nospecial_custom}
+      }
+   }
+}
+
+## Print the objective when the game starts
+
+on_startup {
+}
+
+## Execute this every time a player moves or redescribes a location
+
+on_describe {
+}
+
+## Test VERB NOUN that the player types and executes conditional actions
+
+on_command {
+   : match "z _;wait _" {
+      : print "\"Loaf, right? Lo, fright!\"" ;
+      : if (!wait_yet) {
+         : print "{note_once}This is just a silly general response. Waiting gives no penalty or benefit." ;
+         : set_true "wait_yet" ;
+      }
+   }
+   : match "about _" {
+      : print "Fill in later." ;
+   }
+   : match "credits _;credit _" {
+      : print "Fill in later." ;
+   }
+   : match "help _;hint _;hints _" {
+      : print "Fill in later." ;
+   }
+   : match "history _" {
+      : print "Fill in later." ;
+   }
+   : match "score _" {
+      : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
+      : if (!warn_score_header) {
+         : print "{note_once}This is tracked in the upper left." ;
+         : set_true "warn_score_header" ;
+      }
+   }
+   : match "think _" {
+      : print "Fill in later." ;
+   }
+   : match "verbs _;verb _" {
+      : print "Fill in later." ;
+   }
+   : match "x me;x myself" {
+      : print "Fill in later." ;
+   }
+}
+
+on_tick {
+}
+
+on_render {
+   : if (!showing_map) {
+      : done ;
+   }
+}
+
+assets {
+}
