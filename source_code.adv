@@ -31,6 +31,9 @@ booleans {
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
 
+   # scoring
+   point_glow_bold : boolean "false" ;
+
    # rendering
    show_overlay : boolean "false" ;
 }
@@ -40,6 +43,23 @@ vocabulary {
 
 locations {
    r0 : location {
+      on_command {
+         : match "glow bold" {
+            : if (point_glow_bold) {
+               : print "The globe is already giving light!" ;
+            }
+            : print "The globe begins to glow more boldly. You can see your way around. There are two exits. One's probably the way you came. The other leads to real, natural light, aboveground!" ;
+            : set_true "point_glow_bold" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_glow_bold) {
+            : match "glow _;_ bold" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r1 : location {
    }
