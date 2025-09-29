@@ -1,4 +1,4 @@
-start_at = "start_room"
+start_at = "r0"
 start_theme = my_theme
 
 #cch.py makes sure of things
@@ -34,6 +34,26 @@ vocabulary {
 }
 
 locations {
+   r0 : location {
+   }
+   r1 : location {
+   }
+   r2 : location {
+   }
+   r3 : location {
+   }
+   r4 : location {
+   }
+   r5 : location {
+   }
+   r6 : location {
+   }
+   r7 : location {
+   }
+   r8 : location {
+   }
+   r9 : location {
+   }
 }
 
 # Defines things in the world (scenery cannot be carried)
@@ -42,6 +62,16 @@ objects {
 }
 
 connections {
+   from, direction, to = [
+   r0, up, r9
+   r9, north, r8
+   r9, west, r5
+   r9, east, r6
+   r5, west, r1
+   r6, east, r4
+   r5, north, r2
+   r6, north, r3
+   ]
 }
 
 barriers {
