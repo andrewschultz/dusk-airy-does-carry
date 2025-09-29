@@ -22,11 +22,63 @@ strings {
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "glow (bold)" ;
 
+   # parser error stuff
+   custom_unknown_verb_error : string "Nothing comes of that. {gsgr} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
+   exits_err : dynamic_string {( is_at "r0" ? "{r0_cantgo}" :
+      is_at "r1" ? "{r1_cantgo}" :
+      is_at "r2" ? "{r2_cantgo}" :
+      is_at "r3" ? "{r3_cantgo}" :
+      is_at "r4" ? "{r4_cantgo}" :
+      is_at "r5" ? "{r5_cantgo}" :
+      is_at "r6" ? "{r6_cantgo}" :
+      is_at "r7" ? "{r7_cantgo}" :
+      is_at "r8" ? "{r8_cantgo}" :
+      is_at "r9" ? "{r9_cantgo}" ?
+      "You can't go that way. I should have a better message, but I don't."
+      )} ;
+
+   # basics
    my_score : string "{score}/{max_score}" ;
 
    r0_loc : dynamic_string {( point_glow_bold ? "Now that the globe (old) emanates a {d_glow_bold}, you can see a passage leading up." : "You can't see much here. A small {c_globe_old} gives off a very dim light. It seems to be your only hope to illuminate a way out of here. But how to operate it?" )} ;
    r0_header : dynamic_string {( point_glow_bold ? "{c_globe_old}" : "{d_glow_bold}" )} ;
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
+
+   r1_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r1_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r1_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r2_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r2_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r2_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r3_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r3_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r3_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r4_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r4_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r4_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r5_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r5_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r5_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r6_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r6_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r6_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r7_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r7_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r7_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r8_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r8_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r8_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+
+   r9_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r9_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r9_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
 }
 
 integers {
@@ -92,6 +144,7 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 
 objects {
+   dump_ale : object "Dumb-Pale-Dump Ale" ;
 }
 
 connections {
