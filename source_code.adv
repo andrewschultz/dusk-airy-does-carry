@@ -80,9 +80,22 @@ connections {
 }
 
 barriers {
+   block_init : block {
+      location = r9
+      block_when_not = point_glow_bold
+      message = There will be a way up when you have a light source.
+   }
 }
 
 subroutines {
+   add_point : subroutine {
+      : print "<Your score has just gone up by a point!<#ff0>>" ;
+	  : increment "score" ;
+	  : update_graphic ;
+   }
+   say_half : subroutine {
+      : print "You got half right." ;
+   }
 }
 
 themes {
