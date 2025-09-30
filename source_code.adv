@@ -84,12 +84,36 @@ strings {
 integers {
    score : integer "0" ;
    max_score : integer "12" ;
+   tats_number : dynamic_integer {(
+      is_at "r0" ? r0_hintnum :
+      is_at "r1" ? r1_hintnum :
+      is_at "r2" ? r2_hintnum :
+      is_at "r3" ? r3_hintnum :
+      is_at "r4" ? r4_hintnum :
+      is_at "r5" ? r5_hintnum :
+      is_at "r6" ? r6_hintnum :
+      is_at "r7" ? r7_hintnum :
+      is_at "r8" ? r8_hintnum :
+      is_at "r9" ? r9_hintnum : 0
+      )} ;
+   r0_hintnum : dynamic_integer {(point_glow_bold ? 0 : 44)} ;
+   r9_hintnum : dynamic_integer {(point_why_trains ? 0 : 36)} ;
+   r8_hintnum : dynamic_integer {(point_wake_up ? 0 : 42)} ;
+   r7_hintnum : dynamic_integer {(point_k_vroom ? 0 : 15)} ;
+   r6_hintnum : dynamic_integer {(point_aid_route ? 0 : 35)} ;
+   r5_hintnum : dynamic_integer {(point_scam_pill ? 0 : 44)} ;
+   r4_hintnum : dynamic_integer {(point_carp_arts ? 0 : 44)} ;
+   r3_hintnum : dynamic_integer {(point_blurb_lasting ? 0 :
+      (point_whee_zoos ? 57 : 44) )} ;
+   r2_hintnum : dynamic_integer {(point_reek_odor ? 0 : (point_broke_ode ? 44 : 53) )} ;
+   r1_hintnum : dynamic_integer {(point_dew_nice ? 0 : 34)} ;
 }
 
 booleans {
    # game state (noncritical)
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
+   me_x_yet : boolean "false" ;
 
    # scoring
    point_glow_bold : boolean "false" ;
@@ -344,6 +368,7 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 
 objects {
+   phase_tats : object "<Fey Stats Phase Tats<#88f>>" ;
    dump_ale : object "Dumb-Pale-Dump Ale" ;
 }
 
@@ -455,7 +480,20 @@ on_command {
       : print "Fill in later." ;
    }
    : match "x me;x myself" {
-      : print "Fill in later." ;
+      : if (!me_x_yet) {
+         : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them fey stats/phase-tats." ;
+         : pocket "phase_tats" ;
+         : set_true "me_x_yet" ;
+      } : else {
+         : print "Nothing on you but the tats which can give hints." ;
+      }
+      : done ;
+   }
+   : if (me_x_yet) {
+      : match "_ tats;_ fey;_ phase;_ stats" {
+         : print "The tats swirl and form a number: {tats_number}." ;
+         : done ;
+      }
    }
 }
 
