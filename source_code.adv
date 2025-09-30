@@ -403,6 +403,24 @@ subroutines {
    say_half : subroutine {
       : print "You got half right." ;
    }
+
+   odd_dir_note : subroutine {
+      : match "se _;sw _;ne _;nw _" {
+         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
+         : done ;
+      }
+      : mask {
+         : if (is_at "r9" || is_at "r0") {
+            : match "d _;u _" {
+               : return ;
+            }
+         }
+      }
+      : match "u _;d _;enter _;in _;exit _;out _" {
+         : print "Only the four main cardinal directions are used here, and (at the start) up/down." ;
+         : done ;
+      }
+   }
 }
 
 themes {
@@ -447,6 +465,7 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_command {
+   : gosub "odd_dir_note" ;
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
       : if (!wait_yet) {
@@ -478,6 +497,10 @@ on_command {
    }
    : match "verbs _;verb _" {
       : print "Fill in later." ;
+   }
+   : match "take _;drop _" {
+      : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
+      : done ;
    }
    : match "x me;x myself" {
       : if (!me_x_yet) {
