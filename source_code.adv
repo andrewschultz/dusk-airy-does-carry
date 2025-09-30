@@ -33,7 +33,7 @@ strings {
       is_at "r6" ? "{r6_cantgo}" :
       is_at "r7" ? "{r7_cantgo}" :
       is_at "r8" ? "{r8_cantgo}" :
-      is_at "r9" ? "{r9_cantgo}" ?
+      is_at "r9" ? "{r9_cantgo}" :
       "You can't go that way. I should have a better message, but I don't."
       )} ;
 
@@ -41,7 +41,7 @@ strings {
    my_score : string "{score}/{max_score}" ;
 
    r0_loc : dynamic_string {( point_glow_bold ? "Now that the globe (old) emanates a {d_glow_bold}, you can see a passage leading up." : "You can't see much here. A small {c_globe_old} gives off a very dim light. It seems to be your only hope to illuminate a way out of here. But how to operate it?" )} ;
-   r0_header : dynamic_string {( point_glow_bold ? "{c_globe_old}" : "{d_glow_bold}" )} ;
+   r0_header : dynamic_string {( point_glow_bold ? "{d_glow_bold}" : "{c_globe_old}" )} ;
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
 
    r1_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
@@ -83,7 +83,7 @@ strings {
 
 integers {
    score : integer "0" ;
-   max_score : integer "11" ;
+   max_score : integer "12" ;
 }
 
 booleans {
@@ -107,7 +107,7 @@ booleans {
 
    # rendering
    indoors : dynamic_boolean {( is_at "r0" || is_at "r7" )} ;
-   show_overlay : boolean "false" ;
+   show_overlay : boolean "true" ;
 }
 
 vocabulary {
@@ -346,6 +346,7 @@ connections {
    from, direction, to = [
    r0, up, r9
    r9, north, r8
+   r8, north, r7
    r9, west, r5
    r9, east, r6
    r5, west, r1
@@ -481,7 +482,7 @@ on_render {
          : overlay "p_9" x="0" y="0" ;
       } : else_if (score == 10) {
          : overlay "p_10" x="0" y="0" ;
-      } : else_if (score == 11) {
+      } : else_if (score >= 11) {
          : overlay "p_11" x="0" y="0" ;
       }
    }
