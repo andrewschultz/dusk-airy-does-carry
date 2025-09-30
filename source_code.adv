@@ -57,41 +57,41 @@ strings {
    r0_header : dynamic_string {( point_glow_bold ? "{d_glow_bold}" : "{c_globe_old}" )} ;
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
 
-   r1_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r1_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r1_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r1_header : dynamic_string {( point_dew_nice ? "Dew (Nice)" : "Dune/Ice" )} ;
+   r1_loc : dynamic_string {( "Here the way is blocked in every direction except back east, by a large dune and lots of ice." + (point_dew_nice ? " Some of the ice has thawed, so you can get a bit of dew." : "") )} ;
+   r1_cantgo : string "You can only go back east." ;
 
-   r2_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r2_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r2_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r2_header : string "Comp-Lots-Com Plots" ;
+   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A recorder is present, trying to fix the broke ode you broke." : "A BRO CODE is on the wall here." ) )} ;
+   r2_cantgo : string "You can only go back south." ;
 
-   r3_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r3_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r3_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "Wheeze-Ooze" )} ;
+   r3_loc : dynamic_string {( point_whee_zoos ? "All kinds of animals fill the zoos here. They're mostly sleeping, since it's night." : "Wheeze-ooze threatens to take over this whole area. It's full of undead energy." )} ;
+   r3_cantgo : string "You can only go back south." ;
 
-   r4_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r4_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r4_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r4_header : string "Car Parts" ;
+   r4_loc : dynamic_string {( "Car parts lie strewn about the area." + (point_carp_arts ? " There are some carp arts, too, that helped you learn a thing or two about charisma, but you've internalized all that." : "") )} ;
+   r4_cantgo : string "You can only go back west." ;
 
-   r5_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r5_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r5_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r5_header : string {( "<The \"Scamp, Thus\" Camp<#88f>>" )} ;
+   r5_loc : string {( point_scam_pill ? "The scamp (ill) has left. Nothing much to do here." : "A scamp (ill) sits here. He's obviously trying to get you to notice he's sick." )} ;
+   r5_cantgo : string "The only blocked way is back south." ;
 
-   r6_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r6_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r6_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r6_header : dynamic_string {( point_aid_route ? "A Drought" : "Aid Route" )} ;
+   r6_loc : dynamic_string {( point_aid_route ? "You've restored hydration to here." : "It's very, very dry here. Maybe you can find a way to fix that." )} ;
+   r6_cantgo : string "The only blocked way is back south." ;
 
-   r7_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r7_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r7_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r7_header : string "Cave Room" ;
+   r7_loc : dynamic_string {( (point_k_vroom ? "You no longer feel stuck here." : "Ugh! You feel stuck here. You got what you wanted, but ... how to get out?") + "The only exit is back south." )} ;
+   r7_cantgo : string "You can only go back south." ;
 
-   r8_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r8_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r8_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r8_header : string "Whey Cup" ;
+   r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge." ;
+   r8_cantgo : string "This is a north-south passage." ;
 
-   r9_loc : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r9_header : dynamic_string {( point_glow_bold ? "" : "" )} ;
-   r9_cantgo : dynamic_string {( point_glow_bold ? "" : "" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "Wight Reigns/White Rains" : "Why-Trains" )} ;
+   r9_loc : dynamic_string {( point_why_trains ? "Why-trains echo through here, not of the why-bother sort, but of the \"Why not try new cool stuff\" variety." : "A wight reigns here as white rains fall." )} ;
+   r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
 
 integers {
