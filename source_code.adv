@@ -19,11 +19,11 @@ game_information {
 
 strings {
    # top level strings
-   dadc : string "<Dusk, Airy, Does Carry<#88f>>" ;
+   dadc : string "<Dusk, Airy, Does Carry<#ccc>>" ;
 
    # game clue strings
    c_globe_old : string "<globe (old)<#88f>>" ;
-   d_glow_bold : string "glow (bold)" ;
+   d_glow_bold : string "<glow (bold)<#ccc>>" ;
 
    # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
@@ -62,7 +62,7 @@ strings {
    r1_cantgo : string "You can only go back east." ;
 
    r2_header : string "Comp-Lots-Com Plots" ;
-   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A recorder is present, trying to fix the broke ode you broke." : "A BRO CODE is on the wall here." ) )} ;
+   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A recoder has present, trying to fix the broke ode you broke." : "A BRO CODE is on the wall here." ) )} ;
    r2_cantgo : string "You can only go back south." ;
 
    r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "Wheeze-Ooze" )} ;
@@ -73,11 +73,11 @@ strings {
    r4_loc : dynamic_string {( "Car parts lie strewn about the area." + (point_carp_arts ? " There are some carp arts, too, that helped you learn a thing or two about charisma, but you've internalized all that." : "") )} ;
    r4_cantgo : string "You can only go back west." ;
 
-   r5_header : string {( "<The \"Scamp, Thus\" Camp<#88f>>" )} ;
+   r5_header : string "<The \"Scamp, Thus\" Camp<#ccc>>" ;
    r5_loc : string {( point_scam_pill ? "The scamp (ill) has left. Nothing much to do here." : "A scamp (ill) sits here. He's obviously trying to get you to notice he's sick." )} ;
    r5_cantgo : string "The only blocked way is back south." ;
 
-   r6_header : dynamic_string {( point_aid_route ? "A Drought" : "Aid Route" )} ;
+   r6_header : dynamic_string {( point_aid_route ? "Aid Route" : "A Drought" )} ;
    r6_loc : dynamic_string {( point_aid_route ? "You've restored hydration to here." : "It's very, very dry here. Maybe you can find a way to fix that." )} ;
    r6_cantgo : string "The only blocked way is back south." ;
 
@@ -89,7 +89,7 @@ strings {
    r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge." ;
    r8_cantgo : string "This is a north-south passage." ;
 
-   r9_header : dynamic_string {( point_why_trains ? "Wight Reigns/White Rains" : "Why-Trains" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
    r9_loc : dynamic_string {( point_why_trains ? "Why-trains echo through here, not of the why-bother sort, but of the \"Why not try new cool stuff\" variety." : "A wight reigns here as white rains fall." )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
@@ -396,8 +396,8 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 
 objects {
-   phase_tats : object "<Fey Stats Phase Tats<#88f>>" ;
-   dump_ale : object "<Dumb-Pale-Dump Ale<#88f>>" msg="{dump_ale_description}" ;
+   phase_tats : object "<Fey Stats Phase Tats<#ccc>>" ;
+   dump_ale : object "<Dumb-Pale-Dump Ale<#ccc>>" msg="{dump_ale_description}" ;
 }
 
 connections {
