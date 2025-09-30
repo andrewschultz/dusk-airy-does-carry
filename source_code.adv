@@ -211,19 +211,22 @@ locations {
                : done ;
             }
          }
-         : match "reek odor" {
-            : if (point_reek_odor) {
-               : print "Already done!" ;
-            }
-            : print "Narrative text." ;
-            : set_true "point_reek_odor" ;
-            : gosub "add_point" ;
-            : done ;
-         }
-         : if (!point_reek_odor) {
-            : match "reek _;_ odor" {
-               : gosub "say_half" ;
+         : if (point_broke_ode) {
+            : match "reek odor" {
+               : if (point_reek_odor) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_true "point_reek_odor" ;
+               : gosub "add_point" ;
                : done ;
+            }
+            : if (!point_reek_odor) {
+               : match "reek _;_ odor" {
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
@@ -245,19 +248,22 @@ locations {
                : done ;
             }
          }
-         : match "blurb lasting" {
-            : if (point_blurb_lasting) {
-               : print "Already done!" ;
-            }
-            : print "Narrative text." ;
-            : set_true "point_blurb_lasting" ;
-            : gosub "add_point" ;
-            : done ;
-         }
-         : if (!point_blurb_lasting) {
-            : match "blurb _;_ lasting" {
-               : gosub "say_half" ;
+         : if (point_whee_zoos) {
+            : match "blurb lasting" {
+               : if (point_blurb_lasting) {
+                  : print "Already done!" ;
+                  : done ;
+               }
+               : print "Narrative text." ;
+               : set_true "point_blurb_lasting" ;
+               : gosub "add_point" ;
                : done ;
+            }
+            : if (!point_blurb_lasting) {
+               : match "blurb _;_ lasting" {
+                  : gosub "say_half" ;
+                  : done ;
+               }
             }
          }
       }
