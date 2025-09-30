@@ -18,12 +18,21 @@ game_information {
 ## Defines locations in the world
 
 strings {
+   # top level strings
+   dadc : string "<Dusk, Airy, Does Carry<#88f>>" ;
+
    # game clue strings
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "glow (bold)" ;
 
+   # meta-verbs
+   vm_about : string "<ABOUT<#f80>>" ;
+   vm_credits : string "<CREDITS<#f80>>" ;
+   vm_verbs : string "<VERBS<#f80>>" ;
+   vm_versions : string "<VERSIONS<#f80>>" ;
+
    # parser error stuff
-   custom_unknown_verb_error : string "Nothing comes of that. {gsgr} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
+   custom_unknown_verb_error : string "Nothing comes of that. {dadc} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
    exits_err : dynamic_string {( is_at "r0" ? "{r0_cantgo}" :
       is_at "r1" ? "{r1_cantgo}" :
       is_at "r2" ? "{r2_cantgo}" :
@@ -36,6 +45,10 @@ strings {
       is_at "r9" ? "{r9_cantgo}" :
       "You can't go that way. I should have a better message, but I don't."
       )} ;
+   nospecial_custom : string "You see no specific item like that. For rooms, <LOOK<#0f0>>. Note that this game may not note adjectives as synonyms, so use nouns." ;
+
+   # items
+   dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty." )} ;
 
    # basics
    my_score : string "{score}/{max_score}" ;
@@ -369,7 +382,7 @@ locations {
 
 objects {
    phase_tats : object "<Fey Stats Phase Tats<#88f>>" ;
-   dump_ale : object "Dumb-Pale-Dump Ale" ;
+   dump_ale : object "<Dumb-Pale-Dump Ale<#88f>>" msg="{dump_ale_description}" ;
 }
 
 connections {
