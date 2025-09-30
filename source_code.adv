@@ -127,6 +127,7 @@ booleans {
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
+   won_yet : boolean "false" scope="survivor" ;
 
    # scoring
    point_glow_bold : boolean "false" ;
@@ -361,7 +362,14 @@ locations {
             : print "Narrative text." ;
             : set_true "point_wake_up" ;
             : gosub "add_point" ;
-            : done ;
+            : print "You wake up!" ;
+            : if (!won_yet) {
+               : print "{one_time}there's nothing new to be found on replaying. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
+            } : else {
+               : print "Thanks for replaying. Sorry there was no new content!" ;
+            }
+            : set_true "won_yet" ;
+            : win_game ;
          }
          : if (!point_wake_up) {
             : match "wake _;_ up" {
