@@ -89,7 +89,7 @@ strings {
    r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge." ;
    r8_cantgo : string "This is a north-south passage." ;
 
-   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "<Wight Reigns/White Rains<#f4f>>" : "<Why-Trains<#ccc>>" )} ;
    r9_loc : dynamic_string {( point_why_trains ? "Why-trains echo through here, not of the why-bother sort, but of the \"Why not try new cool stuff\" variety." : "A wight reigns here as white rains fall." )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
@@ -143,8 +143,13 @@ booleans {
    point_why_trains : boolean "false" ; #r9
    point_wake_up : boolean "false" ; #r8
 
+   # game state combo
+   r5_ready : dynamic_boolean {( point_carp_arts && point_blurb_lasting )} ;
+   r6_ready : dynamic_boolean {( point_dew_nice && point_reek_odor )} ;
+   r7_ready : dynamic_boolean {( point_scam_pill && point_aid_route )} ;
+
    # rendering
-   indoors : dynamic_boolean {( is_at "r0" || is_at "r7" )} ;
+   indoors : dynamic_boolean {( is_at "r0" || is_at "r2" || is_at "r7" )} ;
    show_overlay : boolean "true" ;
 }
 
@@ -295,6 +300,10 @@ locations {
    r5 : location "{r5_loc}" header="{r5_header}" graphic="r_blank"  {
       on_command {
          : match "scam pill" {
+            : if (!r5_ready) {
+               : print "You can't quite convince the scamp that you're able to sell the \"wares\" effectively." ;
+               : done ;
+            }
             : if (point_scam_pill) {
                : print "Already done!" ;
                : done ;
@@ -315,6 +324,10 @@ locations {
    r6 : location "{r6_loc}" header="{r6_header}" graphic="r_blank"  {
       on_command {
          : match "aid route" {
+            : if (!r6_ready) {
+               : print "But you have nothing that could relieve the drought." ;
+               : done ;
+            }
             : if (point_aid_route) {
                : print "Already done!" ;
                : done ;
@@ -359,6 +372,10 @@ locations {
                : print "Already done!" ;
                : done ;
             }
+            : if (!point_why_trains) {
+               : print "But you're pretty sure you need to dispose of the wight first." ;
+               : done ;
+            }
             : print "Narrative text." ;
             : set_true "point_wake_up" ;
             : gosub "add_point" ;
@@ -384,6 +401,10 @@ locations {
          : match "why trains" {
             : if (point_why_trains) {
                : print "Already done!" ;
+               : done ;
+            }
+            : if (!point_k_vroom) {
+               : print "You don't have the energy yet." ;
                : done ;
             }
             : print "Narrative text." ;
