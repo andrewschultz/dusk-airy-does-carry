@@ -156,6 +156,7 @@ locations {
          : match "glow bold" {
             : if (point_glow_bold) {
                : print "The globe is already giving light!" ;
+               : done ;
             }
             : print "The globe begins to glow more boldly. You can see your way around. There are two exits. One's probably the way you came. The other leads to real, natural light, aboveground!" ;
             : set_true "point_glow_bold" ;
@@ -179,7 +180,7 @@ locations {
          : match "dew nice" {
             : if (point_dew_nice) {
                : print "You've already gotten dew." ;
-			   : done ;
+               : done ;
             }
             : print "The ice melts bit, leaving dew beneath it." ;
             : set_true "point_dew_nice" ;
@@ -199,6 +200,7 @@ locations {
          : match "broke ode" {
             : if (point_broke_ode) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_broke_ode" ;
@@ -236,6 +238,7 @@ locations {
          : match "whee zoos" {
             : if (point_whee_zoos) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_whee_zoos" ;
@@ -273,6 +276,7 @@ locations {
          : match "carp arts" {
             : if (point_carp_arts) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_carp_arts" ;
@@ -292,6 +296,7 @@ locations {
          : match "scam pill" {
             : if (point_scam_pill) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_scam_pill" ;
@@ -311,6 +316,7 @@ locations {
          : match "aid route" {
             : if (point_aid_route) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_aid_route" ;
@@ -330,6 +336,7 @@ locations {
          : match "k vroom" {
             : if (point_k_vroom) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_k_vroom" ;
@@ -349,6 +356,7 @@ locations {
          : match "wake up" {
             : if (point_wake_up) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_wake_up" ;
@@ -368,6 +376,7 @@ locations {
          : match "why trains" {
             : if (point_why_trains) {
                : print "Already done!" ;
+               : done ;
             }
             : print "Narrative text." ;
             : set_true "point_why_trains" ;
