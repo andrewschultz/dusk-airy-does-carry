@@ -93,6 +93,17 @@ booleans {
 
    # scoring
    point_glow_bold : boolean "false" ;
+   point_dew_nice : boolean "false" ; #r1
+   point_broke_ode : boolean "false" ; #r2-1
+   point_reek_odor : boolean "false" ; #r2-2
+   point_whee_zoos : boolean "false" ; #r3-1
+   point_blurb_lasting : boolean "false" ; #r3-2
+   point_carp_arts : boolean "false" ; #r4
+   point_scam_pill : boolean "false" ; #r5
+   point_aid_route : boolean "false" ; #r6
+   point_k_vroom : boolean "false" ; #r7
+   point_why_trains : boolean "false" ; #r9
+   point_wake_up : boolean "false" ; #r8
 
    # rendering
    indoors : dynamic_boolean {( is_at "r0" || is_at "r7" )} ;
@@ -123,22 +134,205 @@ locations {
       }
    }
    r1 : location "{r1_loc}" header="{r1_header}" graphic="r_blank"  {
+      on_command {
+         : match "dew nice" {
+            : if (point_dew_nice) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_dew_nice" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_dew_nice) {
+            : match "dew _;_ nice" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r2 : location "{r2_loc}" header="{r2_header}" graphic="r_blank"  {
+      on_command {
+         : match "broke ode" {
+            : if (point_broke_ode) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_broke_ode" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_broke_ode) {
+            : match "broke _;_ ode" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+         : match "reek odor" {
+            : if (point_reek_odor) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_reek_odor" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_reek_odor) {
+            : match "reek _;_ odor" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r3 : location "{r3_loc}" header="{r3_header}" graphic="r_blank"  {
+      on_command {
+         : match "whee zoos" {
+            : if (point_whee_zoos) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_whee_zoos" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_whee_zoos) {
+            : match "whee _;_ zoos" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+         : match "blurb lasting" {
+            : if (point_blurb_lasting) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_blurb_lasting" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_blurb_lasting) {
+            : match "blurb _;_ lasting" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r4 : location "{r4_loc}" header="{r4_header}" graphic="r_blank"  {
+      on_command {
+         : match "carp arts" {
+            : if (point_carp_arts) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_carp_arts" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_carp_arts) {
+            : match "carp _;_ arts" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r5 : location "{r5_loc}" header="{r5_header}" graphic="r_blank"  {
+      on_command {
+         : match "scam pill" {
+            : if (point_scam_pill) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_scam_pill" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_scam_pill) {
+            : match "scam _;_ pill" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r6 : location "{r6_loc}" header="{r6_header}" graphic="r_blank"  {
+      on_command {
+         : match "aid route" {
+            : if (point_aid_route) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_aid_route" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_aid_route) {
+            : match "aid _;_ route" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r7 : location "{r7_loc}" header="{r7_header}" graphic="r_blank"  {
+      on_command {
+         : match "k vroom" {
+            : if (point_k_vroom) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_k_vroom" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_k_vroom) {
+            : match "k _;_ vroom" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r8 : location "{r8_loc}" header="{r8_header}" graphic="r_blank"  {
+      on_command {
+         : match "wake up" {
+            : if (point_wake_up) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_wake_up" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_wake_up) {
+            : match "wake _;_ up" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
    r9 : location "{r9_loc}" header="{r9_header}" graphic="r_blank"  {
+      on_command {
+         : match "why trains" {
+            : if (point_why_trains) {
+               : print "Already done!" ;
+            }
+            : print "Narrative text." ;
+            : set_true "point_why_trains" ;
+            : gosub "add_point" ;
+            : done ;
+         }
+         : if (!point_why_trains) {
+            : match "why _;_ trains" {
+               : gosub "say_half" ;
+               : done ;
+            }
+         }
+      }
    }
 }
 
