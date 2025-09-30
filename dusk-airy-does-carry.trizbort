@@ -2,54 +2,56 @@
 <trizbort version="1.7.0.0">
 	<info />
 	<map>
-		<room id="1" name="White Rains" subtitle="" x="-96" y="-32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
+		<room id="1" name="White Rains" subtitle="r9" x="-96" y="-32" w="96" h="64" region="Region3" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
 			<objects>Wight Reigns</objects>
 		</room>
-		<room id="2" name="Whey Cup" subtitle="" x="-96" y="-160" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="2" name="Whey Cup" subtitle="r8" x="-96" y="-160" w="96" h="64" region="Region4" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="3" name="" description="">
 			<dock index="0" id="1" port="n" />
 			<dock index="1" id="2" port="s" />
 		</line>
-		<room id="4" name="Cave Room" subtitle="" x="-96" y="-288" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="4" name="Cave Room" subtitle="r7" x="-96" y="-288" w="96" h="64" region="Region1" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="5" name="" description="">
 			<dock index="0" id="2" port="n" />
 			<dock index="1" id="4" port="s" />
 		</line>
-		<room id="6" name="Scamp, Ill" subtitle="" x="-256" y="-32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="6" name="The &quot;Scamp, Thus&quot; Camp" subtitle="r5" x="-256" y="-32" w="96" h="64" region="Region2" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
+			<objects>Scamp, Ill</objects>
+		</room>
 		<line id="7" name="" description="">
 			<dock index="0" id="1" port="w" />
 			<dock index="1" id="6" port="e" />
 		</line>
-		<room id="8" name="Dune, Ice" subtitle="" x="-416" y="-32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="8" name="Dune, Ice" subtitle="r1" x="-416" y="-32" w="96" h="64" region="starter" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="9" name="" description="">
 			<dock index="0" id="6" port="w" />
 			<dock index="1" id="8" port="e" />
 		</line>
-		<room id="10" name="Comp-Lots-Com Plots" subtitle="" x="-256" y="-160" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
+		<room id="10" name="Comp-Lots-Com Plots" subtitle="r2" x="-256" y="-160" w="96" h="64" region="starter" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
 			<objects>"No plots? Nope, Lots!"|BRO CODE|(Re-Coder)</objects>
 		</room>
 		<line id="11" name="" description="">
 			<dock index="0" id="6" port="n" />
 			<dock index="1" id="10" port="s" />
 		</line>
-		<room id="12" name="A Drought" subtitle="" x="64" y="-32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="12" name="A Drought" subtitle="r6" x="64" y="-32" w="96" h="64" region="Region2" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="13" name="" description="">
 			<dock index="0" id="1" port="e" />
 			<dock index="1" id="12" port="w" />
 		</line>
-		<room id="14" name="Car Parts" subtitle="" x="224" y="-32" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="14" name="Car Parts" subtitle="r4" x="224" y="-32" w="96" h="64" region="starter" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="15" name="" description="">
 			<dock index="0" id="12" port="e" />
 			<dock index="1" id="14" port="w" />
 		</line>
-		<room id="16" name="Wheeze Ooze" subtitle="" x="64" y="-160" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
+		<room id="16" name="Wheeze Ooze" subtitle="r3" x="64" y="-160" w="96" h="64" region="starter" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
 			<objects>Blur, Blasting</objects>
 		</room>
 		<line id="17" name="" description="">
 			<dock index="0" id="12" port="n" />
 			<dock index="1" id="16" port="s" />
 		</line>
-		<room id="18" name="Globe, Old" subtitle="" x="-96" y="96" w="96" h="64" region="NoRegion" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isStartRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="18" name="Globe, Old" subtitle="r0" x="-96" y="96" w="96" h="64" region="initial" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isStartRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
 		<line id="19" name="" description="">
 			<dock index="0" id="1" port="s" />
 			<dock index="1" id="18" port="n" />
@@ -70,7 +72,13 @@
 			<endRoom>Red</endRoom>
 		</colors>
 		<regions>
+			<initial Name="initial" TextColor="Black">#FF80C0</initial>
 			<NoRegion Name="NoRegion" TextColor="Black">White</NoRegion>
+			<Region1 Name="Region1" TextColor="Black">Lime</Region1>
+			<Region2 Name="Region2" TextColor="Black">Yellow</Region2>
+			<Region3 Name="Region3" TextColor="Black">Aqua</Region3>
+			<Region4 Name="Region4" TextColor="Black">#8080FF</Region4>
+			<starter Name="starter" TextColor="Black">#FF8000</starter>
 		</regions>
 		<fonts>
 			<room size="13">Arial</room>
