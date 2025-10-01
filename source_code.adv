@@ -20,6 +20,7 @@ game_information {
 strings {
    # top level strings
    dadc : string "<Dusk, Airy, Does Carry<#ccc>>" ;
+   ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
 
    # game clue strings
    c_globe_old : string "<globe (old)<#88f>>" ;
@@ -527,6 +528,12 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
+   : print "{dadc}: an {ecomp} Petite Mort 2025 entry.";
+   : if (won_yet) {
+      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
+   }
+   : press_any_key ;
+   : clear_screen;
 }
 
 ## Execute this every time a player moves or redescribes a location
