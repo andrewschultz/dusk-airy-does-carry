@@ -30,6 +30,13 @@ strings {
    i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
 
+   # thinky strings
+   t_scam_pill : string "<SCAM PILL<#f80>>" ;
+   t_aid_route : string "<AID ROUTE<#f80>>" ;
+   t_k_vroom : string "<K VROOM<#f80>>" ;
+   t_why_trains : string "<WHY TRAINS<#f80>>" ;
+   t_wake_up : string "<WAKE UP<#f80>>" ;
+
    # meta-verbs
    hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    ho_nigh : string "<HO NIGH<#ff0>>" ;
@@ -149,6 +156,14 @@ booleans {
    point_k_vroom : boolean "false" ; #r7
    point_why_trains : boolean "false" ; #r9
    point_wake_up : boolean "false" ; #r8
+
+   think_scam_pill : boolean "false" ; #r5
+   think_aid_route : boolean "false" ; #r5
+   think_k_vroom : boolean "false" ; #r7
+   think_why_trains : boolean "false" ; #r9
+   think_wake_up : boolean "false" ; #r8
+
+   think_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
 
    # game progress (critical)
    progress_ale_full : boolean "false" ;
@@ -331,6 +346,7 @@ locations {
          : match "scam pill" {
             : if (!r5_ready) {
                : print "You can't quite convince the scamp that you're able to sell the \"wares\" effectively." ;
+               : set_true "think_scam_pill" ;
                : done ;
             }
             : if (point_scam_pill) {
@@ -339,6 +355,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_true "point_scam_pill" ;
+            : set_false "think_scam_pill" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -355,6 +372,7 @@ locations {
          : match "aid route" {
             : if (!r6_ready) {
                : print "But you have nothing that could relieve the drought." ;
+               : set_true "think_aid_route" ;
                : done ;
             }
             : if (point_aid_route) {
@@ -363,6 +381,7 @@ locations {
             }
             : print "Narrative text." ;
             : set_true "point_aid_route" ;
+            : set_false "think_aid_route" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -381,8 +400,14 @@ locations {
                : print "Already done!" ;
                : done ;
             }
+            : if (!r7_ready) {
+               : print "More to do." ;
+               : set_true "think_k_vroom" ;
+               : done ;
+            }
             : print "Narrative text." ;
             : set_true "point_k_vroom" ;
+            : set_false "think_k_vroom" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -403,10 +428,12 @@ locations {
             }
             : if (!point_why_trains) {
                : print "But you're pretty sure you need to dispose of the wight first." ;
+               : set_true "think_wake_up" ;
                : done ;
             }
             : print "Narrative text." ;
             : set_true "point_wake_up" ;
+            : set_false "think_wake_up" ;
             : gosub "add_point" ;
             : print "You wake up!" ;
             : if (!won_yet) {
@@ -434,9 +461,11 @@ locations {
             }
             : if (!point_k_vroom) {
                : print "You don't have the energy yet." ;
+               : set_true "think_why_trains" ;
                : done ;
             }
             : print "Narrative text." ;
+            : set_false "think_why_trains" ;
             : set_true "point_why_trains" ;
             : gosub "add_point" ;
             : done ;
@@ -452,7 +481,6 @@ locations {
 }
 
 # Defines things in the world (scenery cannot be carried)
-
 objects {
    phase_tats : object "{i_fspt}" ;
    dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
@@ -652,7 +680,25 @@ on_command {
       }
    }
    : match "think _" {
-      : print "Fill in later." ;
+      : if (!think_any) {
+         : print "You haven't had any good ideas you weren't able to execute yet." ;
+         : done ;
+      }
+      : if (think_scam_pill) {
+         : print "You can {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the scamp, ill." ;
+      }
+      : if (think_aid_route) {
+         : print "You can {t_aid_route} {once_aid_route} you are able to help with A Drought." ;
+      }
+      : if (think_k_vroom) {
+         : print "You can {t_k_vroom} {once_k_vroom} you have the motivation to look around Cave Room." ;
+      }
+      : if (think_why_trains) {
+         : print "You can {t_why_trains} {once_why_trains} you have something to tame the wight." ;
+      }
+      : if (think_wake_up) {
+         : print "You can {t_wake_up} {once_wake_up} you've defeated the wight." ;
+      }
    }
    : match "verbs _;verb _" {
       : print "Fill in later." ;
