@@ -149,11 +149,25 @@ booleans {
    # game progress (critical)
    progress_ale_full : boolean "false" ;
 
+   # option(s)
+   opt_hone_aye : boolean "false" ;
+
    # game state combo
    can_fill_ale : dynamic_boolean {( point_carp_arts && point_blurb_lasting && !progress_ale_full )} ;
    r5_ready : dynamic_boolean {( point_carp_arts && point_blurb_lasting )} ;
    r6_ready : dynamic_boolean {( point_dew_nice && point_reek_odor )} ;
    r7_ready : dynamic_boolean {( point_scam_pill && point_aid_route )} ;
+
+   # blocker dynamic booleans
+   r0_hone_block : dynamic_boolean {( opt_hone_aye && point_glow_bold )} ;
+   r1_hone_block : dynamic_boolean {( opt_hone_aye && progress_ale_full )} ;
+   r2_hone_block : dynamic_boolean {( opt_hone_aye && point_reek_odor )} ;
+   r3_hone_block : dynamic_boolean {( opt_hone_aye && point_blurb_lasting )} ;
+   r4_hone_block : dynamic_boolean {( opt_hone_aye && point_carp_arts )} ;
+   r5_hone_block : dynamic_boolean {( opt_hone_aye && progress_ale_full && point_dew_nice && point_reek_odor && point_scam_pill && is_at "r9" )} ;
+   r6_hone_block : dynamic_boolean {( opt_hone_aye && point_aid_route && point_blurb_lasting && point_carp_arts && is_at "r9" )} ;
+   r7_hone_block : dynamic_boolean {( opt_hone_aye && point_k_vroom )} ;
+   r9_hone_block : dynamic_boolean {( opt_hone_aye && point_why_trains && is_at "r8" )} ;
 
    # rendering
    indoors : dynamic_boolean {( is_at "r0" || is_at "r2" || is_at "r7" )} ;
@@ -459,6 +473,51 @@ barriers {
       location = r9
       block_when_not = point_glow_bold
       message = There will be a way up when you have a light source.
+   }
+   block_hone_r0 : block {
+      location = r0
+      block_when = r0_hone_block
+      message = No need to go back. You found the light source to leave.
+   }
+   block_hone_r1 : block {
+      location = r1
+      block_when = r1_hone_block
+      message = No need to go back. You got dew in the ale bottle.
+   }
+   block_hone_r2 : block {
+      location = r2
+      block_when = r2_hone_block
+      message = No need to go back. The ale bottle was all you needed.
+   }
+   block_hone_r3 : block {
+      location = r3
+      block_when = r3_hone_block
+      message = No need to go back. The blurb, lasting, is stuck in your head. That's enough.
+   }
+   block_hone_r4 : block {
+      location = r4
+      block_when = r4_hone_block
+      message = No need to go back. You've learned the carp arts as well as you could.
+   }
+   block_hone_r5 : block {
+      location = r5
+      block_when = r5_hone_block
+      message = No need to go back. You've got what you needed from the camp and beyond.
+   }
+   block_hone_r6 : block {
+      location = r6
+      block_when = r6_hone_block
+      message = No need to go back. You got what you needed from the aid route and beyond.
+   }
+   block_hone_r7 : block {
+      location = r7
+      block_when = r7_hone_block
+      message = No need to go back. You got what you needed from the cave room.
+   }
+   block_hone_r9 : block {
+      location = r9
+      block_when = r9_hone_block
+      message = No need to go back. You defeated the wight reign(s). Time to finish things off.
    }
 }
 
