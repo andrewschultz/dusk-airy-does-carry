@@ -26,6 +26,10 @@ strings {
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
 
+   # item strings
+   i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
+   i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
+
    # meta-verbs
    hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    ho_nigh : string "<HO NIGH<#ff0>>" ;
@@ -450,8 +454,8 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 
 objects {
-   phase_tats : object "<Fey Stats Phase Tats<#ccc>>" ;
-   dump_ale : object "<Dumb-Pale-Dump Ale<#ccc>>" msg="{dump_ale_description}" ;
+   phase_tats : object "{i_fspt}" ;
+   dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
 }
 
 connections {
