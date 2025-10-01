@@ -27,6 +27,8 @@ strings {
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
 
    # meta-verbs
+   hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
+   ho_nigh : string "<HO NIGH<#ff0>>" ;
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
@@ -477,6 +479,20 @@ subroutines {
       }
    }
 
+   check_options : subroutine {
+      : match "hone aye;hone eye" {
+         : print {( "Avaiilable exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
+         : if (tats_number == 0 && !opt_hone_aye) {
+            : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
+         }
+         : set_true "opt_hone_aye" ;
+      }
+      : match "ho nigh" {
+         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
+         : set_false "opt_hone_aye" ;
+      }
+   }
+
    odd_dir_note : subroutine {
       : match "se _;sw _;ne _;nw _" {
          : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
@@ -544,6 +560,7 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_command {
+   : gosub "check_options" ;
    : gosub "odd_dir_note" ;
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
