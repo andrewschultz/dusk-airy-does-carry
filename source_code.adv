@@ -23,6 +23,7 @@ strings {
    ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
 
    # game clue strings
+   gb_done : string "<GLOW BOLD<#44f>>" ;
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
 
@@ -42,8 +43,11 @@ strings {
    ho_nigh : string "<HO NIGH<#ff0>>" ;
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
+   vm_think : string "<THINK<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
+
+   xme : string "<X ME<#0f0>>" ;
 
    # parser error stuff
    custom_unknown_verb_error : string "Nothing comes of that. {dadc} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
@@ -661,16 +665,46 @@ on_command {
       }
    }
    : match "about _" {
-      : print "Fill in later." ;
+      : print "{dadc} was written for {ecomp} Petite Mort 2025." ;
+      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
+      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
+      : print "{gsgr} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_us}." ;
+      : print "{gsgr} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
+      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
    : match "credits _;credit _" {
-      : print "Fill in later." ;
+      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to Chris Ainsley for creating Adventuron." ;
+      : print "I had no time for testers, alas, but if you find a bug, you can get your name here!" ;
    }
    : match "help _;hint _;hints _" {
+      : if (!point_glow_bold) {
+         : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
+            : print "The inital puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
+            : print "The globe (old) could be brighter. You need a combination of two words." ;
+            : print "The game title, {dadc}, is an example." ;
+            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
+            : print "{gb_done}. (The hints will cycle now.)" ;
+         }
+         : done ;
+      }
+      : if (!me_x_yet) {
+         : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
+      } : else {
+         : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
+            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vm_think} will hold it for later." ;
+            : print "The number 0 means there is nothing else left to do." ;
+            : print "A two-digit number tells you something about the two words you need. I didn't make it too out-there, I hope." ;
+            : print "The tens digit is the length of the first word, and the ones digit is the length of the second." ;
+            : print "So, for instance, using the tats for the first puzzle would give 44, as each of {gb_done} has four letters." ;
+            : print "First words range from 1 to 6 letters. Second words range from 2 to 7. This is the final clue. The clues will now cycle." ;
+         }
+      }
       : print "Fill in later." ;
    }
    : match "history _" {
-      : print "Fill in later." ;
+      : print "The first release of {dadc} was October 30, 2025 ,for {ecomp} Petite Mort." ;
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
@@ -701,7 +735,8 @@ on_command {
       }
    }
    : match "verbs _;verb _" {
-      : print "Fill in later." ;
+      : print "To complete {dadc}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
+      : print "There is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
       : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
