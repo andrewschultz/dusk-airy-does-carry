@@ -96,7 +96,7 @@ strings {
    r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge." ;
    r8_cantgo : string "This is a north-south passage." ;
 
-   r9_header : dynamic_string {( point_why_trains ? "<Wight Reigns/White Rains<#f4f>>" : "<Why-Trains<#ccc>>" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
    r9_loc : dynamic_string {( point_why_trains ? "Why-trains echo through here, not of the why-bother sort, but of the \"Why not try new cool stuff\" variety." : "A wight reigns here as white rains fall." )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
@@ -157,9 +157,9 @@ booleans {
    opt_hone_aye : boolean "false" ;
 
    # game state combo
-   can_fill_ale : dynamic_boolean {( point_carp_arts && point_blurb_lasting && !progress_ale_full )} ;
+   can_fill_ale : dynamic_boolean {( point_dew_nice && point_reek_odor && !progress_ale_full )} ;
    r5_ready : dynamic_boolean {( point_carp_arts && point_blurb_lasting )} ;
-   r6_ready : dynamic_boolean {( point_dew_nice && point_reek_odor )} ;
+   r6_ready : dynamic_boolean {( progress_ale_full && point_reek_odor )} ;
    r7_ready : dynamic_boolean {( point_scam_pill && point_aid_route )} ;
 
    # blocker dynamic booleans
