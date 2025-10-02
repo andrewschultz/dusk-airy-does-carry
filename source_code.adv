@@ -57,6 +57,13 @@ strings {
    xtats : string "<X TATS<#f80>>" ;
    xme : string "<X ME<#0f0>>" ;
 
+   # "once" strings
+   once_scam_pill : dynamic_string {( r5_ready ? "now" : "once" )} ;
+   once_aid_route : dynamic_string {( r6_ready ? "now" : "once" )} ;
+   once_k_vroom : dynamic_string {( r7_ready ? "now" : "once" )} ;
+   once_why_trains : dynamic_string {( point_k_vroom ? "now" : "once" )} ;
+   once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
+
    # parser error stuff
    custom_unknown_verb_error : string "Nothing comes of that. {dadc} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
    exits_err : dynamic_string {( is_at "r0" ? "{r0_cantgo}" :
