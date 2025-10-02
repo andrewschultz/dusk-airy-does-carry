@@ -11,7 +11,7 @@ game_information {
    uuid                         = 9998565c-3283-4dcd-9e5d-fafadbda5c2e
    year_of_release              = 2025
    copyright_message            = Free to distribute, voluntary payments welcome
-   short_synopsis               = EctoComp 2025 Petite Mort entry, in the vein of {wp} and {ut}
+   short_synopsis               = EctoComp 2025 Petite Mort entry, in the vein of {g_wp} and {g_ut}
 }
 
 
@@ -20,12 +20,19 @@ game_information {
 strings {
    # top level strings
    dadc : string "<Dusk, Airy, Does Carry<#ccc>>" ;
+   g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
+   g_ut : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
    ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
+
+   # noting stuff
+   one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
+   key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
 
    # game clue strings
    gb_done : string "<GLOW BOLD<#44f>>" ;
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
+   tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can findd with {xme}" )} ;
 
    # item strings
    i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
@@ -47,6 +54,7 @@ strings {
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
 
+   xtats : string "<X TATS<#f80>>" ;
    xme : string "<X ME<#0f0>>" ;
 
    # parser error stuff
@@ -64,6 +72,7 @@ strings {
       "You can't go that way. I should have a better message, but I don't."
       )} ;
    nospecial_custom : string "You see no specific item like that. For rooms, <LOOK<#0f0>>. Note that this game may not note adjectives as synonyms, so use nouns." ;
+   yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # items
    dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty." )} ;
@@ -104,7 +113,7 @@ strings {
    r7_cantgo : string "You can only go back south." ;
 
    r8_header : string "Whey Cup" ;
-   r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge." ;
+   r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
    r8_cantgo : string "This is a north-south passage." ;
 
    r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
@@ -146,6 +155,7 @@ booleans {
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
    won_yet : boolean "false" scope="survivor" ;
+   in_number_choice : boolean "false" ;
 
    # scoring, in approximate order
    point_glow_bold : boolean "false" ;
@@ -569,7 +579,7 @@ subroutines {
 
    ale_fill_check : subroutine {
       : if (can_fill_ale) {
-         : print "With the dew flowing and the empty {dump_ale}, you have an idea. You can fill the {dump_ale} with dew to see if, indeed, it really does have increased capacity! It most certainly does." ;
+         : print "With the dew flowing and the empty {i_dpda}, you have an idea. You can fill the {i_dpda} with dew to see if, indeed, it really does have increased capacity! It most certainly does." ;
          : set_true "progress_ale_full" ;
       }
    }
@@ -624,10 +634,10 @@ themes {
 
    i_cant_do_that = That's a valid command, but not right here and now.
    not_present = You can't see ${entity} here.
-   ask_new_game                                   = Would you like to restart {cdsa}?
-   ask_quit                                       = Do you wish to quit {cdsa}?
+   ask_new_game                                   = Would you like to restart {dadc}?
+   ask_quit                                       = Do you wish to quit {dadc}?
    invalid_choice                                 = {yn_or_12_or_14}
-   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {cdsa}.
+   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {dadc}.
    unknown_verb                                   = {custom_unknown_verb_error}
    you_cant_go_that_direction                     = {exits_err}
    you_see_nothing_special = {nospecial_custom}
@@ -660,7 +670,7 @@ on_command {
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
       : if (!wait_yet) {
-         : print "{note_once}This is just a silly general response. Waiting gives no penalty or benefit." ;
+         : print "{one_time}This is just a silly general response. Waiting gives no penalty or benefit." ;
          : set_true "wait_yet" ;
       }
    }
@@ -668,8 +678,8 @@ on_command {
       : print "{dadc} was written for {ecomp} Petite Mort 2025." ;
       : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
       : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
-      : print "{gsgr} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_us}." ;
-      : print "{gsgr} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "{dadc} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
+      : print "{dadc} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
       : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
@@ -709,7 +719,7 @@ on_command {
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
       : if (!warn_score_header) {
-         : print "{note_once}This is tracked in the upper left." ;
+         : print "{one_time}This is tracked in the upper left." ;
          : set_true "warn_score_header" ;
       }
    }
