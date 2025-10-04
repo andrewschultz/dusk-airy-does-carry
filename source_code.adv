@@ -158,6 +158,7 @@ integers {
 
 booleans {
    # game state (noncritical)
+   showed_first_note : boolean "false" ;
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
@@ -778,6 +779,10 @@ on_command {
 }
 
 on_tick {
+   : if (!showed_first_note) {
+      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {dadc}'s stripped-down parser." ;
+      : set_true "showed_first_note" ;
+   }
 }
 
 on_render {
