@@ -29,9 +29,11 @@ strings {
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
 
    # game clue strings
-   gb_done : string "<GLOW BOLD<#44f>>" ;
+   gb_done : string "<GLOW BOLD<#44f>>" ; #r0
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
+   c_re_coder : string "<RE-CODER<#88f>>" ;
+   c_bro_code : string "<BRO CODE<#88f>>" ;
    tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can findd with {xme}" )} ;
 
    # item strings
@@ -95,8 +97,8 @@ strings {
    r1_loc : dynamic_string {( "Here the way is blocked in every direction except back east, by a large dune and lots of ice." + (point_dew_nice ? " Some of the ice has thawed, so you can get a bit of dew." : "") )} ;
    r1_cantgo : string "You can only go back east." ;
 
-   r2_header : string "Comp-Lots-Com Plots" ;
-   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A recoder has present, trying to fix the broke ode you broke." : "A BRO CODE is on the wall here." ) )} ;
+   r2_header : string "<Comp-Lots-Com Plots<#888>>" ;
+   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A {c_re_coder} is present, trying to fix the broke ode you broke." : "A {c_bro_code} is on the wall here." ) )} ;
    r2_cantgo : string "You can only go back south." ;
 
    r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "Wheeze-Ooze" )} ;
@@ -280,6 +282,10 @@ locations {
             : done ;
          }
          : if (!point_broke_ode) {
+            : match "_ bro;_ code" {
+               : print "The bro code seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
+               : done ;
+            }
             : match "broke _;_ ode" {
                : gosub "say_half" ;
                : done ;
@@ -297,6 +303,10 @@ locations {
                : done ;
             }
             : if (!point_reek_odor) {
+               : match "_ re;_ coder;_ recoder" {
+                  : print "Working frantically, staring at the screen, trying to rebuild the Bro Code. You have plenty of time to distract him from this daunting task, but you just need to find the right distraction." ;
+                  : done ;
+               }
                : match "reek _;_ odor" {
                   : gosub "say_half" ;
                   : done ;
@@ -736,6 +746,7 @@ on_command {
          : print "You haven't had any good ideas you weren't able to execute yet." ;
          : done ;
       }
+      : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it them." ;
       : if (think_scam_pill) {
          : print "You can {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the scamp, ill." ;
       }
@@ -754,7 +765,8 @@ on_command {
    }
    : match "verbs _;verb _" {
       : print "To complete {dadc}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
-      : print "There is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
+      : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows release dates of versions." ;
+      : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
       : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
