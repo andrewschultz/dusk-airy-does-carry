@@ -670,7 +670,12 @@ on_startup {
    : print "{dadc}: an {ecomp} Petite Mort 2025 entry.";
    : if (won_yet) {
       : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
+      : press_any_key ;
    }
+   : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers outside. Dusk, airy, does carry, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind. " ;
+   : print "How dare you, says the performer. He is wearing a black cape, black shirt and black pants. One day, soon, you will see the results of your impertinence. Impetuousness. \"Po', um, ... poem,\" you mutter to yourself as you leave. The performer continues." ;
+   : print "You think no further of the incident. The final day of the month, you take care of things you meant to, and you plan for the month ahead. It's so much more productive than New Year's resolutions, which never have urgency. You have quite a few, big and small, and you fall asleep in the process." ;
+   : print "You don't remember what happens next, all you remember is, you wake up in ..." ;
    : press_any_key ;
    : clear_screen;
 }
