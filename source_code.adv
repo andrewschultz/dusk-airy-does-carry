@@ -685,6 +685,24 @@ on_describe {
 on_command {
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
+   : if (is_carried "tool") {
+      : mask {
+         : match "x tool" {
+            : set_true "show_overlay" ;
+            : update_graphic "ig_tool" ;
+            : set_false "show_overlay" ;
+         }
+      }
+   }
+   : if (is_carried "coin") {
+      : mask {
+         : match "x coin" {
+            : set_true "show_overlay" ;
+            : update_graphic "ig_coin" ;
+            : set_false "show_overlay" ;
+         }
+      }
+   }
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
       : if (!wait_yet) {
@@ -802,7 +820,7 @@ on_render {
       : done ;
    }
    : if (is_at "r7" && !point_k_vroom) {
-      : overlay "i_tool" x="107" y="14" ;
+      : overlay "ig_tool" x="107" y="14" ;
 	  : done ;
    }
    : if (!indoors) {
@@ -906,8 +924,8 @@ assets {
       r_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEX///+nxBvIAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
 
       # item(s)
-      i_coin : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAACVBMVEUAAADAwMD///8Nbde7AAAA80lEQVR4XsXWsY3DMAxG4Z9AdLUKy0WmoQr3PIB04RE0T7xBVNhTRr7g6gBkkdfzqwiQOIN9AvY1BuxmawQ4bNQCQLfRFgDsLz9wvIHmBnpVI8XmBnbIBMEcAHLOE1Y3YEDWQuYFjn+guQGKAd2Icx7A5gdkgkWARY1sCQDv3MBefjUpVL3AI7GQIOfZDzArxA/cuIqRwA0AVWoUWEhwdwJPgHkA2Q0QhCJAv/ZgWVS/tomHFU1CWpoXuMYZkrzAqYl5EOX0Ao9UZSCzH6ALkB838MQF8N0NHMSsCS1wXIU01ch512RlCz8YX3xxRn07PwHBXkr8Ji7dWZIoAAAAAElFTkSuQmCC" ;
-      i_tool : base64_png "iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAABDklEQVR4nL1VURaEIAgc9nUvvZl4MzsZ+7HPltowqK3p9cpURmAgEggsVK4/k4ULmRscmLwLrxJ1vJ4kcxFaZHObZW6znQ8DS0h7vrYE2zzq+ZRT2HMSiGlUf48cZASXaCxjOWfP9hVee9IfeaaRcqJ+ewkPPbRCl3OGFo2XdCpcyJOPvW+tteU9IXn4ruXwTH1Sb217ZVG5imX0NpWODJ9R6aVe2nN4FAU9f7qXFi40CqOOTOUqfUwCAYHCPdECMw8P6/Lwn5gAQCAOZeoofNbvFj5/7ZiELujtgerbEt8WUktofg//RLrysLtvxd9C5G+xEG5JoqQhQq1M/byD9PE6hAQuAKLHrTWJ7BcI3hgI2brRO8F0AAAAAElFTkSuQmCC" ;
+      ig_coin : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAgMAAABslMwaAAAACVBMVEUAAADAwMD///8Nbde7AAAA80lEQVR4XsXWsY3DMAxG4Z9AdLUKy0WmoQr3PIB04RE0T7xBVNhTRr7g6gBkkdfzqwiQOIN9AvY1BuxmawQ4bNQCQLfRFgDsLz9wvIHmBnpVI8XmBnbIBMEcAHLOE1Y3YEDWQuYFjn+guQGKAd2Icx7A5gdkgkWARY1sCQDv3MBefjUpVL3AI7GQIOfZDzArxA/cuIqRwA0AVWoUWEhwdwJPgHkA2Q0QhCJAv/ZgWVS/tomHFU1CWpoXuMYZkrzAqYl5EOX0Ao9UZSCzH6ALkB838MQF8N0NHMSsCS1wXIU01ch512RlCz8YX3xxRn07PwHBXkr8Ji7dWZIoAAAAAElFTkSuQmCC" ;
+      ig_tool : base64_png "iVBORw0KGgoAAAANSUhEUgAAABwAAAAaCAYAAACkVDyJAAABDklEQVR4nL1VURaEIAgc9nUvvZl4MzsZ+7HPltowqK3p9cpURmAgEggsVK4/k4ULmRscmLwLrxJ1vJ4kcxFaZHObZW6znQ8DS0h7vrYE2zzq+ZRT2HMSiGlUf48cZASXaCxjOWfP9hVee9IfeaaRcqJ+ewkPPbRCl3OGFo2XdCpcyJOPvW+tteU9IXn4ruXwTH1Sb217ZVG5imX0NpWODJ9R6aVe2nN4FAU9f7qXFi40CqOOTOUqfUwCAYHCPdECMw8P6/Lwn5gAQCAOZeoofNbvFj5/7ZiELujtgerbEt8WUktofg//RLrysLtvxd9C5G+xEG5JoqQhQq1M/byD9PE6hAQuAKLHrTWJ7BcI3hgI2brRO8F0AAAAAElFTkSuQmCC" ;
 
       # scenery/npcs
       s_scamp : base64_png "iVBORw0KGgoAAAANSUhEUgAAABgAAAAUBAMAAABlm+CwAAAAFVBMVEX/AP8AAAAAgACAQADg4ID/AAD///8FXN0PAAAAAXRSTlMAQObYZgAAAG1JREFUeF5tjLENgDAMBBOxgNN4AAoWIBuEFaBPJH7/EXiJ2KbgUjin9zuRZSdpsrRWP3LURvGt2FNA7J87tLsACLldiJ6XuOQISlG+IlaHndCuIAVCUckYLKnJuoWM/yQndkbnJDITYULea+QB4qkcKgtgRU8AAAAASUVORK5CYII=" ;
