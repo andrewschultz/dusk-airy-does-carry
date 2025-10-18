@@ -86,6 +86,9 @@ strings {
    # items
    dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty." )} ;
 
+   # scenery reused
+   zoo_anim : string "a lion, a seal, a panda bear, a giraffe, a hippopotamus, and an elephant" ;
+
    # basics
    my_score : string "{score}/{max_score}" ;
 
@@ -94,39 +97,39 @@ strings {
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
 
    r1_header : dynamic_string {( point_dew_nice ? "Dew (Nice)" : "Dune/Ice" )} ;
-   r1_loc : dynamic_string {( "Here the way is blocked in every direction except back east, by a large dune and lots of ice." + (point_dew_nice ? " Some of the ice has thawed, so you can get a bit of dew." : "") )} ;
+   r1_loc : dynamic_string {( "It's nice and peaceful here, really in touch with nature, with water flowing on one hand and dunes on the other. But they also block any passage except back east. " + (point_dew_nice ? " Some of the ice has thawed, so you can get a bit of dew." : "") )} ;
    r1_cantgo : string "You can only go back east." ;
 
    r2_header : string "<Comp-Lots-Com Plots<#888>>" ;
-   r2_loc : dynamic_string {( "A very techie nook. " + (point_reek_odor ? "Nothing left to do here." : point_broke_ode ? "A {c_re_coder} is present, trying to fix the broke ode you broke." : "A {c_bro_code} is on the wall here." ) )} ;
-   r2_cantgo : string "You can only go back south." ;
+   r2_loc : dynamic_string {( "A small techie-corp office.\n" + ( point_reek_odor ? "The area is empty now that you disposed of the recoder." : point_broke_ode ? "A recoder sits here programming now, trying frantically to reconstruct the bro code from a broke ode." : " You're here alone for the moment. A Bro Code is on the wall." ) + "\nThe only viable exit is south." )} ;
+   r2_cantgo : string "You can only go back south. Okay, you could go further into the office, but that'd get you arrested." ;
 
    r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "Wheeze-Ooze" )} ;
-   r3_loc : dynamic_string {( point_whee_zoos ? "All kinds of animals fill the zoos here. They're mostly sleeping, since it's night." : "Wheeze-ooze threatens to take over this whole area. It's full of undead energy." )} ;
+   r3_loc : dynamic_string {( (point_whee_zoos ? "A zoo with all sorts of animals: {zoo_anim}.\n" : "" ) + (point_blurb_lasting ? "The zoo is nice and quiet now, with the blurb and the blur and the ooze gone. " : point_whee_zoos ? "A blur, blasting, seems to be attacking areas by the zoo, and you need to disable it, or at least put it into something less harmful stuff " : "A wheeze-ooze sloshes around here, menacingly. What could it be guarding or oppressing?" ) + "\nYou can only go back south." )} ;
    r3_cantgo : string "You can only go back south." ;
 
    r4_header : string "Car Parts" ;
-   r4_loc : dynamic_string {( "Car parts lie strewn about the area." + (point_carp_arts ? " There are some carp arts, too, that helped you learn a thing or two about charisma, but you've internalized all that." : "") )} ;
+   r4_loc : dynamic_string {( point_carp_arts ? "You're amazed all the car parts gave you such information, especially since the radio lying around wasn't working." : "Car parts lie strewn about here. Perhaps they contain some weird wisdom you haven't thought of, if you look at them right. You've never been quite sure about cars. You just know what you'd better not do, and you manage to get an A in driver's ed and avoid any car crashes, but that doesn't really count as wisdom." )} ;
    r4_cantgo : string "You can only go back west." ;
 
    r5_header : string "<The \"Scamp, Thus\" Camp<#ccc>>" ;
-   r5_loc : string {( point_scam_pill ? "The scamp (ill) has left. Nothing much to do here." : "A scamp (ill) sits here. He's obviously trying to get you to notice he's sick." )} ;
+   r5_loc : string "This camp is at a bit of a crossroads, with passages west and north and east." ;
    r5_cantgo : string "The only blocked way is back south." ;
 
    r6_header : dynamic_string {( point_aid_route ? "Aid Route" : "A Drought" )} ;
-   r6_loc : dynamic_string {( point_aid_route ? "You've restored hydration to here." : "It's very, very dry here. Maybe you can find a way to fix that." )} ;
+   r6_loc : dynamic_string {( point_aid_route ? "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here." : "This aid route runs east and west, with a passage north, too." )} ;
    r6_cantgo : string "The only blocked way is back south." ;
 
    r7_header : string "Cave Room" ;
-   r7_loc : dynamic_string {( (point_k_vroom ? "You no longer feel stuck here." : "Ugh! You feel stuck here. You got what you wanted, but ... how to get out?") + "The only exit is back south." )} ;
+   r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the tool. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
    r8_header : string "Whey Cup" ;
-   r8_loc : string "A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
+   r8_loc : string "This is a canyon running north and south. A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
    r8_cantgo : string "This is a north-south passage." ;
 
    r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
-   r9_loc : dynamic_string {( point_why_trains ? "Why-trains echo through here, not of the why-bother sort, but of the \"Why not try new cool stuff\" variety." : "A wight reigns here as white rains fall." )} ;
+   r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A wight reigns here as white rains fall." )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
 
@@ -225,10 +228,10 @@ locations {
       on_command {
          : match "glow bold" {
             : if (point_glow_bold) {
-               : print "The globe is already giving light!" ;
+               : print "It's not going to glow any bolder. You can see your way out, and that's good enough." ;
                : done ;
             }
-            : print "The globe begins to glow more boldly. You can see your way around. There are two exits. One's probably the way you came. The other leads to real, natural light, aboveground!" ;
+            : print "The globe begins to glow more boldly. You can see your way around a bit, but no exit yet. However, you discover a globe, older. Pfft, that's no problem. \"Glow, boulder!\" you yell. And a boulder behind the globe (older) does so. It begins to shake. You back up, and it and the globe explodes, revealing a way up!" ;
             : set_true "point_glow_bold" ;
             : gosub "add_point" ;
             : done ;
@@ -249,7 +252,7 @@ locations {
         }
          : match "dew nice" {
             : if (point_dew_nice) {
-               : print "You've already gotten dew." ;
+               : print {( "There " + (progress_ale_full ? "was" : "is") + " already enough dew to collect if and when you need it." )} ;
                : done ;
             }
             : print "The ice melts bit, leaving dew beneath it." ;
@@ -273,10 +276,12 @@ locations {
       on_command {
          : match "broke ode" {
             : if (point_broke_ode) {
-               : print "Already done!" ;
+               : print "You already disrupted the bro code." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The Bro Code's text seems to crumble, then transform into a musical score. You play it through your head, and unless you completely forgot how to read sheet music, the tune's genuinely horrible.\"" ;
+            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the bro code back in place. \"When they need a tough job, they call for the ... RE-CODER!\"" ;
+            : print "You really don't think the bro code deserves to be built back up, so you need to figure out a way to neutralize the recoder." ;
             : set_true "point_broke_ode" ;
             : gosub "add_point" ;
             : done ;
@@ -294,10 +299,10 @@ locations {
          : if (point_broke_ode) {
             : match "reek odor" {
                : if (point_reek_odor) {
-                  : print "Already done!" ;
+                  : print "Things don't need to smell any worse here." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "You hear a small cracking, then smell something vile. \"Dude!\" the recoder says, noticing you. They're a bit surprised it isn't you. They can't find where it's from. \"That's it. I can't work in these conditions.\" The recoder rushes away so quickly, they forget to pitch an empty glass of {dump_ale}. You take it. You might as well." ;
                : set_true "point_reek_odor" ;
                : gosub "add_point" ;
                : done ;
@@ -319,10 +324,11 @@ locations {
       on_command {
          : match "whee zoos;wee zoos" {
             : if (point_whee_zoos) {
-               : print "Already done!" ;
+               : print "You continue to enjoy your surprise trip to the zoo. The animals express joy as well." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The wheeze ooze bubbles up, making one final big old wheeze, and then soars into the air like a geyser and pops. There is rumbling below, and then, surprisingly, life! All sorts of animals: {zoo_anim} have been released from underground activity. They sure do seem happy to see you. " ;
+            : print "Then, a menacing noise. A blur, blasting -- thankfully, it's far away from the zoo, but it's still annoying." ;
             : set_true "point_whee_zoos" ;
             : gosub "add_point" ;
             : done ;
@@ -336,10 +342,10 @@ locations {
          : if (point_whee_zoos) {
             : match "blurb lasting" {
                : if (point_blurb_lasting) {
-                  : print "Already done!" ;
+                  : print "Once the blurb got in your brain, it was already sure to last." ;
                   : done ;
                }
-               : print "Narrative text." ;
+               : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive.  Nothing too pompous of course. But it makes you happy and gives you confidence." ;
                : set_true "point_blurb_lasting" ;
                : gosub "add_point" ;
                : done ;
@@ -357,10 +363,10 @@ locations {
       on_command {
          : match "carp arts" {
             : if (point_carp_arts) {
-               : print "Already done!" ;
+               : print "You gained no further insight into linguistic gymnastics. You found everything pretty much the first time." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "While you're not sure what a bunch of renderings of fish could do, you sort of hope for them anyway. You get something unexpected: revelations for conversational tricks not only to make yourself seem more impressive than others, but to feel less unimpressive in the presence of people who puff themselves out a bit too much." ;
             : set_true "point_carp_arts" ;
             : gosub "add_point" ;
             : done ;
@@ -377,15 +383,17 @@ locations {
       on_command {
          : match "scam pill" {
             : if (!r5_ready) {
-               : print "You can't quite convince the scamp that you're able to sell the \"wares\" effectively." ;
+               : print {( "You can't quite convince the scamp that you're able to sell the \"wares\" effectively. You haven't gained " + ((point_carp_arts || point_blurb_lasting) ? "enough" : "any") + " verbal facility yet." )} ;
                : set_true "think_scam_pill" ;
                : done ;
             }
             : if (point_scam_pill) {
-               : print "Already done!" ;
+               : print "You aren't getting anything more from the scamp." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You walk up to the scamp. You tried to hide the lack of confidence you have in clever words, and thanks to the carp arts and blurb (lasting,) it works. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
+            : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
+            : print "You look at the coin. It is a coy nickel coin, ickle." ;
             : set_true "point_scam_pill" ;
             : set_false "think_scam_pill" ;
             : gosub "add_point" ;
@@ -398,6 +406,9 @@ locations {
             }
          }
       }
+      on_describe {
+         : print {( point_scam_pill ? "The scamp has left, or rather, he's back in his tent now. He's given you what you need, or what had better work, because you're not going to get anything more from him." : "A scamp, ill, stands here in a campsite of tents. He's not physically ill, although it seems as though he would be willing to tell you how and why he got cured, and how he would sell you that solution.\nNaturally, he lives in the big tent." )} ;
+     }
    }
    r6 : location "{r6_loc}" header="{r6_header}" graphic="r_blank"  {
       on_command {
@@ -408,10 +419,13 @@ locations {
                : done ;
             }
             : if (point_aid_route) {
-               : print "Already done!" ;
+               : print "Emotional support is the only aid you're going to get here. These people mean well. And saving them will let you move on." ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You figure you can make this place an aid route now that you can bring water to it, and the cracks in the dirt start closing." ;
+            : print "You figure it's going to take a while to repopulate, but you're shocked to turn around and see a cheering crowd, of a lot of more or less identical people, but hey, it's good to have friends." ;
+            : print "They say they can't offer much more than emotional support, but they hope that's something, and they hope the purpose you get, or increased purpose, helps you down the line." ;
+            : print "They're still being oppressed by the wight, true, but your recent actions give them confidence things will change even more!" ;
             : set_true "point_aid_route" ;
             : set_false "think_aid_route" ;
             : gosub "add_point" ;
@@ -429,7 +443,7 @@ locations {
       on_command {
          : match "k vroom" {
             : if (point_k_vroom) {
-               : print "Already done!" ;
+               : print "You already put yourself in a position to run off with the {tool}." ;
                : done ;
             }
             : if (!r7_ready) {
@@ -437,7 +451,7 @@ locations {
                : set_true "think_k_vroom" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The queen fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the tool out of the ground. You've also said the magic word to get it running. It has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
             : set_true "point_k_vroom" ;
             : set_false "think_k_vroom" ;
             : gosub "add_point" ;
@@ -455,19 +469,23 @@ locations {
       on_command {
          : match "wake up" {
             : if (point_wake_up) {
-               : print "Already done!" ;
+               : print "You already woke up. This should not happen." ;
                : done ;
             }
             : if (!point_why_trains) {
-               : print "But you're pretty sure you need to dispose of the wight first." ;
+               : print "Without getting rid of the wight first? Well, you'd be able to move on, but think of the poor citizens of this little imaginary nonsense world! Also, I don't exactly have a master's in dream logic--I didn't even take a course on it in college--but this is the dream *I* built, dang it, so I'm pretty sure there's some sort of butterfly effect that'd come back to your own world and curse your sports team for the next hundred years. Clearly consequences not to be trifled with." ;
+               : print "P.S. if you don't have a favorite sports team, your favorite television show will get worse, and you won't understand why, and neither will many other people watching it. Everyone will just feel bummed." ;
+               : print "So trust me. It's all very serious stuff, obviously." ;
                : set_true "think_wake_up" ;
                : done ;
             }
-            : print "Narrative text." ;
             : set_true "point_wake_up" ;
             : set_false "think_wake_up" ;
             : gosub "add_point" ;
-            : print "You wake up!" ;
+            : print "The next morning, you wake up, and you realize it was a bit of a weird dream, but it was a heck of a lot better than the ones you used to have, ones you forgot you had, like being back in high school and having the principal inform you you got an F in the class you actually got an A in, and your protests only make things worse." ;
+            : print "There were other worse ones, but it's the sort of thing you can't discuss with other people, but perhaps all those books about changing your mindset, even the cheesy ones, actually helped your subconscious in some way. " ;
+            : print "It's a nice little confidence boost, and you get a bit more when you start planning the month. You even find a letter in the mailbox. That's funny, it's too early for the mailman. When you open and look at it, you see, \"To the only one who told me my terrible poetry was terrible. I sensed you maybe needed a little motivation to bust out in more meaningful ways. I hope your little adventure helps you in your own way to have confidence and go get stuff done, like, well, those monthly plans you have.\"" ;
+            : print "You're not sure how this person knew, or how they were supernatural or whatever, but you're grateful for the push. November is very productive indeed." ;
             : if (!won_yet) {
                : print "{one_time}there's nothing new to be found on replaying. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
             } : else {
@@ -488,7 +506,7 @@ locations {
       on_command {
          : match "why trains" {
             : if (point_why_trains) {
-               : print "Already done!" ;
+               : print "You think up more ways trains are good for society, especially if they run on clean fuel. But the infrastructure isn't there for any more y-trains at the moment." ;
                : done ;
             }
             : if (!point_k_vroom) {
@@ -496,7 +514,8 @@ locations {
                : set_true "think_why_trains" ;
                : done ;
             }
-            : print "Narrative text." ;
+            : print "You doubt the wight really delves deep into conversation or philosophy, but you wonder if plain old general heckling will work. So you just start asking why, all kinds of pointless wise, of stuff that is really out of the wight's control, but then again, you've had people do that to you to distract you, so why not pay it forward to someone or something who is less awful than you." ;
+            : print "The tribe from the east follows your lead, battering it with silly questions. In the confusion, you take the tool to the chair and with some trial and error figure out what parts of the tool help disassemble which part of the chair. Crash! The chair falls apart. The white screams in agony and disappears into a small dot. The tribe cheers you some more. They're a good bunch, yet you feel you don't quite belong here." ;
             : set_false "think_why_trains" ;
             : set_true "point_why_trains" ;
             : gosub "add_point" ;
@@ -516,6 +535,7 @@ locations {
 objects {
    phase_tats : object "{i_fspt}" ;
    dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
+   coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
 }
 
 connections {
