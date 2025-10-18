@@ -80,7 +80,7 @@ strings {
       is_at "r9" ? "{r9_cantgo}" :
       "You can't go that way. I should have a better message, but I don't."
       )} ;
-   nospecial_custom : string "You see no specific item like that. For rooms, <LOOK<#0f0>>. Note that this game may not note adjectives as synonyms, so use nouns." ;
+   nospecial_custom : string "You see no specific item like that. For rooms, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
    yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # items
@@ -185,7 +185,7 @@ booleans {
    point_wake_up : boolean "false" ; #r8
 
    think_scam_pill : boolean "false" ; #r5
-   think_aid_route : boolean "false" ; #r5
+   think_aid_route : boolean "false" ; #r6
    think_k_vroom : boolean "false" ; #r7
    think_why_trains : boolean "false" ; #r9
    think_wake_up : boolean "false" ; #r8
@@ -303,6 +303,7 @@ locations {
                   : done ;
                }
                : print "You hear a small cracking, then smell something vile. \"Dude!\" the recoder says, noticing you. They're a bit surprised it isn't you. They can't find where it's from. \"That's it. I can't work in these conditions.\" The recoder rushes away so quickly, they forget to pitch an empty glass of {dump_ale}. You take it. You might as well." ;
+               : pocket "dump_ale" ;
                : set_true "point_reek_odor" ;
                : gosub "add_point" ;
                : done ;
@@ -394,6 +395,7 @@ locations {
             : print "You walk up to the scamp. You tried to hide the lack of confidence you have in clever words, and thanks to the carp arts and blurb (lasting,) it works. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
             : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
             : print "You look at the coin. It is a coy nickel coin, ickle." ;
+            : pocket "coin" ;
             : set_true "point_scam_pill" ;
             : set_false "think_scam_pill" ;
             : gosub "add_point" ;
@@ -454,6 +456,7 @@ locations {
             : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The queen fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the tool out of the ground. You've also said the magic word to get it running. It has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
             : set_true "point_k_vroom" ;
             : set_false "think_k_vroom" ;
+            : destroy "coin" ;
             : gosub "add_point" ;
             : done ;
          }
@@ -536,6 +539,9 @@ objects {
    phase_tats : object "{i_fspt}" ;
    dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
    coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
+   tool : object "{i_tool}" msg="The tool is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" ;
+   chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" ;
+   wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" ;
 }
 
 connections {
