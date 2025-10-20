@@ -714,6 +714,21 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_command {
+   : match "xyzzy _" {
+      : print "A hollow voice intones \"Our gaol: argh, ail!\" It's so spooky, you don't dare quibble over details of pronunciation." ;
+      : done ;
+   }
+   : mask {
+      : match "load -" {
+         : print "You hear a low \"Do load, ooh!\"" ;
+      }
+      : match "restore -" {
+         : print "You hear a tune. It could be called a re-load reel/ode, I guess." ;
+      }
+      : match "save -" {
+         : print "A ghostly apparition with \"Save? Illun', Say!\" Villain written on its front taunts your very reasonable precaution. But you don't need to listen to such meanies." ;
+      }
+   }
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
    : if (is_carried "tool") {
