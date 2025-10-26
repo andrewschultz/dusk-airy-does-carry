@@ -509,10 +509,20 @@ locations {
             : set_false "think_wake_up" ;
             : gosub "add_point" ;
             : print "You don't wake up right away. Instead, you open a passage down to the Fake or Fey Core, where the people you aided from the route take over." ;
-            : print "The next morning, you wake up, and you realize it was a bit of a weird dream, but it was a heck of a lot better than the ones you used to have, ones you forgot you had, like being back in high school and having the principal inform you you got an F in the class you actually got an A in, and your protests only make things worse." ;
+            : print "The next morning, you wake up early, and you realize it was a bit of a weird dream, but it was a heck of a lot better than the ones you used to have, ones you forgot you had, like being back in high school and having the principal inform you you got an F in the class you actually got an A in, and your protests only make things worse." ;
             : print "There were other worse ones, but it's the sort of thing you can't discuss with other people, but perhaps all those books about changing your mindset, even the cheesy ones, actually helped your subconscious in some way." ;
-            : print "It's a nice little confidence boost, and you get a bit more when you start planning the month. You even find a letter in the mailbox. That's funny, it's too early for the mailman. When you open and look at it, you see, \"To the only one who told me my terrible poetry was terrible. I sensed you maybe needed a little motivation to bust out in more meaningful ways. I hope your little adventure helps you in your own way to have confidence and go get stuff done, like, well, those monthly plans you have.\"" ;
-            : print "You're not sure how this person knew, or how they were supernatural or whatever, but you're grateful for the push. November is very productive indeed." ;
+            : print "Suddenly you remember the coffee shop where you were cursed for interrupting. And it's not there. Now, you've heard of seasonal stuff popping up and disappearing, but this was a bit much, too fast you stand and stare for a bit, then you feel a tap on the shoulder. You turn around. It's the poet! ";
+            : print "\"Oh, hey, nice job with all that. I hope you enjoy it.\"" ;
+            : print "You're a bit confused, because he sure didn't seem to appreciate your comments on his poetry. But he explains." ;
+            : print "\"So few people even pay attention. I don't appear for a lot of folks, but what I do is, I look for somebody who kind of needed to speak up, who hadn't for a while, who maybe notices things aren't right but buries what they see. You did, this time, and you called me on it, so good job." ;
+            : print "\"But what did I do, really?\"" ;
+            : print "\"Well, not all that much, but enough. You see, the people in the coffee house crowd, they were the blokes.\"" ;
+            : print "The blokes come out. They wave at you. They put their poetry person costumes on and off. So that's where you saw them before!" ;
+            : print "\"But why me? What's the point?\"" ;
+            : print "\"Well, there's no hard algorithm about when I show up for people, but you may just have needed a push to go in do interesting stuff, and to speak up when you have doubts.\"" ;
+            : print "That's a good point, you say." ;
+            : print "\"I had a bunch of other people to show up for in all of October, and usually about half of them come through. You were one of the ones that worked out. Now to find places to speak out without them landing in your lap. Don't wait for a huge sign.\"" ;
+            : print "It's an odd sort of motivation, but it works. November is very productive. So is December. And January. And come October, you think back. You've kept it up, and you hope the next people stumbling on the coffee shop benefit as much as you do." ;
             : if (!won_yet) {
                : print "{one_time}there's nothing new to be found on replaying. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
             } : else {
@@ -722,9 +732,10 @@ on_startup {
       : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
       : press_any_key ;
    }
-   : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers outside. Dusk, airy, does carry, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind. " ;
-   : print "How dare you, says the performer. He is wearing a black cape, black shirt and black pants. One day, soon, you will see the results of your impertinence. Impetuousness. \"Po', um, ... poem,\" you mutter to yourself as you leave. The performer continues." ;
-   : print "You think no further of the incident. The final day of the month, you take care of things you meant to, and you plan for the month ahead. It's so much more productive than New Year's resolutions, which never have urgency. You have quite a few, big and small, and you fall asleep in the process." ;
+   : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers blasting outside. <Dusk, airy, does carry<#f80>>, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind." ;
+   : print "\"Duh! Scary!\" you blurt out. " ;
+   : print "\"How dare you,\" says the performer. He is wearing a black cape, black shirt and black pants. One day, soon, you will see the results of your impertinence. Impetuousness. \"Po', um, ... poem,\" you fire back as you leave. The performer says \"YOUR DAY WILL COME!\" and then continues." ;
+   : print "Why did you bother? Still, after, you think no further of the incident. The final day of the month, you take care of things you meant to, and plan for November too. You have quite a few, big and small, and you fall asleep in the process. It's so much more productive than New Year's resolutions, which never have urgency. Sometimes you get annoyed at repeating yourself each month and finally take care of this or that. But you could still do better." ;
    : print "You don't remember what happens next, all you remember is, you wake up in ..." ;
    : press_any_key ;
    : clear_screen;
