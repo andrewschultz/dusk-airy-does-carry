@@ -124,8 +124,8 @@ strings {
    r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the tool. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
-   r8_header : string "Whey Cup" ;
-   r8_loc : string "This is a canyon running north and south. A gigantic whey cup full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
+   r8_header : string "Fail-And-Fey Land" ;
+   r8_loc : string "This is a canyon running north and south. A gigantic {c_whey_cup} full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
    r8_cantgo : string "This is a north-south passage." ;
 
    r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
@@ -488,15 +488,16 @@ locations {
             : if (!point_why_trains) {
                : print "Without getting rid of the wight first? Well, you'd be able to move on, but think of the poor citizens of this little imaginary nonsense world! Also, I don't exactly have a master's in dream logic--I didn't even take a course on it in college--but this is the dream *I* built, dang it, so I'm pretty sure there's some sort of butterfly effect that'd come back to your own world and curse your sports team for the next hundred years. Clearly consequences not to be trifled with." ;
                : print "P.S. if you don't have a favorite sports team, your favorite television show will get worse, and you won't understand why, and neither will many other people watching it. Everyone will just feel bummed." ;
-               : print "So trust me. It's all very serious stuff, obviously." ;
+               : print "So trust me. It's all very serious stuff, obviously. Take down that wight!" ;
                : set_true "think_wake_up" ;
                : done ;
             }
             : set_true "point_wake_up" ;
             : set_false "think_wake_up" ;
             : gosub "add_point" ;
+            : print "You don't wake up right away. Instead, you open a passage down to the Fake or Fey Core, where the people you aided from the route take over." ;
             : print "The next morning, you wake up, and you realize it was a bit of a weird dream, but it was a heck of a lot better than the ones you used to have, ones you forgot you had, like being back in high school and having the principal inform you you got an F in the class you actually got an A in, and your protests only make things worse." ;
-            : print "There were other worse ones, but it's the sort of thing you can't discuss with other people, but perhaps all those books about changing your mindset, even the cheesy ones, actually helped your subconscious in some way. " ;
+            : print "There were other worse ones, but it's the sort of thing you can't discuss with other people, but perhaps all those books about changing your mindset, even the cheesy ones, actually helped your subconscious in some way." ;
             : print "It's a nice little confidence boost, and you get a bit more when you start planning the month. You even find a letter in the mailbox. That's funny, it's too early for the mailman. When you open and look at it, you see, \"To the only one who told me my terrible poetry was terrible. I sensed you maybe needed a little motivation to bust out in more meaningful ways. I hope your little adventure helps you in your own way to have confidence and go get stuff done, like, well, those monthly plans you have.\"" ;
             : print "You're not sure how this person knew, or how they were supernatural or whatever, but you're grateful for the push. November is very productive indeed." ;
             : if (!won_yet) {

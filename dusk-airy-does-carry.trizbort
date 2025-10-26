@@ -5,7 +5,9 @@
 		<room id="1" name="White Rains" subtitle="r9" x="-96" y="-32" w="96" h="64" region="Region3" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isDark="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
 			<objects>Wight Reigns</objects>
 		</room>
-		<room id="2" name="Whey Cup" subtitle="r8" x="-96" y="-160" w="96" h="64" region="Region4" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isDark="yes" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0" />
+		<room id="2" name="Fail-and-Fey Land" subtitle="r8" x="-96" y="-160" w="96" h="64" region="Region4" handDrawn="yes" allcornersequal="yes" ellipse="no" roundedCorners="no" octagonal="no" cornerTopLeft="15" cornerTopRight="15" cornerBottomLeft="15" cornerBottomRight="15" borderstyle="Solid" isDark="yes" isEndRoom="yes" description="" roomFill="" secondFill="" secondFillLocation="Bottom" roomBorder="" roomLargeText="" roomSubtitleColor="" roomSmallText="" ZOrder="0">
+			<objects>Whey Cup|Fake or Fey Core</objects>
+		</room>
 		<line id="3" name="" description="">
 			<dock index="0" id="1" port="n" />
 			<dock index="1" id="2" port="s" />
