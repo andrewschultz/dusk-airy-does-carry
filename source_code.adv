@@ -36,9 +36,13 @@ strings {
    c_dune_ice : string "<dune/ice<#88f>>" ;
    c_bro_code : string "<Bro Code<#88f>>" ;
    d_bro_code : string "<Bro Code<#ccc>>" ;
+   c_blur : string "<blur, blasting<#88f>>" ;
    c_scamp_ill : string "<scamp, ill<#88f>>" ;
-   c_a_drought: string "<A drought<#88f>>" ;
+   c_a_drought : string "<A drought<#88f>>" ;
+   c_wheeze : string "<wheeze-ooze<#88f>>" ;
    c_whey_cup : string "<whey cup<#88f>>" ;
+   c_wr1 : string "<wight reigns<#88f>>" ;
+   c_wr2 : string "<white rains<#88f>>" ;
    tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can findd with {xme}" )} ;
 
    # item strings
@@ -46,6 +50,7 @@ strings {
    i_coin : string "<coy nickel coin, ickle<#ccc>>" ;
    i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
+   i_tool : string "<Tool O' \"Too-Low\"<#ccc>>" ;
 
    # thinky strings
    t_scam_pill : string "<SCAM PILL<#f80>>" ;
@@ -111,8 +116,8 @@ strings {
    r2_loc : dynamic_string {( "A small techie-corp office.\n" + ( point_reek_odor ? "The area is empty now that you disposed of the recoder." : point_broke_ode ? "A {c_re_coder} sits here programming now, trying frantically to reconstruct the {d_bro_code} from a broke ode." : " You're here alone for the moment. A {c_bro_code} is on the wall." ) + "\nThe only viable exit is south." )} ;
    r2_cantgo : string "You can only go back south. Okay, you could go further into the office, but that'd get you arrested." ;
 
-   r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "Wheeze-Ooze" )} ;
-   r3_loc : dynamic_string {( (point_whee_zoos ? "A zoo with all sorts of animals: {zoo_anim}.\n" : "" ) + (point_blurb_lasting ? "The zoo is nice and quiet now, with the blurb and the blur and the ooze gone. " : point_whee_zoos ? "A blur, blasting, seems to be attacking areas by the zoo, and you need to disable it, or at least repurpose it into something less harmful." : "A wheeze-ooze sloshes around here, menacingly. What could it be guarding or oppressing?" ) + "\nYou can only go back south." )} ;
+   r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "{c_wheeze}" )} ;
+   r3_loc : dynamic_string {( (point_whee_zoos ? "A zoo with all sorts of animals: {zoo_anim}.\n" : "" ) + (point_blurb_lasting ? "The zoo is nice and quiet now, with the blurb and the blur and the ooze gone. " : point_whee_zoos ? "A {c_blur} seems to be attacking areas by the zoo, and you need to disable it, or at least repurpose it into something less harmful." : "A {c_wheeze} sloshes around here, menacingly. What could it be guarding or oppressing?" ) + "\nYou can only go back south." )} ;
    r3_cantgo : string "You can only go back south." ;
 
    r4_header : string "Car Parts" ;
@@ -135,8 +140,8 @@ strings {
    r8_loc : string "This is a canyon running north and south. A gigantic {c_whey_cup} full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
    r8_cantgo : string "This is a north-south passage." ;
 
-   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "<Wight Reigns/White Rains<#f4f>>" )} ;
-   r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A wight reigns here as white rains fall. It stands next to its scorch-ere-score chair, an intimidating throne indeed!" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "{c_wr1}/{c_wr2}" )} ;
+   r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A {c_wr1} here as {c_wr2} fall. It stands next to its scorch-ere-score chair, an intimidating throne indeed!" )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 }
 
@@ -346,7 +351,7 @@ locations {
                : done ;
             }
             : print "The wheeze ooze bubbles up, making one final big old wheeze, and then soars into the air like a geyser and pops. There is rumbling below, and then, surprisingly, life! All sorts of animals have been released from underground activity: {zoo_anim}. They sure do seem happy to see you. " ;
-            : print "Then, a menacing noise. A blur, blasting -- thankfully, it's far away from the zoo, but it's still annoying." ;
+            : print "Then, a menacing noise. A {c_blur} -- thankfully, it's far away from the zoo, but it's still annoying." ;
             : set_true "point_whee_zoos" ;
             : gosub "add_point" ;
             : done ;
@@ -409,7 +414,7 @@ locations {
                : print "You aren't getting anything more from the scamp." ;
                : done ;
             }
-            : print "You walk up to the scamp. You tried to hide the lack of confidence you have in clever words, and thanks to the carp arts and blurb (lasting,) it works. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
+            : print "You walk up to the scamp. Thanks to the blurb (lasting) and carp arts, any lack of confidence is buried. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
             : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
             : print "You look at the coin. It is a {i_coin}." ;
             : pocket "coin" ;
@@ -551,8 +556,8 @@ locations {
                : set_true "think_why_trains" ;
                : done ;
             }
-            : print "You doubt the wight really delves deep into conversation or philosophy, but you wonder if plain old general heckling will work. So you just start asking why, all kinds of pointless wise, of stuff that is really out of the wight's control, but then again, you've had people do that to you to distract you, so why not pay it forward to someone or something who is less awful than you." ;
-            : print "The {i_blokes} from the east follows your lead, battering it with silly questions. In the confusion, you take the {i_tool} to the chair and with some trial and error figure out what parts of the tool help disassemble which part of the chair. Crash! The chair falls apart. The white screams in agony and disappears into a small dot. The tribe cheers you some more. They're a good bunch, yet you feel you don't quite belong here." ;
+            : print "You doubt the wight really delves deep into conversation or philosophy, but you wonder if plain old general heckling will work. So you just start asking why, all kinds of pointless whys, of stuff that is really out of the wight's control, but then again, you've had people do that to you to distract you, so why not pay it forward to someone or something who is less awful than you." ;
+            : print "The {i_blokes} from the east follows your lead, battering it with silly questions. In the confusion, you take the {i_tool} to the chair and with some trial and error figure out what parts of the tool help disassemble which part of the chair. Crash! The chair falls apart. The wight screams in agony and disappears into a small dot. The tribe cheers you some more. They're a good bunch, yet you feel you don't quite belong here." ;
             : set_false "think_why_trains" ;
             : set_true "point_why_trains" ;
             : gosub "add_point" ;
@@ -801,9 +806,9 @@ on_command {
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
    : match "credits _;credit _" {
+      : print "Thanks to Allyson Gray for testing." ;
       : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
-      : print "I had no time for testers, alas, but if you find a bug, you can get your name here!" ;
    }
    : match "help _;hint _;hints _" {
       : if (!point_glow_bold) {
