@@ -274,6 +274,10 @@ locations {
    }
    r2 : location "{r2_loc}" header="{r2_header}" graphic="r2_graphic"  {
       on_command {
+         : match "_ ice" {
+            : print "You mutter to yourself, \"Say! Nice, sane ice!\"" ;
+            : done ;
+         }
          : match "broke ode" {
             : if (point_broke_ode) {
                : print "You already disrupted the bro code." ;
@@ -323,6 +327,12 @@ locations {
    }
    r3 : location "{r3_loc}" header="{r3_header}" graphic="r_blank"  {
       on_command {
+         : if (!point_whee_zoos) {
+            : match "_ oil;_ ooze" {
+               : print "You look at the ooze and name it oi-lose oil/ooze." ;
+               : done ;
+            }
+         }
          : match "whee zoos;wee zoos" {
             : if (point_whee_zoos) {
                : print "You continue to enjoy your surprise trip to the zoo. The animals express joy as well." ;
@@ -539,9 +549,9 @@ objects {
    phase_tats : object "{i_fspt}" ;
    dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
    coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
-   tool : object "{i_tool}" msg="The tool is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" ;
-   chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" ;
-   wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" ;
+   tool : object "{i_tool}" msg="The tool is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
+   chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
+   wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" conspicuous="false" ;
 }
 
 connections {
