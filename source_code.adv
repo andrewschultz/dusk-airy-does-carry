@@ -42,6 +42,8 @@ strings {
    tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can findd with {xme}" )} ;
 
    # item strings
+   i_blokes : string "<'Stable Oaks, Stay' Blokes<#ccc>>" ;
+   i_coin : string "<coy nickel coin, ickle<#ccc>>" ;
    i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
    i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
 
@@ -85,11 +87,11 @@ strings {
       is_at "r9" ? "{r9_cantgo}" :
       "You can't go that way. I should have a better message, but I don't."
       )} ;
-   nospecial_custom : string "You see no specific item like that. For rooms, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
+   nospecial_custom : string "You see no specific item like that--time limits mean I couldn't implement noncritical things. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
    yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # items
-   dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty." )} ;
+   dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty. But the recoder mentioned it had extra capacity. What to fill it with?" )} ;
 
    # scenery reused
    zoo_anim : string "a hippopotamus, a panda bear, a lion, a giraffe, an elephant and a seal" ;
@@ -114,7 +116,7 @@ strings {
    r3_cantgo : string "You can only go back south." ;
 
    r4_header : string "Car Parts" ;
-   r4_loc : dynamic_string {( point_carp_arts ? "You're amazed all the car parts gave you such information, especially since the radio lying around wasn't working." : "Car parts lie strewn about here. Perhaps they contain some weird wisdom you haven't thought of, if you look at them right. You've never been quite sure about cars. You just know what you'd better not do, and you manage to get an A in driver's ed and avoid any car crashes, but that doesn't really count as wisdom." )} ;
+   r4_loc : dynamic_string {( point_carp_arts ? "You're amazed all the car parts gave you such information, especially since the radio lying around wasn't working. But you probably can't get anything else from them." : "Car parts lie strewn about here. Perhaps they contain some weird wisdom you haven't thought of, if you look at them right. You've never been quite sure about cars. You just know what you'd better not do, you managed to get an A in driver's ed and avoid any car crashes, and you're less lousy at driving-based video games than you used to be, but none of that really counts as wisdom." )} ;
    r4_cantgo : string "You can only go back west." ;
 
    r5_header : string "<The \"Scamp, Thus\" Camp<#ccc>>" ;
@@ -126,7 +128,7 @@ strings {
    r6_cantgo : string "The only blocked way is back south." ;
 
    r7_header : string "Cave Room" ;
-   r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the tool. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. The only exit is back south." )} ;
+   r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. You sense you need to show you have the energy and ability to use it right. The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
    r8_header : string "Fail-And-Fey Land" ;
@@ -260,7 +262,7 @@ locations {
                : print {( "There " + (progress_ale_full ? "was" : "is") + " already enough dew to collect if and when you need it." )} ;
                : done ;
             }
-            : print "The ice melts bit, leaving dew beneath it." ;
+            : print {( "The ice melts bit, leaving dew beneath it." + (point_reek_odor ? "" : " It might be nice to bottle, but you have no container yet.") )} ;
             : set_true "point_dew_nice" ;
             : gosub "add_point" ;
             : gosub "ale_fill_check" ;
@@ -285,19 +287,19 @@ locations {
          }
          : match "broke ode" {
             : if (point_broke_ode) {
-               : print "You already disrupted the bro code." ;
+               : print "You already disrupted the Bro Code." ;
                : done ;
             }
             : print "The Bro Code's text seems to crumble, then transform into a musical score. You play it through your head, and unless you completely forgot how to read sheet music, the tune's genuinely horrible.\"" ;
-            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the bro code back in place. \"When they need a tough job, they call for the ... RE-CODER!\"" ;
-            : print "You really don't think the bro code deserves to be built back up, so you need to figure out a way to neutralize the recoder." ;
+            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#ccc>>! And my bottomless bottle of liquid nourishment!\"" ;
+            : print "You really don't think the {d_bro_code} deserves to be built back up, so you need to figure out a way to neutralize the {c_re_coder}." ;
             : set_true "point_broke_ode" ;
             : gosub "add_point" ;
             : done ;
          }
          : if (!point_broke_ode) {
             : match "_ bro;_ code" {
-               : print "The bro code seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
+               : print "The {c_bro_code} seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
                : done ;
             }
             : match "broke _;_ ode" {
@@ -311,7 +313,7 @@ locations {
                   : print "Things don't need to smell any worse here." ;
                   : done ;
                }
-               : print "You hear a small cracking, then smell something vile. \"Dude!\" the recoder says, noticing you. They're a bit surprised it isn't you. They can't find where it's from. \"That's it. I can't work in these conditions.\" The recoder rushes away so quickly, they forget to pitch an empty glass of {dump_ale}. You take it. You might as well." ;
+               : print "You hear a small cracking, then smell something vile. \"Dude!\" the recoder says, noticing you. They're a bit surprised it isn't you. They can't find where it's from. \"That's it. I can't work in these conditions.\" The recoder rushes away so quickly, they forget to pitch an empty glass of {i_dpda}. You take it. You might as well." ;
                : pocket "dump_ale" ;
                : set_true "point_reek_odor" ;
                : gosub "add_point" ;
@@ -319,7 +321,7 @@ locations {
             }
             : if (!point_reek_odor) {
                : match "_ re;_ coder;_ recoder" {
-                  : print "Working frantically, staring at the screen, trying to rebuild the Bro Code. You have plenty of time to distract him from this daunting task, but you just need to find the right distraction." ;
+                  : print "Working frantically, staring at the screen, trying to rebuild the {d_bro_code}. You have plenty of time to distract him from this daunting task, but you just need to find the right distraction." ;
                   : done ;
                }
                : match "reek _;_ odor" {
@@ -361,7 +363,7 @@ locations {
                   : print "Once the blurb got in your brain, it was already sure to last." ;
                   : done ;
                }
-               : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive.  Nothing too pompous of course. But it makes you happy and gives you confidence." ;
+               : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive.  Nothing too pompous of course. But it makes you happy and gives you confidence and ideas for other ways to seem slick in conversation." ;
                : set_true "point_blurb_lasting" ;
                : gosub "add_point" ;
                : done ;
@@ -409,7 +411,7 @@ locations {
             }
             : print "You walk up to the scamp. You tried to hide the lack of confidence you have in clever words, and thanks to the carp arts and blurb (lasting,) it works. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
             : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
-            : print "You look at the coin. It is a coy nickel coin, ickle." ;
+            : print "You look at the coin. It is a {i_coin}." ;
             : pocket "coin" ;
             : set_true "point_scam_pill" ;
             : set_false "think_scam_pill" ;
@@ -431,7 +433,7 @@ locations {
       on_command {
          : match "aid route" {
             : if (!r6_ready) {
-               : print "But you have nothing that could relieve the drought." ;
+               : print "But you have nothing that could relieve the drought yet." ;
                : set_true "think_aid_route" ;
                : done ;
             }
@@ -460,11 +462,11 @@ locations {
       on_command {
          : match "k vroom" {
             : if (point_k_vroom) {
-               : print "You already put yourself in a position to run off with the {tool}." ;
+               : print "You already put yourself in a position to run off with the {i_tool}." ;
                : done ;
             }
             : if (!r7_ready) {
-               : print "More to do." ;
+               : print {( "That feels right, but you don't fully feel worthy yet. You might need to " + ( point_scam_pill ? "help other people" : point_aid_route ? "feel more confident in your words" : "unravel a couple mysteries") + " first." )} ;
                : set_true "think_k_vroom" ;
                : done ;
             }
@@ -555,7 +557,7 @@ objects {
    phase_tats : object "{i_fspt}" ;
    dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
    coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
-   tool : object "{i_tool}" msg="The tool is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
+   tool : object "{i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
    chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
    wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" conspicuous="false" ;
 }
@@ -695,7 +697,7 @@ themes {
    i_cant_do_that = That's a valid command, but not right here and now.
    not_present = You can't see ${entity} here.
    ask_new_game                                   = Would you like to restart {dadc}?
-   ask_quit                                       = Do you wish to quit {dadc}?
+   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {dadc}?
    invalid_choice                                 = {yn_or_12_or_14}
    post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {dadc}.
    unknown_verb                                   = {custom_unknown_verb_error}
