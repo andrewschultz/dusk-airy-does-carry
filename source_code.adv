@@ -21,7 +21,10 @@ strings {
    # top level strings
    dadc : string "<Dusk, Airy, Does Carry<#ccc>>" ;
    g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
-   g_ut : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
+   g_ut : string "<Us Too<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
+   l_cdsa : string "<Chez Dark Shade Ark<#0f0>>[http://andrewschultz.itch.io/chez-dark-shade-ark]" ;
+   l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
+   l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
    ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
 
    # noting stuff
@@ -43,7 +46,7 @@ strings {
    c_whey_cup : string "<whey cup<#88f>>" ;
    c_wr1 : string "<wight reigns<#88f>>" ;
    c_wr2 : string "<white rains<#88f>>" ;
-   tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can findd with {xme}" )} ;
+   tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can find with {xme}" )} ;
 
    # item strings
    i_blokes : string "<'Stable Oaks, Stay' Blokes<#ccc>>" ;
@@ -669,7 +672,7 @@ subroutines {
 
    check_options : subroutine {
       : match "hone aye;hone eye" {
-         : print {( "Avaiilable exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
+         : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
          : if (tats_number == 0 && !opt_hone_aye) {
             : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
          }
@@ -738,7 +741,7 @@ on_startup {
       : press_any_key ;
    }
    : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers blasting outside. <Dusk, airy, does carry<#f80>>, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind." ;
-   : print "\"Duh! Scary!\" you blurt out. " ;
+   : print "\"Duh! Scary!\" you blurt out sarcastically." ;
    : print "\"How dare you,\" says the performer. He is wearing a black cape, black shirt and black pants. One day, soon, you will see the results of your impertinence. Impetuousness. \"Po', um, ... poem,\" you fire back as you leave. The performer says \"YOUR DAY WILL COME!\" and then continues." ;
    : print "Why did you bother? Still, after, you think no further of the incident. The final day of the month, you take care of things you meant to, and plan for November too. You have quite a few, big and small, and you fall asleep in the process. It's so much more productive than New Year's resolutions, which never have urgency. Sometimes you get annoyed at repeating yourself each month and finally take care of this or that. But you could still do better." ;
    : print "You don't remember what happens next, all you remember is, you wake up in ..." ;
@@ -813,7 +816,7 @@ on_command {
    : match "help _;hint _;hints _" {
       : if (!point_glow_bold) {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
-            : print "The inital puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
+            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
             : print "The globe (old) could be brighter. You need a combination of two words." ;
             : print "The game title, {dadc}, is an example." ;
             : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
@@ -835,8 +838,8 @@ on_command {
       }
       : print "Fill in later." ;
    }
-   : match "history _" {
-      : print "The first release of {dadc} was October 30, 2025 ,for {ecomp} Petite Mort." ;
+   : match "history _;version _;versions _" {
+      : print "The first release of {dadc} was October 30, 2025, for {ecomp} Petite Mort. It was released along with {l_gsgr} and {l_cdsa}." ;
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
@@ -869,7 +872,7 @@ on_command {
    }
    : match "verbs _;verb _" {
       : print "To complete {dadc}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
-      : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows release dates of versions." ;
+      : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
       : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
