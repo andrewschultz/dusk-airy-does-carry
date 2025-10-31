@@ -1,0 +1,115 @@
+Author's Walkthrough for Dusk, Airy, Does Carry
+
+by Andrew Schultz
+
+This was a submission to EctoComp Petite Mort 2025, where you had 4 hours to code. Graphics were not counted against the time limit. (Please, no cracks about how they wouldn't have counted much!)
+
+The solution is, in the big picture, fairly straightforward. You need to find a way to defeat the wight in the second room, then find a way home. The map is branching. HONE AYE and HO NIGH can block off or unblock passages to places where you're done.
+
+If you figure out some puzzles ahead of time, the game leaves the right command for reference in THINK.
+
+======================================
+
+You start by a globe, old.
+
+> GLOW BOLD (1)
+
+> U
+
+You can't do much with the wight. So search around. It's equally fast to go east or west, though there's one small decision that may save a couple moves.
+
+> E
+
+> E
+
+Car parts.
+
+> CARP ARTS (1)
+
+Incidentally, you can say CARP ART too! Adventuron accepts plural or singular forms of the second word by default.
+
+> W
+
+> N
+
+Wheeze-ooze. (Or oohs.)
+
+> WHEE ZOOS (1)
+
+"Wee" is an alternate solution here.
+
+Now you feel a blur, blasting ...
+
+> BLURB LASTING (1)
+
+> S
+
+You can't fix a drought yet. But you can ...
+
+> W
+
+> W
+
+Now if you go north you save a bit of time. In the west, you need something from the north to do everything, even after you score the point.
+
+> N
+
+A bro code!
+
+> BROKE ODE (1)
+
+A re-coder comes to fix it!
+
+> REEK ODOR (1)
+
+> S
+
+> W
+
+Dune/Ice.
+
+> DEW NICE (1)
+
+Here "do" was not specific enough so I had it clue something more physical.
+
+Once you get this, you will pour the dew in the ale container you got from the plots. That gives you a hydration source. If you'd come here first, you'd have had to come back.
+
+> E
+
+And oh yes! Before I forget, you now have the verbal skill for ...
+
+> SCAM PILL (1)
+
+> E
+
+> E
+
+> AID ROUTE (1)
+
+The blokes can't do anything in-game, but ...
+
+> W
+
+> N
+
+> N
+
+With the support you got from the aid route, and the coy nickel coin (ickle) ...
+
+> K VROOM (1)
+
+> S
+
+You may know what to do with the whey cup, but you haven't finished your quest ...
+
+> S
+
+> WHY TRAINS (1)
+
+They distract the wight enough you can disassemble the chair, from which the wight gains its powers.
+
+> N
+
+Now for the whey cup.
+
+> WAKE UP (1)
