@@ -44,6 +44,7 @@ strings {
    c_a_drought : string "<A drought<#88f>>" ;
    c_wheeze : string "<wheeze-ooze<#88f>>" ;
    c_whey_cup : string "<whey cup<#88f>>" ;
+   c_cave_room : string "<cave room<#88f>>" ;
    c_wr1 : string "<wight reigns<#88f>>" ;
    c_wr2 : string "<white rains<#88f>>" ;
    tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can find with {xme}" )} ;
@@ -135,7 +136,7 @@ strings {
    r6_loc : dynamic_string {( point_aid_route ? "This aid route runs east and west, with a passage north, too." : "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here. {c_a_drought} needn't last forever." )} ;
    r6_cantgo : string "The only blocked way is back south." ;
 
-   r7_header : string "Cave Room" ;
+   r7_header : dynamic_string {( point_k_vroom ? "Cave Room" : "{c_cave_room}" ;
    r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. You sense you need to show you have the energy and ability to use it right. The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
@@ -439,6 +440,12 @@ locations {
    }
    r6 : location "{r6_loc}" header="{r6_header}" graphic="r_blank"  {
       on_command {
+         : if (!point_aid_route) {
+            : match "_ rout" {
+               : print "Very, VERY close on the second word. 80%% in fact. But, to be pedantic, the rout will be just to the west." ;
+               : done ;
+            }
+         }
          : match "aid route" {
             : if (!r6_ready) {
                : print "But you have nothing that could relieve the drought yet." ;
