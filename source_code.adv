@@ -108,7 +108,7 @@ strings {
    zoo_anim : string "a hippopotamus, a panda bear, a lion, a giraffe, an elephant and a seal" ;
 
    # basics
-   my_score : string "{score}/{max_score}" ;
+   my_score : string "{score}{plusthink}/{max_score}" ;
 
    r0_loc : dynamic_string {( point_glow_bold ? "Now that the globe (old) emanates a {d_glow_bold}, you can see a passage leading up." : "You can't see much here. A small {c_globe_old} gives off a very dim light. It seems to be your only hope to illuminate a way out of here. But how to operate it?" )} ;
    r0_header : string "Raw Cold Rock, Old" ;
@@ -149,11 +149,21 @@ strings {
    r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "{c_wr1}/{c_wr2}" )} ;
    r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A {c_wr1} here as {c_wr2} fall. It stands next to its scorch-ere-score chair, an intimidating throne indeed!" )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
+
+   # status line trickery
+   plusthink : dynamic_string {( think_any ? "+{thought_score}" : "" )}
 }
 
 integers {
    score : integer "0" ;
    max_score : integer "12" ;
+   thought_score : dynamic_integer {(
+      (think_scam_pill ? 1 : 0) +
+      (think_aid_route ? 1 : 0) +
+      (think_k_vroom ? 1 : 0) +
+      (think_why_trains ? 1 : 0) +
+      (think_wake_up ? 1 : 0)
+      )} ;
    tats_number : dynamic_integer {(
       is_at "r0" ? r0_hintnum :
       is_at "r1" ? r1_hintnum :
