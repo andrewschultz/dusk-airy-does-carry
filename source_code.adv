@@ -807,6 +807,12 @@ on_command {
    }
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
+   : match "i _" {
+      : if (carried() == 0) {
+         : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : "You haven't found anything worth using yet." )} ;
+         : done ;
+      }
+   }
    : if (is_carried "tool") {
       : mask {
          : match "x tool" {
