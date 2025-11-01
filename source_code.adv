@@ -784,18 +784,18 @@ on_command {
    : if (is_carried "tool") {
       : mask {
          : match "x tool" {
-            : set_true "show_overlay" ;
-            : update_graphic "ig_tool" ;
             : set_false "show_overlay" ;
+            : update_graphic "ig_tool" ;
+            : set_true "show_overlay" ;
          }
       }
    }
    : if (is_carried "coin") {
       : mask {
          : match "x coin" {
-            : set_true "show_overlay" ;
-            : update_graphic "ig_coin" ;
             : set_false "show_overlay" ;
+            : update_graphic "ig_coin" ;
+            : set_true "show_overlay" ;
          }
       }
    }
