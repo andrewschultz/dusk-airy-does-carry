@@ -575,7 +575,8 @@ locations {
                : done ;
             }
             : print "You doubt the wight really delves deep into conversation or philosophy, but you wonder if plain old general heckling will work. So you just start asking why, all kinds of pointless whys, of stuff that is really out of the wight's control, but then again, you've had people do that to you to distract you, so why not pay it forward to someone or something who is less awful than you." ;
-            : print "The {i_blokes} from the east follows your lead, battering it with silly questions. In the confusion, you take the {i_tool} to the chair and with some trial and error figure out what parts of the tool help disassemble which part of the chair. Crash! The chair falls apart. The wight screams in agony and disappears into a small dot. The tribe cheers you some more. They're a good bunch, yet you feel you don't quite belong here." ;
+            : print "The {i_blokes} from the east follows your lead, battering it with silly questions. In the confusion, you take the {i_tool} to the chair and with some trial and error figure out what parts of the tool help disassemble which part of the chair. Crash! The chair falls apart, but as it does, it sends a surge through the {i_tool}, which explodes when you drop it. The wight screams in agony and disappears into a small dot. The tribe cheers you some more. They're a good bunch, yet you feel you don't quite belong here." ;
+            : destroy "tool" ;
             : set_false "think_why_trains" ;
             : set_true "point_why_trains" ;
             : gosub "add_point" ;
