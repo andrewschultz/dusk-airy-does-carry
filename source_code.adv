@@ -813,6 +813,10 @@ on_command {
          }
       }
    }
+   : match "glow _;carp _;whee _;wee _;blurb _;broke _;reek _;dew _;do _;scam _;aid _;k _;why _;" {
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
       : if (!wait_yet) {
