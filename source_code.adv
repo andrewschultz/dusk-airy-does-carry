@@ -239,6 +239,7 @@ booleans {
 }
 
 vocabulary {
+   : verb / aliases = [aid, aide]
 }
 
 locations {
@@ -581,9 +582,17 @@ locations {
             : done ;
          }
          : if (!point_why_trains) {
+            : match "y _" {
+               : print "You don't need to say yes or take a trip to the Y. But that sure sounds right!" ;
+               : done ;
+            }
             : match "why _;_ trains" {
                : gosub "say_half" ;
                : done ;
+            }
+         } : else {
+            : match "y _" {
+               : print "You engage in a relaxing bit of trainspotting before continuing your journey." ;
             }
          }
       }
