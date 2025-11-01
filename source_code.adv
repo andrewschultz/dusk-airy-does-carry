@@ -68,6 +68,7 @@ strings {
    ho_nigh : string "<HO NIGH<#ff0>>" ;
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
+   vm_hint : string "<HINT<#0f0>>/<HINTS<#0f0>>/<HELP<#0f0>>" ;
    vm_think : string "<THINK<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
@@ -816,7 +817,7 @@ on_command {
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to Allyson Gray for testing." ;
+      : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
       : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
       : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
@@ -881,6 +882,7 @@ on_command {
    : match "verbs _;verb _" {
       : print "To complete {dadc}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
+      : print {( "{vm_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) )} ;
       : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
    }
    : match "take _;drop _" {
