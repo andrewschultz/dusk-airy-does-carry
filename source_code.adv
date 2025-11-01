@@ -188,6 +188,7 @@ booleans {
    won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
    think_note_yet : boolean "false" ;
+   inventory_note : boolean "false" ;
 
    # scoring, in approximate order
    point_glow_bold : boolean "false" ;
@@ -946,6 +947,14 @@ on_tick {
    : if (!showed_first_note) {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {dadc}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
+      : done ;
+   }
+   : if (!point_why_trains && !inventory_note) {
+      : match "i _" {
+         : set_true "inventory_note" ;
+         : print "{one_time}you don't have to explicitly use anything in your inventory in {dadc}. The right command will use it, then remove it from inventory." ;
+         : done ;
+      }
    }
 }
 
