@@ -186,6 +186,7 @@ booleans {
    me_x_yet : boolean "false" ;
    won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
+   think_note_yet : boolean "false" ;
 
    # scoring, in approximate order
    point_glow_bold : boolean "false" ;
@@ -413,6 +414,7 @@ locations {
             : if (!r5_ready) {
                : print {( "You can't quite convince the scamp that you're able to sell the \"wares\" effectively. You haven't gained " + ((point_carp_arts || point_blurb_lasting) ? "enough" : "any") + " verbal facility yet." )} ;
                : set_true "think_scam_pill" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : if (point_scam_pill) {
@@ -451,6 +453,7 @@ locations {
             : if (!r6_ready) {
                : print "But you have nothing that could relieve the drought yet." ;
                : set_true "think_aid_route" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : if (point_aid_route) {
@@ -490,6 +493,7 @@ locations {
             : if (!r7_ready) {
                : print {( "That feels right, but you don't fully feel worthy yet. You might need to " + ( point_scam_pill ? "help other people" : point_aid_route ? "feel more confident in your words" : "unravel a couple mysteries") + " first." )} ;
                : set_true "think_k_vroom" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The coin fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the {i_tool} out of the ground. You've also said the magic word to get it running. It has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
@@ -519,6 +523,7 @@ locations {
                : print "P.S. if you don't have a favorite sports team, your favorite television show will get worse, and you won't understand why, and neither will many other people watching it. Everyone will just feel bummed." ;
                : print "So trust me. It's all very serious stuff, obviously. Take down that wight!" ;
                : set_true "think_wake_up" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : set_true "point_wake_up" ;
@@ -565,6 +570,7 @@ locations {
             : if (!point_k_vroom) {
                : print "You don't have the energy yet." ;
                : set_true "think_why_trains" ;
+               : gosub "note_thinks" ;
                : done ;
             }
             : print "You doubt the wight really delves deep into conversation or philosophy, but you wonder if plain old general heckling will work. So you just start asking why, all kinds of pointless whys, of stuff that is really out of the wight's control, but then again, you've had people do that to you to distract you, so why not pay it forward to someone or something who is less awful than you." ;
@@ -689,6 +695,13 @@ subroutines {
       : match "ho nigh" {
          : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
          : set_false "opt_hone_aye" ;
+      }
+   }
+
+   note_thinks : subroutine {
+      : if (!think_note_yet) {
+         : print "{one_time}{vd_think} will track any command that will score points at a later time. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
+         : set_true "think_note_yet" ;
       }
    }
 
