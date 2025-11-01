@@ -102,6 +102,7 @@ strings {
 
    # items
    dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty. But the recoder mentioned it had extra capacity. What to fill it with?" )} ;
+   ale_details : dynamic_string {( (progress_ale_full ? "full" : "empty" ) )} ;
 
    # scenery reused
    zoo_anim : string "a hippopotamus, a panda bear, a lion, a giraffe, an elephant and a seal" ;
@@ -464,7 +465,8 @@ locations {
             : print "You figure you can make this place an aid route now that you can bring water to it, and the cracks in the dirt start closing." ;
             : print "You figure it's going to take a while to repopulate, but you're shocked to turn around and see a cheering crowd, of a lot of more or less identical people, but hey, it's good to have friends. They introduce themselves as the {i_blokes}. They look familiar, but you can't place from where." ;
             : print "They say they can't offer much more than emotional support, but they hope that's something, and they hope the purpose you get, or increased purpose, helps you down the line." ;
-            : print "They're still being oppressed by the wight, true, but your recent actions give them confidence things will change even more!" ;
+            : print "They're still being oppressed by the wight, true, but your recent actions give them confidence things will change even more! They also ask if you can share the ale, since, well, they were a bit thirsty themselves. You say, no problem. Less stuff to juggle." ;
+            : destroy "dump_ale" ;
             : set_true "point_aid_route" ;
             : set_false "think_aid_route" ;
             : gosub "add_point" ;
@@ -603,7 +605,7 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 objects {
    phase_tats : object "{i_fspt}" ;
-   dump_ale : object "{i_dpda}" msg="{dump_ale_description}" ;
+   dump_ale : object "{i_dpda} ({ale_details})" msg="{dump_ale_description}" ;
    coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
    tool : object "{i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
    chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
