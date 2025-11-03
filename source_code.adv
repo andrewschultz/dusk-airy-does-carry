@@ -921,6 +921,9 @@ on_command {
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
+      : if (think_any > 0) {
+         : print {( "You've also discovered {think_any} command" + (think_any > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
+      }
       : if (!warn_score_header) {
          : print "{one_time}This is tracked in the upper left." ;
          : set_true "warn_score_header" ;
