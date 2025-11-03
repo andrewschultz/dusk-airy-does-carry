@@ -241,10 +241,15 @@ booleans {
    r2_hone_block : dynamic_boolean {( opt_hone_aye && point_reek_odor )} ;
    r3_hone_block : dynamic_boolean {( opt_hone_aye && point_blurb_lasting )} ;
    r4_hone_block : dynamic_boolean {( opt_hone_aye && point_carp_arts )} ;
-   r5_hone_block : dynamic_boolean {( opt_hone_aye && progress_ale_full && point_dew_nice && point_reek_odor && point_scam_pill && is_at "r9" )} ;
-   r6_hone_block : dynamic_boolean {( opt_hone_aye && point_aid_route && point_blurb_lasting && point_carp_arts && is_at "r9" )} ;
+   r5_hone_block : dynamic_boolean {( west_blockable && is_at "r9" )} ;
+   r6_hone_block : dynamic_boolean {( east_blockable && is_at "r9" )} ;
    r7_hone_block : dynamic_boolean {( opt_hone_aye && point_k_vroom )} ;
    r9_hone_block : dynamic_boolean {( opt_hone_aye && point_why_trains && is_at "r8" )} ;
+
+   west_blockable : dynamic_boolean {( opt_hone_aye && progress_ale_full && point_dew_nice && point_reek_odor && point_scam_pill )} ;
+   east_blockable : dynamic_boolean {( opt_hone_aye && point_aid_route && point_blurb_lasting && point_carp_arts )} ;
+   is_in_west : dynamic_boolean {( is_at "r1" || is_at "r2" || is_at "r5" )} ;
+   is_in_east : dynamic_boolean {( is_at "r3" || is_at "r4" || is_at "r6" )} ;
 
    # rendering
    indoors : dynamic_boolean {( (is_at "r0" && !point_glow_bold) || is_at "r2" || is_at "r7" )} ;
@@ -995,7 +1000,11 @@ on_render {
    : if (showing_map) {
       : overlay "mr_0" x="248" y="264" ;
       : if (point_glow_bold) {
-         : overlay "mc_v_u" x="286" y="240" ;
+         : if (opt_hone_aye && !is_at "r0") {
+            : overlay "mc_vx_u" x="286" y="240" ;
+         } : else {
+            : overlay "mc_v_u" x="286" y="240" ;
+         }
       }
       : if (has_visited "r1") {
          : overlay "mr_1" x="0" y="176" ;
@@ -1015,12 +1024,32 @@ on_render {
       }
       : if (has_visited "r5") {
          : overlay "mr_5" x="124" y="176" ;
-         : overlay "mc_h" x="100" y="206" ;
-         : overlay "mc_v" x="172" y="152" ;
+         : if (opt_hone_aye && progress_ale_full && !is_at "r1")
+         {
+            : overlay "mc_hx" x="100" y="206" ;
+         } : else {
+            : overlay "mc_h" x="100" y="206" ;
+         }
+         : if (opt_hone_aye && point_reek_odor && !is_at "r2")
+         {
+            : overlay "mc_vx" x="172" y="152" ;
+         } : else {
+            : overlay "mc_v" x="172" y="152" ;
+         }
       }
       : if (has_visited "r6") {
-         : overlay "mc_h" x="472" y="206" ;
-         : overlay "mc_v" x="420" y="152" ;
+         : if (opt_hone_aye && point_carp_arts && !is_at "r4")
+         {
+            : overlay "mc_hx" x="472" y="206" ;
+         } : else {
+            : overlay "mc_h" x="472" y="206" ;
+         }
+         : if (opt_hone_aye && point_blurb_lasting && !is_at "r3")
+         {
+            : overlay "mc_vx" x="420" y="152" ;
+         } : else {
+            : overlay "mc_v" x="420" y="152" ;
+         }
          : if (point_aid_route) {
             : overlay "mr_62" x="372" y="176" ;
          } : else {
@@ -1032,12 +1061,28 @@ on_render {
       }
       : if (has_visited "r8") {
          : overlay "mr_5" x="248" y="88" ;
-         : overlay "mc_v" x="298" y="64" ;
+         : if (opt_hone_aye && point_k_vroom && !is_at "r7") {
+            : overlay "mc_vx" x="298" y="64" ;
+         } : else {
+            : overlay "mc_v" x="298" y="64" ;
+         }
       }
       : if (has_visited "r9") {
-         : overlay "mc_v" x="298" y="152" ;
-         : overlay "mc_h" x="224" y="206" ;
-         : overlay "mc_h" x="348" y="206" ;
+         : if (opt_hone_aye && (is_at "r7" || is_at "r8") && point_why_trains) {
+            : overlay "mc_vx" x="298" y="152" ;
+         } : else {
+            : overlay "mc_v" x="298" y="152" ;
+         }
+         : if (west_blockable && (!is_in_west)) {
+            : overlay "mc_hx" x="224" y="206" ;
+         } : else {
+            : overlay "mc_h" x="224" y="206" ;
+         }
+         : if (east_blockable && (!is_in_east)) {
+            : overlay "mc_hx" x="348" y="206" ;
+         } : else {
+            : overlay "mc_h" x="348" y="206" ;
+         }
          : if (point_why_trains) {
             : overlay "mr_92" x="248" y="176" ;
          } : else {
@@ -1195,7 +1240,10 @@ assets {
       # auxiliary directions
       mc_h : base64_png "iVBORw0KGgoAAAANSUhEUgAAABgAAAAEAQMAAACurW1bAAAAA1BMVEUAAACnej3aAAAACklEQVQIHWNAAwAAEAABmUMJyQAAAABJRU5ErkJggg==" ;
       mc_v : base64_png "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYAQMAAADnK87dAAAAA1BMVEUAAACnej3aAAAAC0lEQVR4XmMgEQAAADAAAYFIpkQAAAAASUVORK5CYII=" ;
+      mc_hx : base64_png "iVBORw0KGgoAAAANSUhEUgAAABgAAAAECAYAAACUY/8YAAAAFklEQVR4nGP8z8Dwn4GGgImWhg8PCwAHvgIGGydoGAAAAABJRU5ErkJggg==" ;
+      mc_vx : base64_png "iVBORw0KGgoAAAANSUhEUgAAAAQAAAAYCAYAAADd5VyeAAAAGElEQVR4nGP8z8DwnwEJMDGggVGBgRAAAE/aAi7cU12TAAAAAElFTkSuQmCC" ;
       mc_v_u : base64_png "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYAQMAAADaua+7AAAABlBMVEX///8AAABVwtN+AAAAAXRSTlMAQObYZgAAAB5JREFUCFtjYLBhYGAGYqY9CAziM5CKbR3Q8AGQOACgWQjyfpGiXAAAAABJRU5ErkJggg==" ;
+      mc_vx_u : base64_png "iVBORw0KGgoAAAANSUhEUgAAABgAAAAYAQMAAADaua+7AAAABlBMVEX/////AADrWueTAAAAAXRSTlMAQObYZgAAAB5JREFUCFtjYLBhYGAGYqY9CAziM5CKbR3Q8AGQOACgWQjyfpGiXAAAAABJRU5ErkJggg==" ;
 
    }
 }
