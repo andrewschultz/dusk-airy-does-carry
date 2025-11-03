@@ -926,18 +926,18 @@ on_command {
          : print "There are no commands you figured out and will need to re-use in the future with stronger preparation." ;
          : done ;
       }
-      : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it them." ;
+      : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it, and you still haven't. Yet." ;
       : if (think_scam_pill) {
-         : print "You can {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill}." ;
+         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill}." ;
       }
       : if (think_aid_route) {
-         : print "You can {t_aid_route} {once_aid_route} you are able to help with A Drought." ;
+         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help with A Drought." ;
       }
       : if (think_k_vroom) {
-         : print "You can {t_k_vroom} {once_k_vroom} you have the motivation to look around Cave Room." ;
+         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around Cave Room." ;
       }
       : if (think_why_trains) {
-         : print "You can {t_why_trains} {once_why_trains} you have something to tame the wight." ;
+         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight." ;
       }
       : if (think_wake_up) {
          : print "You can {t_wake_up} {once_wake_up} you've defeated the wight." ;
