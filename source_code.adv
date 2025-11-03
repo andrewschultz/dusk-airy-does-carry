@@ -1001,95 +1001,95 @@ on_tick {
 
 on_render {
    : if (showing_map) {
-      : overlay "mr_0" x="248" y="264" ;
+      : overlay "mr_0" x="250" y="266" ;
       : if (point_glow_bold) {
          : if (opt_hone_aye && !is_at "r0") {
-            : overlay "mc_vx_u" x="286" y="240" ;
+            : overlay "mc_vx_u" x="288" y="242" ;
          } : else {
-            : overlay "mc_v_u" x="286" y="240" ;
+            : overlay "mc_v_u" x="288" y="242" ;
          }
       }
       : if (has_visited "r1") {
-         : overlay "mr_1" x="0" y="176" ;
+         : overlay "mr_1" x="2" y="178" ;
       }
       : if (has_visited "r2") {
-         : overlay "mr_2" x="124" y="88" ;
+         : overlay "mr_2" x="126" y="90" ;
       }
       : if (has_visited "r3") {
          : if (point_whee_zoos) {
-            : overlay "mr_32" x="372" y="88" ;
+            : overlay "mr_32" x="374" y="90" ;
          } : else {
-            : overlay "mr_31" x="372" y="88" ;
+            : overlay "mr_31" x="374" y="90" ;
          }
       }
       : if (has_visited "r4") {
-         : overlay "mr_4" x="496" y="176" ;
+         : overlay "mr_4" x="498" y="178" ;
       }
       : if (has_visited "r5") {
-         : overlay "mr_5" x="124" y="176" ;
+         : overlay "mr_5" x="126" y="178" ;
          : if (opt_hone_aye && progress_ale_full && !is_at "r1")
          {
-            : overlay "mc_hx" x="100" y="206" ;
+            : overlay "mc_hx" x="102" y="208" ;
          } : else {
-            : overlay "mc_h" x="100" y="206" ;
+            : overlay "mc_h" x="102" y="208" ;
          }
          : if (opt_hone_aye && point_reek_odor && !is_at "r2")
          {
-            : overlay "mc_vx" x="172" y="152" ;
+            : overlay "mc_vx" x="174" y="154" ;
          } : else {
-            : overlay "mc_v" x="172" y="152" ;
+            : overlay "mc_v" x="174" y="154" ;
          }
       }
       : if (has_visited "r6") {
          : if (opt_hone_aye && point_carp_arts && !is_at "r4")
          {
-            : overlay "mc_hx" x="472" y="206" ;
+            : overlay "mc_hx" x="474" y="208" ;
          } : else {
-            : overlay "mc_h" x="472" y="206" ;
+            : overlay "mc_h" x="474" y="208" ;
          }
          : if (opt_hone_aye && point_blurb_lasting && !is_at "r3")
          {
-            : overlay "mc_vx" x="420" y="152" ;
+            : overlay "mc_vx" x="422" y="154" ;
          } : else {
-            : overlay "mc_v" x="420" y="152" ;
+            : overlay "mc_v" x="422" y="154" ;
          }
          : if (point_aid_route) {
-            : overlay "mr_62" x="372" y="176" ;
+            : overlay "mr_62" x="374" y="178" ;
          } : else {
-            : overlay "mr_61" x="372" y="176" ;
+            : overlay "mr_61" x="374" y="178" ;
          }
       }
       : if (has_visited "r7") {
-         : overlay "mr_7" x="248" y="0" ;
+         : overlay "mr_7" x="250" y="2" ;
       }
       : if (has_visited "r8") {
-         : overlay "mr_5" x="248" y="88" ;
+         : overlay "mr_5" x="250" y="90" ;
          : if (opt_hone_aye && point_k_vroom && !is_at "r7") {
-            : overlay "mc_vx" x="298" y="64" ;
+            : overlay "mc_vx" x="300" y="66" ;
          } : else {
-            : overlay "mc_v" x="298" y="64" ;
+            : overlay "mc_v" x="300" y="66" ;
          }
       }
       : if (has_visited "r9") {
          : if (opt_hone_aye && (is_at "r7" || is_at "r8") && point_why_trains) {
-            : overlay "mc_vx" x="298" y="152" ;
+            : overlay "mc_vx" x="300" y="154" ;
          } : else {
-            : overlay "mc_v" x="298" y="152" ;
+            : overlay "mc_v" x="300" y="154" ;
          }
          : if (west_blockable && (!is_in_west)) {
-            : overlay "mc_hx" x="224" y="206" ;
+            : overlay "mc_hx" x="226" y="208" ;
          } : else {
-            : overlay "mc_h" x="224" y="206" ;
+            : overlay "mc_h" x="226" y="208" ;
          }
          : if (east_blockable && (!is_in_east)) {
-            : overlay "mc_hx" x="348" y="206" ;
+            : overlay "mc_hx" x="350" y="208" ;
          } : else {
-            : overlay "mc_h" x="348" y="206" ;
+            : overlay "mc_h" x="350" y="208" ;
          }
          : if (point_why_trains) {
-            : overlay "mr_92" x="248" y="176" ;
+            : overlay "mr_92" x="250" y="178" ;
          } : else {
-            : overlay "mr_91" x="248" y="176" ;
+            : overlay "mr_91" x="250" y="178" ;
          }
       }
       : done ;
@@ -1224,7 +1224,7 @@ assets {
       p_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAQAAAAAoAQMAAAArNLbKAAAAA1BMVEUAAFDMEWwuAAAAE0lEQVR4XmPAC0bBKBgFo2AUAAAFKAABhzzafQAAAABJRU5ErkJggg==" ;
 
       # maps
-      m_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAlQAAAFIAQMAAACsqvIXAAAAA1BMVEXgwKATtJncAAAAL0lEQVR4Xu3AMQEAAADCIPuntsYOWBwAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAMABYWAAAedW05IAAAAASUVORK5CYII=" ;
+      m_blank : base64_png "iVBORw0KGgoAAAANSUhEUgAAAlgAAAFMAQMAAAAtB1CPAAAAA1BMVEXgwKATtJncAAAALklEQVR4Xu3AAQ0AAADCIPuntscHSwEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAOBikAABAZb4FQAAAABJRU5ErkJggg==" ;
 
       mr_0 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAGQAAABAAQMAAADWEUA3AAAABlBMVEUAAAD/gAAgfBVpAAABA0lEQVR4Xt3OQUrDQBQG4H8caDbRbAeo5grtRgKUnmWGgO4kRcCNmBcKjUB7p5FA3fQALlN6gUA3FkLiG01DTiDov/t4M/97+JsJq/Ek0QHNfVmzPp3CsvVlA6jxrfqw0aJYS4/lO02m2VpK6mZaYicF8b94qCpWr72UTi831CtpNwNFb6yfTkApp8h0+67p3QPfEhwbVuDk0Sw41vj1pHYuKl0iHImGVbayNhbpSrSAXhT5VUzYb8WSoKfZanQP2K3ILPQjdniAoDtB/P7Aeu5VsF7OMkvWUy83i6mT3nOnoe9OgjZF7ht73pfwLfqAND+5W6IZKl56450adBEY5gL/NF/9HH2zIziC7QAAAABJRU5ErkJggg==" ;
       mr_1 : base64_png "iVBORw0KGgoAAAANSUhEUgAAAGQAAABAAQMAAADWEUA3AAAABlBMVEUAAAD/gAAgfBVpAAAAvklEQVR4Xs3QsQ3CMBQE0LMsJc0naV1kiF+mYxWPkJKOsBEj/FE8AiVFZGOLkNgCQoME173iy3fGd9IGiG7AwUONUWMmUk50CxZAAwQbNS5i0btCJElVkomyG+Kk5iHDYQK9FrFgVZVkkvpCHKVXuZrUOYqTrK1IXWYpd+gIs+La/ZUwBI8hyqN1d1n8WyocEfwiFSSTFidYVGPI1KDPRDCZOiCT2VaYnvT5riveo6JLA37bWp/cqnVt9hM/zw3JdF5I0hXsBwAAAABJRU5ErkJggg==" ;
