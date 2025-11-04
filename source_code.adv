@@ -187,6 +187,7 @@ integers {
       (point_whee_zoos ? 57 : 44) )} ;
    r2_hintnum : dynamic_integer {(point_reek_odor ? 0 : (point_broke_ode ? 44 : 53) )} ;
    r1_hintnum : dynamic_integer {(point_dew_nice ? 0 : 34)} ;
+   actually_carried : dynamic_integer {( carried() - (me_x_yet ? 1 : 0) )} ;
 }
 
 booleans {
@@ -200,6 +201,7 @@ booleans {
    think_note_yet : boolean "false" ;
    inventory_note : boolean "false" ;
    first_map_note : boolean "false" ;
+   ever_found_item : boolean "false" ; # while this must be true to win the game, no game-critical logic relies on it
 
    # scoring, in approximate order
    point_glow_bold : boolean "false" ;
@@ -346,6 +348,7 @@ locations {
                }
                : print "You hear a small cracking, then smell something vile. \"Dude!\" the recoder says, noticing you. They're a bit surprised it isn't you. They can't find where it's from. \"That's it. I can't work in these conditions.\" The recoder rushes away so quickly, they forget to pitch an empty glass of {i_dpda}. You take it. You might as well." ;
                : pocket "dump_ale" ;
+               : set_true "ever_found_item" ;
                : set_true "point_reek_odor" ;
                : gosub "add_point" ;
                : done ;
@@ -445,6 +448,7 @@ locations {
             : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
             : print "You look at the coin. It is a {i_coin}." ;
             : pocket "coin" ;
+            : set_true "ever_found_item" ;
             : set_true "point_scam_pill" ;
             : set_false "think_scam_pill" ;
             : gosub "add_point" ;
@@ -527,6 +531,8 @@ locations {
             : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The coin fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the {i_tool} out of the ground. You've also said the magic word to get it running. It has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
             : set_true "point_k_vroom" ;
             : set_false "think_k_vroom" ;
+            : pocket "tool" ;
+            : set_true "ever_found_item" ;
             : destroy "coin" ;
             : gosub "add_point" ;
             : done ;
@@ -833,8 +839,8 @@ on_command {
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
    : match "i _" {
-      : if (carried() == 0) {
-         : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : "You haven't found anything worth using yet." )} ;
+      : if (actually_carried == 0) { # This may not be strictly necessary, but I want this code in for reference later, if I want to track "never carried/currently not carrying/no need to carry more"
+         : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : ( ever_found_item ? "You aren't carrying anything, but there's more to find." : "You haven't found anything worth using yet." ) )} ;
          : done ;
       }
    }
@@ -989,6 +995,11 @@ on_tick {
       : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {dadc}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
       : done ;
+   }
+   : if (me_x_yet) {
+      : match "i _" {
+         : print "You've noticed {fspt} on your arm." ;
+      }
    }
    : if (!point_why_trains && !inventory_note) {
       : match "i _" {
