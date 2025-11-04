@@ -232,6 +232,7 @@ booleans {
    opt_hone_aye : boolean "false" ;
 
    # game state combo
+   talk_skill_show : dynamic_boolean {( (point_carp_arts || point_blurb_lasting) && !point_scam_pill )} ;
    can_fill_ale : dynamic_boolean {( point_dew_nice && point_reek_odor && !progress_ale_full )} ;
    r5_ready : dynamic_boolean {( point_carp_arts && point_blurb_lasting )} ;
    r6_ready : dynamic_boolean {( progress_ale_full && point_reek_odor )} ;
@@ -996,16 +997,19 @@ on_tick {
       : set_true "showed_first_note" ;
       : done ;
    }
-   : if (me_x_yet) {
-      : match "i _" {
+   : match "i _" {
+      : if (me_x_yet) {
          : print "You've noticed {fspt} on your arm." ;
       }
-   }
-   : if (!point_why_trains && !inventory_note) {
-      : match "i _" {
-         : set_true "inventory_note" ;
-         : print "{one_time}you don't need to use any inventory item explicitly in {dadc}. The right magic phrase will do so, then remove your item from inventory." ;
-         : done ;
+      : if (talk_skill_show) {
+         : print {( "You have gained " + (r5_ready ? "serious" : "some") + " verbal skill you didn't know you had, thanks to your encounters with the" + (point_carp_arts ? " <CARP ARTS<#ff0>>" : "" ) + (r5_ready ? " and" : "") + (point_blurb_lasting ? " <BLURB LASTING<#ff0>>" : "") + "." )} ;
+      }
+      : if (!point_why_trains && !inventory_note) {
+         : match "i _" {
+            : set_true "inventory_note" ;
+            : print "{one_time}you don't need to use any inventory item explicitly in {dadc}. The right magic phrase will do so, then remove your item from inventory." ;
+            : done ;
+         }
       }
    }
 }
