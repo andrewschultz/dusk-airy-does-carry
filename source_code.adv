@@ -203,6 +203,8 @@ booleans {
    inventory_note : boolean "false" ;
    first_map_note : boolean "false" ;
    ever_found_item : boolean "false" ; # while this must be true to win the game, no game-critical logic relies on it
+   note_half_limitations : boolean "false" ;
+
 
    # scoring, in approximate order
    point_glow_bold : boolean "false" ;
@@ -233,6 +235,10 @@ booleans {
    (is_at "r8" && (!point_why_trains)) ||
    (is_at "r9" && !point_k_vroom)
    )} ;
+
+   # cluing temporary booleans
+   done_already : boolean "false" ;
+   think_already : boolean "false" ;
 
    # game progress (critical)
    progress_ale_full : boolean "false" ;
@@ -727,7 +733,18 @@ subroutines {
 	  : update_graphic ;
    }
    say_half : subroutine {
-      : print "You got half right." ;
+      : if (done_already) {
+         : print "That's half of something you already got to work." ;
+      } : else_if (think_already) {
+         : print "That's half of something you already guessed. {vm_think} will recall it." ;
+      } : else {
+         : print "You feel you must have one word right." ;
+         : if (!note_half_limitations) {
+            : print "{one_time}ideally, I'd keep track of which word you have right, but while Adventuron makes many things easy, its lack of support for complex classes makes the code (as I see it) hard to write and test. Sorry for any inconvenience." ;
+			: set_true "note_half_limitations" ;
+         }
+      }
+      : set_false "think_already" ;
    }
 
    ale_fill_check : subroutine {
