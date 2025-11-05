@@ -563,7 +563,7 @@ locations {
    }
    r8 : location "{r8_loc}" header="{r8_header}" graphic="r_blank" {
       on_command {
-         : match "wake up" {
+         : match "wake up" { #noobfus
             : if (point_wake_up) {
                : print "You already woke up. This should not happen." ;
                : done ;
@@ -766,10 +766,10 @@ subroutines {
          : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
          : set_false "opt_hone_aye" ;
       }
-      : match "hone _" {
+      : match "hone _" { #noobfus
          : print "{hone_stickler} {hone_aye}.";
       }
-      : match "ho _" {
+      : match "ho _" { #noobfus
          : print "{hone_stickler} {ho_nigh}.";
       }
    }
@@ -894,6 +894,11 @@ on_command {
             : set_true "show_overlay" ;
          }
       }
+   }
+
+   : match "wake _" {
+      : print "Yes, you're in a dream, but here's not the place." ;
+      : done ;
    }
 
    : match "map _;m _" {
@@ -1024,7 +1029,12 @@ on_command {
       }
    }
 
-   : match "glow _;carp _;whee _;wee _;blurb _;broke _;reek _;dew _;do _;scam _;aid _;k _;why _" {
+   : match "glow _;carp _;whee _;blurb _;broke _;reek _;dew _;do _;scam _;aid _;k _;why _" { #obfuscation
+      : print "{custom_unknown_verb_error}" ;
+      : done ;
+   }
+   # Keeping the rejects organized: below are noncritical but we don't want to confuse the player
+   : match "y _;2005 _" { #obfuscation
       : print "{custom_unknown_verb_error}" ;
       : done ;
    }
