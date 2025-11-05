@@ -277,6 +277,7 @@ booleans {
 
 vocabulary {
    : verb / aliases = [aid, aide]
+   : verb / aliases = [wee, whee]
 }
 
 locations {
@@ -390,7 +391,7 @@ locations {
                : done ;
             }
          }
-         : match "whee zoos;wee zoos" {
+         : match "whee zoos" {
             : if (point_whee_zoos) {
                : print "You continue to enjoy your surprise trip to the zoo. The animals express joy as well." ;
                : done ;
@@ -402,7 +403,7 @@ locations {
             : done ;
          }
          : if (!point_whee_zoos) {
-            : match "whee _;wee _;_ zoos" {
+            : match "whee _;_ zoos" {
                : gosub "say_half" ;
                : done ;
             }
@@ -732,6 +733,7 @@ subroutines {
 	  : increment "score" ;
 	  : update_graphic ;
    }
+
    say_half : subroutine {
       : if (done_already) {
          : print "That's half of something you already got to work." ;
