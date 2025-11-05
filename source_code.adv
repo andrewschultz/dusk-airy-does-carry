@@ -26,6 +26,7 @@ strings {
    l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
    ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
+   hone_stickler : "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
 
    # noting stuff
    one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
@@ -223,7 +224,15 @@ booleans {
    think_why_trains : boolean "false" ; #r9
    think_wake_up : boolean "false" ; #r8
 
+   # cluing dynamic booleans
    think_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
+   blurry_tats : dynamic_boolean {(
+   (is_at "r5" && (!r5_ready)) ||
+   (is_at "r6" && (!r6_ready)) ||
+   (is_at "r7" && (!r7_ready)) ||
+   (is_at "r8" && (!point_why_trains)) ||
+   (is_at "r9" && !point_k_vroom)
+   )} ;
 
    # game progress (critical)
    progress_ale_full : boolean "false" ;
@@ -740,6 +749,12 @@ subroutines {
          : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
          : set_false "opt_hone_aye" ;
       }
+      : match "hone _" {
+         : print "{hone_stickler} {hone_aye}.";
+      }
+      : match "ho _" {
+         : print "{hone_stickler} {ho_nigh}.";
+      }
    }
 
    note_thinks : subroutine {
@@ -980,7 +995,14 @@ on_command {
    }
    : if (me_x_yet) {
       : match "_ tats;_ fey;_ phase;_ stats" {
+         : if (tats_number == 0) {
+            : print "The tats show nothing." ;
+            : done ;
+         }
          : print "The tats swirl and form a number: {tats_number}." ;
+         : if (blurry_tats) {
+            : print "It's a bit blurry, though, so maybe you're not ready to do whatever it is you need to do yet." ;
+         }
          : done ;
       }
    }
