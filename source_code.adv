@@ -293,11 +293,10 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_glow_bold) {
-            : match "glow _;_ bold" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "glow _;_ bold" {
+            : set_boolean var = "done_already" {( point_glow_bold )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
@@ -318,11 +317,10 @@ locations {
             : gosub "ale_fill_check" ;
             : done ;
          }
-         : if (!point_dew_nice) {
-            : match "dew _;_ nice" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "dew _;_ nice" {
+            : set_boolean var = "done_already" {( point_dew_nice )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
       on_describe {
@@ -352,10 +350,11 @@ locations {
                : print "The {c_bro_code} seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
                : done ;
             }
-            : match "broke _;_ ode" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         }
+         : match "broke _;_ ode" {
+            : set_boolean var = "done_already" {( point_broke_ode )} ;
+            : gosub "say_half" ;
+            : done ;
          }
          : if (point_broke_ode) {
             : match "reek odor" {
@@ -375,10 +374,11 @@ locations {
                   : print "Working frantically, staring at the screen, trying to rebuild the {d_bro_code}. You have plenty of time to distract him from this daunting task, but you just need to find the right distraction." ;
                   : done ;
                }
-               : match "reek _;_ odor" {
-                  : gosub "say_half" ;
-                  : done ;
-               }
+            }
+            : match "reek _;_ odor" {
+               : set_boolean var = "done_already" {( point_reek_odor )} ;
+               : gosub "say_half" ;
+               : done ;
             }
          }
       }
@@ -402,11 +402,10 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_whee_zoos) {
-            : match "whee _;_ zoos" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "whee _;_ zoos" {
+            : set_boolean var = "done_already" {( point_whee_zoos )} ;
+            : gosub "say_half" ;
+            : done ;
          }
          : if (point_whee_zoos) {
             : match "blurb lasting" {
@@ -419,11 +418,10 @@ locations {
                : gosub "add_point" ;
                : done ;
             }
-            : if (!point_blurb_lasting) {
-               : match "blurb _;_ lasting" {
-                  : gosub "say_half" ;
-                  : done ;
-               }
+            : match "blurb _;_ lasting" {
+               : set_boolean var = "done_already" {( point_blurb_lasting )} ;
+               : gosub "say_half" ;
+               : done ;
             }
          }
       }
@@ -440,11 +438,10 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_carp_arts) {
-            : match "carp _;_ arts" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "carp _;_ arts" {
+            : set_boolean var = "done_already" {( point_carp_arts )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
@@ -471,11 +468,11 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_scam_pill) {
-            : match "scam _;_ pill" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "scam _;_ pill" {
+            : set_boolean var = "done_already" {( point_scam_pill )} ;
+            : set_boolean var = "think_already" {( think_scam_pill && !point_scam_pill )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
       on_describe {
@@ -524,11 +521,11 @@ locations {
                : done ;
             }
          }
-         : if (!point_aid_route) {
-            : match "aid _;_ route" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "aid _;_ route" {
+            : set_boolean var = "done_already" {( point_aid_route )} ;
+            : set_boolean var = "think_already" {( think_aid_route && !point_aid_route )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
@@ -554,11 +551,11 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_k_vroom) {
-            : match "k _;_ vroom" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "k _;_ vroom" {
+            : set_boolean var = "done_already" {( point_k_vroom )} ;
+            : set_boolean var = "think_already" {( think_k_vroom && !point_k_vroom )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
@@ -603,11 +600,11 @@ locations {
             : set_true "won_yet" ;
             : win_game ;
          }
-         : if (!point_wake_up) {
-            : match "wake _;_ up" {
-               : gosub "say_half" ;
-               : done ;
-            }
+         : match "wake _;_ up" {
+            : set_boolean var = "done_already" {( point_wake_up )} ;
+            : set_boolean var = "think_already" {( think_wake_up && !point_wake_up )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
@@ -632,19 +629,19 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         : if (!point_why_trains) {
-            : match "y _" {
+         : match "y _" {
+            : if (!point_why_trains) {
                : print "You don't need to say yes or take a trip to the Y. But that sure sounds right!" ;
                : done ;
-            }
-            : match "why _;_ trains" {
-               : gosub "say_half" ;
-               : done ;
-            }
-         } : else {
-            : match "y _" {
+            } : else {
                : print "You engage in a relaxing bit of trainspotting before continuing your journey." ;
             }
+         }
+         : match "why _;_ trains" {
+            : set_boolean var = "done_already" {( point_why_trains )} ;
+            : set_boolean var = "think_already" {( think_why_trains && !point_why_trains )} ;
+            : gosub "say_half" ;
+            : done ;
          }
       }
    }
