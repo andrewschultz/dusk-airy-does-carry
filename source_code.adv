@@ -1,17 +1,20 @@
 start_at = "r0"
 start_theme = my_theme
 
-#cch.py makes sure of things
+#to do before release:
+#check spreadsheet of features for each game
+#cch.py checks there are no undefined string references
+#obfus.py checks that special commands are obfuscated
 
 game_information {
    game_name                    = Dusk, Airy, Does Carry
-   game_version                 = 1.1.0
+   game_version                 = 2.0.0
    game_shortname               = DADC
    written_by                   = Andrew Schultz
    uuid                         = 9998565c-3283-4dcd-9e5d-fafadbda5c2e
    year_of_release              = 2025
    copyright_message            = Free to distribute, voluntary payments welcome
-   short_synopsis               = EctoComp 2025 Petite Mort entry, in the vein of {g_wp} and {g_ut}
+   short_synopsis               = EctoComp 2025 Petite Mort entry, one of three
 }
 
 
@@ -19,14 +22,14 @@ game_information {
 
 strings {
    # top level strings
-   dadc : string "<Dusk, Airy, Does Carry<#ccc>>" ;
+   this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
    g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
    g_ut : string "<Us Too<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
    l_cdsa : string "<Chez Dark Shade Ark<#0f0>>[http://andrewschultz.itch.io/chez-dark-shade-ark]" ;
-   l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
+   l_this_g : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
-   ecomp : string "<EctoComp<#f80>>[https://itch.io/jam/ectocomp-2025]" ;
-   hone_stickler : "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
+   l_ifcomp : string "<IFComp<#0f0>>[http://ifcomp.org]" ;
+   l_ectocomp : string "<EctoComp<#0f0>>[https://itch.io/jam/ectocomp-2025]" ;
 
    # noting stuff
    one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
@@ -85,7 +88,7 @@ strings {
    once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
 
    # parser error stuff
-   custom_unknown_verb_error : string "Nothing comes of that. {dadc} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
+   custom_unknown_verb_error : string "Nothing comes of that. {this_g} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
    exits_err : dynamic_string {( is_at "r0" ? "{r0_cantgo}" :
       is_at "r1" ? "{r1_cantgo}" :
       is_at "r2" ? "{r2_cantgo}" :
@@ -537,12 +540,12 @@ locations {
                : done ;
             }
             : if (!r7_ready) {
-               : print {( "That feels right, but you don't fully feel worthy yet. You might need to " + ( point_scam_pill ? "help other people" : point_aid_route ? "feel more confident in your words" : "unravel a couple mysteries") + " first." )} ;
+               : print {( "That feels right, but you feel a bit odd saying VROOM for no reason. You might need to" + ( point_scam_pill ? " help other people" : "" ) + ( point_aid_route && point_aid_route ? " and" : "" ) + ( point_aid_route ? " feel more confident in your words" : "" ) + "." )} ;
                : set_true "think_k_vroom" ;
                : gosub "note_thinks" ;
                : done ;
             }
-            : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The coin fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the {i_tool} out of the ground. You've also said the magic word to get it running. It has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
+            : print "The tool seems stuck in place, but then you realize that part of the problem is there's a hitch on there, you have to pay for it, and what do you know? The coin fits in nicely. But it's not just the coin. You have a purpose, and that lets you pull the {i_tool} out of the ground. You've also said the magic word to get it running. The tool has some weird sort of electric motor in it, and you're not sure how that works, but you're glad it does. It must be useful somewhere. " ;
             : set_true "point_k_vroom" ;
             : set_false "think_k_vroom" ;
             : pocket "tool" ;
@@ -743,6 +746,7 @@ subroutines {
 			: set_true "note_half_limitations" ;
          }
       }
+      : set_false "done_already" ;
       : set_false "think_already" ;
    }
 
@@ -816,10 +820,10 @@ themes {
 
    i_cant_do_that = That's a valid command, but not right here and now.
    not_present = You can't see ${entity} here.
-   ask_new_game                                   = Would you like to restart {dadc}?
-   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {dadc}?
+   ask_new_game                                   = Would you like to restart {this_g}?
+   ask_quit                                       = \"Sign out. *SIGH*, nowt!\", you mutter under your breath.\"\nDo you wish to quit {this_g}?
    invalid_choice                                 = {yn_or_12_or_14}
-   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {dadc}.
+   post_quit = I hope you enjoyed the experience. Pressing {key_enter} will restart {this_g}.
    unknown_verb                                   = {custom_unknown_verb_error}
    you_cant_go_that_direction                     = {exits_err}
    you_see_nothing_special = {nospecial_custom}
@@ -831,7 +835,7 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{dadc}: an {ecomp} Petite Mort 2025 entry.";
+   : print "{this_g}: an {ecomp} Petite Mort 2025 entry.";
    : if (won_yet) {
       : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
       : press_any_key ;
@@ -920,11 +924,11 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{dadc} was written for {ecomp} Petite Mort 2025." ;
+      : print "{this_g} was written for {ecomp} Petite Mort 2025." ;
       : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
       : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
-      : print "{dadc} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
-      : print "{dadc} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
+      : print "{this_g} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
       : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
       : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
    }
@@ -939,7 +943,7 @@ on_command {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
             : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
             : print "The globe (old) could be brighter. You need a combination of two words." ;
-            : print "The game title, {dadc}, is an example." ;
+            : print "The game title, {this_g}, is an example." ;
             : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
             : print "{gb_done}. (The hints will cycle now.)" ;
          }
@@ -960,7 +964,7 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
-      : print "The first release of {dadc} was October 30, 2025, for {ecomp} Petite Mort. It was released along with {l_gsgr} and {l_cdsa}." ;
+      : print "The first release of {this_g} was October 30, 2025, for {ecomp} Petite Mort. It was released along with {l_gsgr} and {l_cdsa}." ;
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
@@ -995,7 +999,7 @@ on_command {
       }
    }
    : match "verbs _;verb _" {
-      : print "To complete {dadc}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
+      : print "To complete {this_g}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
       : print {( "{vm_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) )} ;
       : print "Finally, there is an option: {hone_aye} blocks off exits to done rooms and what is behind them, while {ho_nigh} lets you traverse freely." ;
@@ -1041,7 +1045,7 @@ on_command {
 
 on_tick {
    : if (!showed_first_note) {
-      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {dadc}'s stripped-down parser." ;
+      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {this_g}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
       : done ;
    }
@@ -1055,7 +1059,7 @@ on_tick {
       : if (!point_why_trains && !inventory_note) {
          : match "i _" {
             : set_true "inventory_note" ;
-            : print "{one_time}you don't need to use any inventory item explicitly in {dadc}. The right magic phrase will do so, then remove your item from inventory." ;
+            : print "{one_time}you don't need to use any inventory item explicitly in {this_g}. The right magic phrase will do so, then remove your item from inventory." ;
             : done ;
          }
       }
