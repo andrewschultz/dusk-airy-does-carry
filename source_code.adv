@@ -45,7 +45,7 @@ strings {
    c_bro_code : string "<Bro Code<#88f>>" ;
    d_bro_code : string "<Bro Code<#ccc>>" ;
    c_blur : string "<blur, blasting<#88f>>" ;
-   c_car_parts : dynamic_string {( point_carp_arts ? "<car parts<#ff0>>" : "<car parts<#f4f>>" )} ;
+   c_car_parts : dynamic_string {( point_carp_arts ? "<car parts<#ff0>>" : "<car parts<#88f>>" )} ;
    c_scamp_ill : string "<scamp, ill<#88f>>" ;
    c_a_drought : string "<A drought<#88f>>" ;
    c_wheeze : string "<wheeze-ooze<#88f>>" ;
@@ -203,6 +203,7 @@ booleans {
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
    won_yet : boolean "false" scope="survivor" ;
+   win_warn : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
    think_note_yet : boolean "false" ;
    inventory_note : boolean "false" ;
@@ -344,7 +345,7 @@ locations {
                : done ;
             }
             : print "The Bro Code's text seems to crumble, then transform into a musical score. You play it through your head, and unless you completely forgot how to read sheet music, the tune's genuinely horrible.\"" ;
-            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#f4f>>! And my bottomless bottle of liquid nourishment!\"" ;
+            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#88f>>! And my bottomless bottle of liquid nourishment!\"" ;
             : print "You really don't think the {d_bro_code} deserves to be built back up, so you need to figure out a way to neutralize the {c_re_coder}." ;
             : set_true "point_broke_ode" ;
             : gosub "add_point" ;
@@ -839,8 +840,12 @@ themes {
 on_startup {
    : print "{this_g}: an {ecomp} Petite Mort 2025 entry.";
    : if (won_yet) {
-      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
-      : press_any_key ;
+      : if (!win_warn) {
+         : print "Thanks for replaying, but this is a reminder to look at the other {l_ectocomp} entries, too! Whether or not it's over now!" ;
+         : press_any_key ;
+      }
+   } : else {
+      : print "{note_once}whenever the blinking yellow cursor appears, push {key_enter} or left-click the mouse. This will usually happen to break up long chunks of narrative text." ;
    }
    : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers blasting outside. <Dusk, airy, does carry<#f80>>, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind." ;
    : print "\"Duh! Scary!\" you blurt out sarcastically." ;
