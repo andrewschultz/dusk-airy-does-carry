@@ -26,10 +26,11 @@ strings {
    g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
    g_ut : string "<Us Too<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
    l_cdsa : string "<Chez Dark Shade Ark<#0f0>>[http://andrewschultz.itch.io/chez-dark-shade-ark]" ;
-   l_this_g : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
+   l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
    l_ifcomp : string "<IFComp<#0f0>>[http://ifcomp.org]" ;
    l_ectocomp : string "<EctoComp<#0f0>>[https://itch.io/jam/ectocomp-2025]" ;
+   hone_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
 
    # noting stuff
    one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
@@ -964,7 +965,17 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
-      : print "The first release of {this_g} was October 30, 2025, for {ecomp} Petite Mort. It was released along with {l_gsgr} and {l_cdsa}." ;
+      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
+      : print "" ;
+      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (won_yet ? " The \"It was all a dream\" sort of ending." : "") )} ;
+      : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {hone_aye} and {ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
+      : print "" ;
+      : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
+      : print "" ;
+      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for EctoComp." ;
+      : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
+      : print "" ;
+      : print "If you've found this elsewhere than Itch.io, the latest version should be at {l_dadc}." ;
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
