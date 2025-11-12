@@ -41,14 +41,15 @@ strings {
    c_globe_old : string "<globe (old)<#88f>>" ;
    d_glow_bold : string "<glow (bold)<#ccc>>" ;
    c_re_coder : string "<re-coder<#88f>>" ;
-   c_dune_ice : string "<dune/ice<#88f>>" ;
+   c_dune_ice : dynamic_string {( point_dew_nice ? "<dune/ice<#ccc>>" : "<dune/ice<#88f>>" )} ;
    c_bro_code : string "<Bro Code<#88f>>" ;
    d_bro_code : string "<Bro Code<#ccc>>" ;
    c_blur : string "<blur, blasting<#88f>>" ;
+   c_car_parts : dynamic_string {( point_carp_arts ? "<car parts<#ff0>>" : "<car parts<#f4f>>" )} ;
    c_scamp_ill : string "<scamp, ill<#88f>>" ;
    c_a_drought : string "<A drought<#88f>>" ;
    c_wheeze : string "<wheeze-ooze<#88f>>" ;
-   c_cave_room : string "<cave room<#88f>>" ;
+   c_cave_room : dynamic_string {( point_k_vroom ? "<cave room<#ff0>>" : "<cave room<#88f>>" )} ;
    c_whey_cup : string "<whey cup<#88f>>" ;
    c_wr1 : string "<wight reigns<#88f>>" ;
    c_wr2 : string "<white rains<#88f>>" ;
@@ -116,42 +117,42 @@ strings {
    my_score : string "{score}{plusthink}/{max_score}" ;
 
    r0_loc : dynamic_string {( point_glow_bold ? "Now that the globe (old) emanates a {d_glow_bold}, you can see a passage leading up." : "You can't see much here. A small {c_globe_old} gives off a very dim light. It seems to be your only hope to illuminate a way out of here. But how to operate it?" )} ;
-   r0_header : string "Raw Cold Rock, Old" ;
+   r0_header : string "<Raw Cold Rock, Old<#ff0>>" ;
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
 
-   r1_header : dynamic_string {( point_dew_nice ? "Dew (Nice)" : "<Dune/Ice<#88f>>" )} ;
+   r1_header : dynamic_string {( point_dew_nice ? "<Dew (Nice)<#ff0>>" : "{c_dune_ice}" )} ;
    r1_loc : dynamic_string {( "It's nice and peaceful here, really in touch with nature, with water flowing on one hand and dunes on the other. But the {c_dune_ice} also blocks any passage except back east. " + (point_dew_nice ? ( progress_ale_full ? "You already got enough dew, though." : "Some of the ice has thawed, so you can get a bit of dew once you have a container.") : "") )} ;
    r1_cantgo : string "You can only go back east." ;
 
-   r2_header : string "<Comp-Lots-Com Plots<#888>>" ;
+   r2_header : string "<Comp-Lots-Com Plots<#ff0>>" ;
    r2_loc : dynamic_string {( "A small techie-corp office.\n" + ( point_reek_odor ? "The area is empty now that you disposed of the recoder." : point_broke_ode ? "A {c_re_coder} sits here programming now, trying frantically to reconstruct the {d_bro_code} from a broke ode." : " You're here alone for the moment. A {c_bro_code} is on the wall." ) + "\nThe only viable exit is south." )} ;
    r2_cantgo : string "You can only go back south. Okay, you could go further into the office, but that'd get you arrested." ;
 
-   r3_header : dynamic_string {( point_whee_zoos ? "Whee! Zoos!" : "{c_wheeze}" )} ;
+   r3_header : dynamic_string {( point_whee_zoos ? "<Whee! Zoos!<#ff0>>" : "{c_wheeze}" )} ;
    r3_loc : dynamic_string {( (point_whee_zoos ? "A zoo with all sorts of animals: {zoo_anim}.\n" : "" ) + (point_blurb_lasting ? "The zoo is nice and quiet now, with the blurb and the blur and the ooze gone. " : point_whee_zoos ? "A {c_blur} seems to be attacking areas by the zoo, and you need to disable it, or at least repurpose it into something less harmful." : "A {c_wheeze} sloshes around here, menacingly. What could it be guarding or oppressing?" ) + "\nYou can only go back south." )} ;
    r3_cantgo : string "You can only go back south." ;
 
-   r4_header : string "Car Parts" ;
-   r4_loc : dynamic_string {( point_carp_arts ? "You're amazed all the car parts gave you such information, especially since the radio lying around wasn't working. But you probably can't get anything else from them." : "Car parts lie strewn about here. Perhaps they contain some weird wisdom you haven't thought of, if you look at them right. You've never been quite sure about cars. You just know what you'd better not do, you managed to get an A in driver's ed and avoid any car crashes, and you're less lousy at driving-based video games than you used to be, but none of that really counts as wisdom." )} ;
+   r4_header : string "{c_car_parts}" ;
+   r4_loc : dynamic_string {( point_carp_arts ? "You're amazed all the car parts gave you such information, especially since the radio lying around wasn't working. But you probably can't get anything else from them." : "All manner of {c_car_parts} lie strewn about here. Perhaps they contain some weird wisdom you haven't thought of, if you look at them right. You've never been quite sure about cars. You just know what you'd better not do, you managed to get an A in driver's ed and avoid any car crashes, and you're less lousy at driving-based video games than you used to be, but none of that really counts as wisdom." )} ;
    r4_cantgo : string "You can only go back west." ;
 
-   r5_header : string "<The \"Scamp, Thus\" Camp<#ccc>>" ;
+   r5_header : string "<The \"Scamp, Thus\" Camp<#ff0>>" ;
    r5_loc : string "This camp is at a bit of a crossroads, with passages west and north and east." ;
    r5_cantgo : string "The only blocked way is back south." ;
 
-   r6_header : dynamic_string {( point_aid_route ? "Aid Route" : "{c_a_drought}" )} ;
+   r6_header : dynamic_string {( point_aid_route ? "<Aid Route<#ff0>>" : "{c_a_drought}" )} ;
    r6_loc : dynamic_string {( point_aid_route ? "This aid route runs east and west, with a passage north, too." : "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here. {c_a_drought} needn't last forever." )} ;
    r6_cantgo : string "The only blocked way is back south." ;
 
-   r7_header : dynamic_string {( point_k_vroom ? "Cave Room" : "{c_cave_room}" )} ;
+   r7_header : string "{c_cave_room}" ;
    r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. You sense you need to show you have the energy and ability to use it right. The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
-   r8_header : string "Fail-And-Fey Land" ;
+   r8_header : string "<Fail-And-Fey Land<#ff0>>" ;
    r8_loc : string "This is a canyon running north and south. A gigantic {c_whey_cup} full of nasty whey is here. It reminds you you have some milk near the expiration date in the fridge back home." ;
    r8_cantgo : string "This is a north-south passage." ;
 
-   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ccc>>" : "{c_wr1}/{c_wr2}" )} ;
+   r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ff0>>" : "{c_wr1}/{c_wr2}" )} ;
    r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A {c_wr1} here as {c_wr2} fall. It stands next to its scorch-ere-score chair, an intimidating throne indeed!" )} ;
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 
@@ -201,7 +202,7 @@ booleans {
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
-   have_won : boolean "false" scope="survivor" ;
+   won_yet : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
    think_note_yet : boolean "false" ;
    inventory_note : boolean "false" ;
@@ -343,7 +344,7 @@ locations {
                : done ;
             }
             : print "The Bro Code's text seems to crumble, then transform into a musical score. You play it through your head, and unless you completely forgot how to read sheet music, the tune's genuinely horrible.\"" ;
-            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#ccc>>! And my bottomless bottle of liquid nourishment!\"" ;
+            : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#f4f>>! And my bottomless bottle of liquid nourishment!\"" ;
             : print "You really don't think the {d_bro_code} deserves to be built back up, so you need to figure out a way to neutralize the {c_re_coder}." ;
             : set_true "point_broke_ode" ;
             : gosub "add_point" ;
@@ -596,12 +597,12 @@ locations {
             : print "That's a good point, you say." ;
             : print "\"I had a bunch of other people to show up for in all of October, and usually about half of them come through. You were one of the ones that worked out. Now to find places to speak out without them landing in your lap. Don't wait for a huge sign.\"" ;
             : print "It's an odd sort of motivation, but it works. November is very productive. So is December. And January. And come October, you think back. You've kept it up, and you hope the next people stumbling on the coffee shop benefit as much as you do." ;
-            : if (!have_won) {
-               : print "{one_time}there's nothing new to be found on replaying. Try some of the other {l_ectocomp} games, whether or not {l_ectocomp} is over!" ;
+            : if (!won_yet) {
+               : print "{one_time}there's nothing new to be found on replaying, although you may not have noticed that the sky gets lighter with each point you score. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
             } : else {
                : print "Thanks for replaying. Sorry there was no new content!" ;
             }
-            : set_true "have_won" ;
+            : set_true "won_yet" ;
             : win_game ;
          }
          : match "wake _;_ up" {
@@ -836,9 +837,9 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{this_g}: an {l_ectocomp} Petite Mort 2025 entry.";
-   : if (have_won) {
-      : print "Thanks for replaying, but this is a reminder to look at the other {l_ectocomp} entries, too!" ;
+   : print "{this_g}: an {ecomp} Petite Mort 2025 entry.";
+   : if (won_yet) {
+      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
       : press_any_key ;
    }
    : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers blasting outside. <Dusk, airy, does carry<#f80>>, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind." ;
@@ -925,7 +926,7 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
+      : print "{this_g} was written for {ecomp} Petite Mort 2025." ;
       : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
       : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
       : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
@@ -936,18 +937,17 @@ on_command {
    : match "credits _;credit _" {
       : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
       : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
-      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
    }
    : match "help _;hint _;hints _" {
       : if (!point_glow_bold) {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
-            : print "Note you can also get a different sort of hints from {tats_hint}. Conceptual hints leading to the answer follow." ;
+            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
             : print "The globe (old) could be brighter. You need a combination of two words." ;
             : print "The game title, {this_g}, is an example." ;
-            : print "It's two different word pairs strung together with the same pronunciation. Do this with the globe. What word very similar to globe implies brightness?" ;
-            : print "Glow. That is the first word." ;
-            : print "{gb_done}. Note that other puzzles may have a modifier first, or may have a noun or verb or even an interjection. (The hints will cycle now.)" ;
+            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
+            : print "{gb_done}. (The hints will cycle now.)" ;
          }
          : done ;
       }
@@ -966,9 +966,9 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
-      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( have_won ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
+      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
       : print "" ;
-      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (have_won ? " The \"It was all a dream\" sort of ending." : "") )} ;
+      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (won_yet ? " The \"It was all a dream\" sort of ending." : "") )} ;
       : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {hone_aye} and {ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
       : print "" ;
       : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
