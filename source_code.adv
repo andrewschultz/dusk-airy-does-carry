@@ -201,7 +201,7 @@ booleans {
    warn_score_header : boolean "false" ;
    wait_yet : boolean "false" ;
    me_x_yet : boolean "false" ;
-   won_yet : boolean "false" scope="survivor" ;
+   have_won : boolean "false" scope="survivor" ;
    in_number_choice : boolean "false" ;
    think_note_yet : boolean "false" ;
    inventory_note : boolean "false" ;
@@ -596,12 +596,12 @@ locations {
             : print "That's a good point, you say." ;
             : print "\"I had a bunch of other people to show up for in all of October, and usually about half of them come through. You were one of the ones that worked out. Now to find places to speak out without them landing in your lap. Don't wait for a huge sign.\"" ;
             : print "It's an odd sort of motivation, but it works. November is very productive. So is December. And January. And come October, you think back. You've kept it up, and you hope the next people stumbling on the coffee shop benefit as much as you do." ;
-            : if (!won_yet) {
-               : print "{one_time}there's nothing new to be found on replaying. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
+            : if (!have_won) {
+               : print "{one_time}there's nothing new to be found on replaying. Try some of the other {l_ectocomp} games, whether or not {l_ectocomp} is over!" ;
             } : else {
                : print "Thanks for replaying. Sorry there was no new content!" ;
             }
-            : set_true "won_yet" ;
+            : set_true "have_won" ;
             : win_game ;
          }
          : match "wake _;_ up" {
@@ -836,9 +836,9 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{this_g}: an {ecomp} Petite Mort 2025 entry.";
-   : if (won_yet) {
-      : print "Thanks for replaying, but this is a reminder to look at the other {ecomp} entries, too!" ;
+   : print "{this_g}: an {l_ectocomp} Petite Mort 2025 entry.";
+   : if (have_won) {
+      : print "Thanks for replaying, but this is a reminder to look at the other {l_ectocomp} entries, too!" ;
       : press_any_key ;
    }
    : print "Late October night. You're walking home, and you realize, the only thing worse than an open mic poetry reading is an open mic poetry reading with speakers blasting outside. <Dusk, airy, does carry<#f80>>, you hear, in an exaggerated tone. What a load of nonsense! You can't help but walk into the coffee shop in question and give the performer a piece of your mind." ;
@@ -925,7 +925,7 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{this_g} was written for {ecomp} Petite Mort 2025." ;
+      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
       : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
       : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
       : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
@@ -936,7 +936,7 @@ on_command {
    : match "credits _;credit _" {
       : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
       : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
-      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
    }
    : match "help _;hint _;hints _" {
@@ -965,9 +965,9 @@ on_command {
       : print "Fill in later." ;
    }
    : match "history _;version _;versions _" {
-      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
+      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( have_won ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
       : print "" ;
-      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (won_yet ? " The \"It was all a dream\" sort of ending." : "") )} ;
+      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (have_won ? " The \"It was all a dream\" sort of ending." : "") )} ;
       : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {hone_aye} and {ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
       : print "" ;
       : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
