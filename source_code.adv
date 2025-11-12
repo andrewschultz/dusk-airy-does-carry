@@ -942,11 +942,12 @@ on_command {
    : match "help _;hint _;hints _" {
       : if (!point_glow_bold) {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
-            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
+            : print "Note you can also get a different sort of hints from {tats_hint}. Conceptual hints leading to the answer follow." ;
             : print "The globe (old) could be brighter. You need a combination of two words." ;
             : print "The game title, {this_g}, is an example." ;
-            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
-            : print "{gb_done}. (The hints will cycle now.)" ;
+            : print "It's two different word pairs strung together with the same pronunciation. Do this with the globe. What word very similar to globe implies brightness?" ;
+            : print "Glow. That is the first word." ;
+            : print "{gb_done}. Note that other puzzles may have a modifier first, or may have a noun or verb or even an interjection. (The hints will cycle now.)" ;
          }
          : done ;
       }
