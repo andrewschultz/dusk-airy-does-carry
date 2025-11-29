@@ -69,6 +69,8 @@ strings {
    t_why_trains : string "<WHY TRAINS<#f80>>" ;
    t_wake_up : string "<WAKE UP<#f80>>" ;
 
+   to_think_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( to_think ) } )} ;
+
    # meta-verbs
    hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    ho_nigh : string "<HO NIGH<#ff0>>" ;
@@ -284,6 +286,21 @@ booleans {
 vocabulary {
    : verb / aliases = [aid, aide]
    : verb / aliases = [wee, whee]
+}
+
+collections {
+   num_to_word : list {
+      items = [
+         "zero",
+         "one",
+         "two",
+         "three",
+         "four",
+         "five",
+         "six",
+         "seven"
+      ]
+   };
 }
 
 locations {
@@ -986,7 +1003,7 @@ on_command {
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
       : if (think_any > 0) {
-         : print {( "You've also discovered {think_any} command" + (think_any > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
+         : print {( "You've also discovered {to_think_words} command" + (think_any > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
       : if (!warn_score_header) {
          : print "{note_once}This is tracked in the upper left." ;
