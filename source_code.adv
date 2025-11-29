@@ -33,7 +33,7 @@ strings {
    hone_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
 
    # noting stuff
-   one_time : string "<ONE-TIME NOTE: <#f0f>>" ;
+   note_once : string "<ONE-TIME NOTE: <#f0f>>" ;
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
 
    # game clue strings
@@ -599,7 +599,7 @@ locations {
             : print "\"I had a bunch of other people to show up for in all of October, and usually about half of them come through. You were one of the ones that worked out. Now to find places to speak out without them landing in your lap. Don't wait for a huge sign.\"" ;
             : print "It's an odd sort of motivation, but it works. November is very productive. So is December. And January. And come October, you think back. You've kept it up, and you hope the next people stumbling on the coffee shop benefit as much as you do." ;
             : if (!won_yet) {
-               : print "{one_time}there's nothing new to be found on replaying, although you may not have noticed that the sky gets lighter with each point you score. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
+               : print "{note_once}there's nothing new to be found on replaying, although you may not have noticed that the sky gets lighter with each point you score. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
             } : else {
                : print "Thanks for replaying. Sorry there was no new content!" ;
             }
@@ -745,7 +745,7 @@ subroutines {
       } : else {
          : print "You feel you must have one word right." ;
          : if (!note_half_limitations) {
-            : print "{one_time}ideally, I'd keep track of which word you have right, but while Adventuron makes many things easy, its lack of support for complex classes makes the code (as I see it) hard to write and test. Sorry for any inconvenience." ;
+            : print "{note_once}ideally, I'd keep track of which word you have right, but while Adventuron makes many things easy, its lack of support for complex classes makes the code (as I see it) hard to write and test. Sorry for any inconvenience." ;
 			: set_true "note_half_limitations" ;
          }
       }
@@ -782,7 +782,7 @@ subroutines {
 
    note_thinks : subroutine {
       : if (!think_note_yet) {
-         : print "{one_time}{vd_think} will track any command that will score points at a later time. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
+         : print "{note_once}{vd_think} will track any command that will score points at a later time. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
          : set_true "think_note_yet" ;
       }
    }
@@ -926,7 +926,7 @@ on_command {
    : match "z _;wait _" {
       : print "\"Loaf, right? Lo, fright!\"" ;
       : if (!wait_yet) {
-         : print "{one_time}This is just a silly general response. Waiting gives no penalty or benefit." ;
+         : print "{note_once}This is just a silly general response. Waiting gives no penalty or benefit." ;
          : set_true "wait_yet" ;
       }
    }
@@ -989,7 +989,7 @@ on_command {
          : print {( "You've also discovered {think_any} command" + (think_any > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
       : if (!warn_score_header) {
-         : print "{one_time}This is tracked in the upper left." ;
+         : print "{note_once}This is tracked in the upper left." ;
          : set_true "warn_score_header" ;
       }
    }
@@ -1062,7 +1062,7 @@ on_command {
 
 on_tick {
    : if (!showed_first_note) {
-      : print "{one_time}{vm_about} will give general game information. {vm_verbs} will describe {this_g}'s stripped-down parser." ;
+      : print "{note_once}{vm_about} will give general game information. {vm_verbs} will describe {this_g}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
       : done ;
    }
@@ -1076,7 +1076,7 @@ on_tick {
       : if (!point_why_trains && !inventory_note) {
          : match "i _" {
             : set_true "inventory_note" ;
-            : print "{one_time}you don't need to use any inventory item explicitly in {this_g}. The right magic phrase will do so, then remove your item from inventory." ;
+            : print "{note_once}you don't need to use any inventory item explicitly in {this_g}. The right magic phrase will do so, then remove your item from inventory." ;
             : done ;
          }
       }
