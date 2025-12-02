@@ -69,7 +69,7 @@ strings {
    t_why_trains : string "<WHY TRAINS<#f80>>" ;
    t_wake_up : string "<WAKE UP<#f80>>" ;
 
-   to_think_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( to_think ) } )} ;
+   thought_right_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( thought_right ) } )} ;
 
    # meta-verbs
    hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
@@ -84,12 +84,23 @@ strings {
    xtats : string "<X TATS<#f80>>" ;
    xme : string "<X ME<#0f0>>" ;
 
-   # "once" strings
+   # thinky variables / "once" strings
    once_scam_pill : dynamic_string {( r5_ready ? "now" : "once" )} ;
    once_aid_route : dynamic_string {( r6_ready ? "now" : "once" )} ;
    once_k_vroom : dynamic_string {( r7_ready ? "now" : "once" )} ;
    once_why_trains : dynamic_string {( point_k_vroom ? "now" : "once" )} ;
    once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
+
+   # here / at variables (r0 = no need for options)
+   here_r1 : dynamic_string {( is_at "r1" ? "here" : "at {r1_header}" )} ;
+   here_r2 : dynamic_string {( is_at "r2" ? "here" : "at {r2_header}" )} ;
+   here_r3 : dynamic_string {( is_at "r3" ? "here" : "at {r3_header}" )} ;
+   here_r4 : dynamic_string {( is_at "r4" ? "here" : "at {r4_header}" )} ;
+   here_r5 : dynamic_string {( is_at "r5" ? "here" : "at {r5_header}" )} ;
+   here_r6 : dynamic_string {( is_at "r6" ? "here" : "at {r6_header}" )} ;
+   here_r7 : dynamic_string {( is_at "r7" ? "here" : "at the {r7_header}" )} ;
+   here_r8 : dynamic_string {( is_at "r8" ? "here" : "at {r8_header}" )} ;
+   here_r9 : dynamic_string {( is_at "r9" ? "here" : "at {r9_header}" )} ;
 
    # parser error stuff
    custom_unknown_verb_error : string "Nothing comes of that. {this_g} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
@@ -159,13 +170,13 @@ strings {
    r9_cantgo : string "You can go any of the four main directions, or back down." ;
 
    # status line trickery
-   plusthink : dynamic_string {( think_any ? "+{thought_score}" : "" )}
+   plusthink : dynamic_string {( think_any ? "+{thought_right}" : "" )}
 }
 
 integers {
    score : integer "0" ;
    max_score : integer "12" ;
-   thought_score : dynamic_integer {(
+   thought_right : dynamic_integer {(
       (think_scam_pill ? 1 : 0) +
       (think_aid_route ? 1 : 0) +
       (think_k_vroom ? 1 : 0) +
@@ -1002,8 +1013,8 @@ on_command {
    }
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
-      : if (think_any > 0) {
-         : print {( "You've also discovered {to_think_words} command" + (think_any > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
+      : if (thought_right > 0) {
+         : print {( "You've also discovered {thought_right_words} command" + (thought_right > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
       : if (!warn_score_header) {
          : print "{note_once}This is tracked in the upper left." ;
@@ -1012,24 +1023,24 @@ on_command {
    }
    : match "think _" {
       : if (!think_any) {
-         : print "There are no commands you figured out and will need to re-use in the future with stronger preparation." ;
+         : print "There are no commands you figured out but will need to re-use in the future with stronger preparation." ;
          : done ;
       }
       : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it, and you still haven't. Yet." ;
       : if (think_scam_pill) {
-         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill}." ;
+         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill} {here_r5}." ;
       }
       : if (think_aid_route) {
-         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help with A Drought." ;
+         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help {here_r6}." ;
       }
       : if (think_k_vroom) {
-         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around Cave Room." ;
+         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around {here_r7}." ;
       }
       : if (think_why_trains) {
-         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight." ;
+         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight {here_r9}." ;
       }
       : if (think_wake_up) {
-         : print "You can {t_wake_up} {once_wake_up} you've defeated the wight." ;
+         : print "You can {t_wake_up} {once_wake_up} {here_r8} you've defeated the wight {here_r9}." ;
       }
    }
    : match "verbs _;verb _" {
