@@ -25,6 +25,8 @@ strings {
    this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
    g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
    g_ut : string "<Us Too<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
+
+   # links
    l_cdsa : string "<Chez Dark Shade Ark<#0f0>>[http://andrewschultz.itch.io/chez-dark-shade-ark]" ;
    l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
@@ -71,13 +73,15 @@ strings {
 
    thought_right_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( thought_right ) } )} ;
 
+   # diagnostic(s)
+   vd_think : string "<THINK<#f80>>" ;
+
    # meta-verbs
    hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    ho_nigh : string "<HO NIGH<#ff0>>" ;
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
    vm_hint : string "<HINT<#0f0>>/<HINTS<#0f0>>/<HELP<#0f0>>" ;
-   vm_think : string "<THINK<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
    vm_versions : string "<VERSIONS<#f80>>" ;
 
@@ -627,7 +631,7 @@ locations {
             : print "\"I had a bunch of other people to show up for in all of October, and usually about half of them come through. You were one of the ones that worked out. Now to find places to speak out without them landing in your lap. Don't wait for a huge sign.\"" ;
             : print "It's an odd sort of motivation, but it works. November is very productive. So is December. And January. And come October, you think back. You've kept it up, and you hope the next people stumbling on the coffee shop benefit as much as you do." ;
             : if (!won_yet) {
-               : print "{note_once}there's nothing new to be found on replaying, although you may not have noticed that the sky gets lighter with each point you score. Try some of the other {ecomp} games, whether or not {ecomp} is over!" ;
+               : print "{note_once}there's nothing new to be found on replaying, although you may not have noticed that the sky gets lighter with each point you score. Try some of the other {l_ectocomp} games, whether or not {l_ectocomp} is over!" ;
             } : else {
                : print "Thanks for replaying. Sorry there was no new content!" ;
             }
@@ -769,7 +773,7 @@ subroutines {
       : if (done_already) {
          : print "That's half of something you already got to work." ;
       } : else_if (think_already) {
-         : print "That's half of something you already guessed. {vm_think} will recall it." ;
+         : print "That's half of something you already guessed. {vd_think} will recall it." ;
       } : else {
          : print "You feel you must have one word right." ;
          : if (!note_half_limitations) {
@@ -866,7 +870,7 @@ themes {
 ## Print the objective when the game starts
 
 on_startup {
-   : print "{this_g}: an {ecomp} Petite Mort 2025 entry.";
+   : print "{this_g}: an {l_ectocomp} Petite Mort 2025 entry.";
    : if (won_yet) {
       : if (!win_warn) {
          : print "Thanks for replaying, but this is a reminder to look at the other {l_ectocomp} entries, too! Whether or not it's over now!" ;
@@ -959,7 +963,7 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{this_g} was written for {ecomp} Petite Mort 2025." ;
+      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
       : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
       : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
       : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
@@ -970,7 +974,7 @@ on_command {
    : match "credits _;credit _" {
       : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
       : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
-      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {ecomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to the administrators Ruber Eaglenest and Alyshkalia for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating Adventuron." ;
    }
    : match "help _;hint _;hints _" {
@@ -988,7 +992,7 @@ on_command {
          : print "There are no specific hints now you've gotten past the first puzzle, but {xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
       } : else {
          : cycle key = "help_general" predictable_order = "true" skip_interval = "0" {
-            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vm_think} will hold it for later." ;
+            : print "Ahead is an explanation of {xtats}, which gives a number that clues what you need to do in the current room. Note that it doesn't track whether or not you're ready to, though you can still guess, and {vd_think} will hold it for later." ;
             : print "The number 0 means there is nothing else left to do." ;
             : print "A two-digit number tells you something about the two words you need. I didn't make it too out-there, I hope." ;
             : print "The tens digit is the length of the first word, and the ones digit is the length of the second." ;
@@ -1096,7 +1100,7 @@ on_tick {
    }
    : match "i _" {
       : if (me_x_yet) {
-         : print "You've noticed {fspt} on your arm." ;
+         : print "You've noticed {i_fspt} on your arm." ;
       }
       : if (talk_skill_show) {
          : print {( "You have gained " + (r5_ready ? "serious" : "some") + " verbal skill you didn't know you had, thanks to your encounters with the" + (point_carp_arts ? " <CARP ARTS<#ff0>>" : "" ) + (r5_ready ? " and" : "") + (point_blurb_lasting ? " <BLURB LASTING<#ff0>>" : "") + "." )} ;
