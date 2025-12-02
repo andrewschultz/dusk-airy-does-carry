@@ -575,7 +575,7 @@ locations {
                : done ;
             }
             : if (!r7_ready) {
-               : print {( "That feels right, but you feel a bit odd saying VROOM for no reason. You might need to" + ( point_scam_pill ? " help other people" : "" ) + ( point_aid_route && point_aid_route ? " and" : "" ) + ( point_aid_route ? " feel more confident in your words" : "" ) + "." )} ;
+               : print {( "That feels right, but you feel a bit odd saying VROOM for no reason. You might need to" + ( !point_aid_route ? " help other people" : "" ) + ( !point_aid_route && !point_scam_pill ? " and" : "" ) + ( !point_scam_pill ? " feel more confident in your words" : "" ) + ", first." )} ;
                : set_true "think_k_vroom" ;
                : gosub "note_thinks" ;
                : done ;
