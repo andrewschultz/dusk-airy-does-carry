@@ -1,0 +1,23 @@
+Fixes/development log
+
+Version 2.0.0 published to Itch December 2, 2025
+--fixed graphical bug where X COIN ruined all future graphics
+--in-game MAP, with red lines if HONE AYE is active
+--rejects for half-right now track if it's something you already figured, whether you scored a point or not
+--"here"/"at room" dynamic strings added to THINK cues
+--THINK writes out # of discovered commands in words
+--Nudge to THINK on first right words/wrong time guess
+--alternate verbs for Ooze, wight and drought puzzles (wight rejected with hint, ooze and drought accepted)
+--Inventory management
+  --it now tracks confidence you've gained (incorpreal "items") from the two puzzles in the east
+  --more explanation for why items destroyed.
+  --Liquid container now labeled as full/empty.
+  --special message when inventory is empty, both at the start and end
+--fixed continuity error talking to the blokes. They now have a different response after you defeat the wight.
+--tats are a bit blurry if you can't solve the relevant puzzle yet
+--status line now shows (for example) 5+1 if you figured one point but didn't have the right prep yet. This info is also added to SCORE.
+--Obfuscated correct first words of puzzle from Adventuron's "correct verb but not here" error
+--VERBS now refers to HINTS
+--silly easter egg for sign in Drought after fixing area north of it (it could read something else)
+--expanded HISTORY with, of course, the second version number
+--text colors made more uniform by purpose
