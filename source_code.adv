@@ -303,7 +303,104 @@ vocabulary {
    : verb / aliases = [wee, whee]
 }
 
-collections {
+collections { # these half-done hints are arranged in clockwise order on the map, so there are no spoilers about what comes when.
+   first_words : list {
+      items = [
+         "<GLOW<#f80>>",
+         "<DEW<#f80>>",
+         "<BROKE<#f80>>",
+         "<REEK<#f80>>",
+         "<CARP<#f80>>",
+         "<WHEE/WEE<#f80>>",
+         "<BLURB<#f80>>",
+         "<SCAM<#f80>>",
+         "<AID/AIDE<#f80>>",
+         "<K<#f80>>",
+         "<WHY<#f80>>",
+         "<WAKE<#f80>>"
+      ]
+   };
+   second_words : list {
+      items = [
+         "<BOLD<#f80>>",
+         "<NICE<#f80>>",
+         "<ODE<#f80>>",
+         "<ODOR<#f80>>",
+         "<ARTS<#f80>>",
+         "<ZOOS<#f80>>",
+         "<LASTING<#f80>>",
+         "<PILL<#f80>>",
+         "<ROUTE<#f80>>",
+         "<VROOM<#f80>>",
+         "<TRAINS<#f80>>",
+         "<UP<#f80>>"
+      ]
+   };
+   situations : list {
+      items = [
+         "{here_r0}.",
+         "{here_r1}.",
+         "{here_r2}.",
+         "{here_r2}.",
+         "{here_r4}.",
+         "{here_r3}.",
+         "{here_r3}.",
+         "{here_r5}.",
+         "{here_r6}.",
+         "{here_r7}.",
+         "{here_r9}.",
+         "{here_r8}."
+      ]
+   };
+   got_first : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false"
+      ]
+   };
+   got_second : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false"
+      ]
+   };
+   tried_combo : list {
+      items = [
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false",
+         "false"
+      ]
+   };
+# finally, the utility numbers to words list
    num_to_word : list {
       items = [
          "zero",
