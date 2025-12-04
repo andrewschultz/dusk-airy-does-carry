@@ -8,7 +8,7 @@ start_theme = my_theme
 
 game_information {
    game_name                    = Dusk, Airy, Does Carry
-   game_version                 = 2.0.0
+   game_version                 = 3.0.0
    game_shortname               = DADC
    written_by                   = Andrew Schultz
    uuid                         = 9998565c-3283-4dcd-9e5d-fafadbda5c2e
@@ -306,6 +306,7 @@ booleans {
 }
 
 vocabulary {
+   # this is for sensible alternative solutions to puzzles
    : verb / aliases = [aid, aide]
    : verb / aliases = [wee, whee]
 }
@@ -1125,7 +1126,7 @@ on_command {
          : print {( "You've also discovered {thought_right_words} command" + (thought_right > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
       : if (!warn_score_header) {
-         : print "{note_once}This is tracked in the upper left." ;
+         : print "{note_once}This is tracked in the upper right." ;
          : set_true "warn_score_header" ;
       }
    }
