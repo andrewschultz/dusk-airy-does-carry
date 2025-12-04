@@ -32,7 +32,7 @@ strings {
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
    l_ifcomp : string "<IFComp<#0f0>>[http://ifcomp.org]" ;
    l_ectocomp : string "<EctoComp<#0f0>>[https://itch.io/jam/ectocomp-2025]" ;
-   hone_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
+   command_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
 
    # noting stuff
    note_once : string "<ONE-TIME NOTE: <#f0f>>" ;
@@ -76,9 +76,14 @@ strings {
    # diagnostic(s)
    vd_think : string "<THINK<#f80>>" ;
 
-   # meta-verbs
+   # options
+   vo_seal_all : string "<SEAL ALL<#f0f>>" ;
+   vo_see_lol : string "<SEE LOL<#f0f>>" ;
    vo_hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
+   opt_txt_see_seal : string "Remembering half-guessed phrases" ;
+
+   # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
    vm_hint : string "<HINT<#0f0>>/<HINTS<#0f0>>/<HELP<#0f0>>" ;
@@ -268,6 +273,8 @@ booleans {
 
    # option(s)
    opt_hone_aye : boolean "false" ;
+   opt_see_lol : boolean "true" ;
+   see_lol_known : boolean "false" scope="survivor" ;
 
    # game state combo
    talk_skill_show : dynamic_boolean {( (point_carp_arts || point_blurb_lasting) && !point_scam_pill )} ;
@@ -902,10 +909,10 @@ subroutines {
          : set_false "opt_hone_aye" ;
       }
       : match "hone _" { #noobfus
-         : print "{hone_stickler} {vo_hone_aye}.";
+         : print "{command_stickler} {vo_hone_aye}.";
       }
       : match "ho _" { #noobfus
-         : print "{hone_stickler} {vo_ho_nigh}.";
+         : print "{command_stickler} {vo_ho_nigh}.";
       }
    }
 
@@ -1174,6 +1181,29 @@ on_command {
          : if (blurry_tats) {
             : print "It's a bit blurry, though, so maybe you're not ready to do whatever it is you need to do yet." ;
          }
+         : done ;
+      }
+   }
+
+   : match "see lol" {
+      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
+      : set_true "opt_see_lol" ;
+      : set_true "see_lol_known" ;
+	  : done ;
+   }
+   : match "seal all" {
+      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_see_lol} turns it on.") )} ;
+      : set_true "opt_see_lol" ;
+      : set_true "see_lol_known" ;
+	  : done ;
+   }
+   : if (see_lol_known) {
+      : match "see _" {
+         : print "{command_stickler} {vo_see_lol}." ;
+         : done ;
+      }
+      : match "seal _" {
+         : print "{command_stickler} {vo_seal_all}." ;
          : done ;
       }
    }
