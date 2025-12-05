@@ -101,7 +101,8 @@ strings {
    once_why_trains : dynamic_string {( point_k_vroom ? "now" : "once" )} ;
    once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
 
-   # here / at variables (r0 = no need for options)
+   # here / at variables (r0 = no need for options, but in there nevertheless)
+   here_r0 : dynamic_string {( is_at "r1" ? "here" : "at {r0_header}" )} ;
    here_r1 : dynamic_string {( is_at "r1" ? "here" : "at {r1_header}" )} ;
    here_r2 : dynamic_string {( is_at "r2" ? "here" : "at {r2_header}" )} ;
    here_r3 : dynamic_string {( is_at "r3" ? "here" : "at {r3_header}" )} ;
@@ -1200,14 +1201,14 @@ on_command {
    }
 
    : match "see lol" {
-      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
+      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "already" : "now") + " off." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
       : set_true "opt_see_lol" ;
       : set_true "see_lol_known" ;
 	  : done ;
    }
    : match "seal all" {
       : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_see_lol} turns it on.") )} ;
-      : set_true "opt_see_lol" ;
+      : set_false "opt_see_lol" ;
       : set_true "see_lol_known" ;
 	  : done ;
    }
