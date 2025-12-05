@@ -890,16 +890,21 @@ subroutines {
 	  : update_graphic ;
    }
 
-   say_half : subroutine {
+   reject_half : subroutine {
       : if (done_already) {
          : print "That's half of something you already got to work." ;
       } : else_if (think_already) {
          : print "That's half of something you already guessed. {vd_think} will recall it." ;
       } : else {
          : print "You feel you must have one word right." ;
+         : if (first_half) {
+            : collection_modify { collection = "got_first" index -> (tempint) content -> ("true") ; }
+         } : else {
+            : collection_modify { collection = "got_second" index -> (tempint) content -> ("true") ; }
+         }
          : if (!note_half_limitations) {
-            : print "{note_once}ideally, I'd keep track of which word you have right, but while Adventuron makes many things easy, its lack of support for complex classes makes the code (as I see it) hard to write and test. Sorry for any inconvenience." ;
-			: set_true "note_half_limitations" ;
+            : print "{note_once}{this_g} spells out half-right guesses with {vd_think} by default. This option can be disabled with {vo_seal_all} or enabled with {vo_see_lol}." ;
+            : set_true "note_half_limitations" ;
          }
       }
       : set_false "done_already" ;
