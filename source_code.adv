@@ -946,6 +946,49 @@ subroutines {
 	  : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
    }
 
+   meta_think : subroutine {
+      : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it, and you still haven't. Yet." ;
+      : if (think_scam_pill) {
+         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill} {here_r5}." ;
+      }
+      : if (think_aid_route) {
+         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help {here_r6}." ;
+      }
+      : if (think_k_vroom) {
+         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around {here_r7}." ;
+      }
+      : if (think_why_trains) {
+         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight {here_r9}." ;
+      }
+      : if (think_wake_up) {
+         : print "You can {t_wake_up} {once_wake_up} {here_r8} you've defeated the wight {here_r9}." ;
+      }
+      : set_integer var="counter" "0" ;
+      : set_false "think_half_yet" ;
+      : if (opt_see_lol) {
+         : while (counter < 12) {
+            : if ((collection_get{ collection -> ("tried_combo") index -> ( counter )} == "false")) {
+               : if (part_word_score > 0) {
+                  : if (!think_half_yet) {
+                     : print {( (think_any ? "Also, here" : "Here") + " is what you know from partially correct guessing:" )} ;
+                     : set_true "think_half_yet" ;
+                  }
+                  : print {( (part_word_score != 2 ? (collection_get{ collection -> ("first_words") index -> (counter) }) : "{noguess}") + " " + (part_word_score >= 2 ? (collection_get{ collection -> ("second_words") index -> (counter) }) : "{noguess}") + " " + (collection_get{ collection -> ("situations") index -> (counter) }) )} ;
+                  : set_true "think_half_yet" ;
+                  : if (!solved_both_parts_nag && part_word_score == 3) {
+                     : print "{note_once}You have solved something in parts, but you haven't typed the complete command yet. If it doesn't work once you do,  you'll still see it here in {vd_think}." ;
+                     : set_true "solved_both_parts_nag" ;
+                  }
+               }
+            }
+            : increment "counter" ;
+         }
+      }
+      : if (!think_half_yet && !think_any) {
+         : print "There's nothing you've currently figured out only partially, whether it's the right phrase and the wrong time, or half of a phrase you need." ;
+      }
+   }
+
    odd_dir_note : subroutine {
       : match "se _;sw _;ne _;nw _" {
          : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
@@ -1153,26 +1196,8 @@ on_command {
       }
    }
    : match "think _" {
-      : if (!think_any) {
-         : print "There are no commands you figured out but will need to re-use in the future with stronger preparation." ;
-         : done ;
-      }
-      : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it, and you still haven't. Yet." ;
-      : if (think_scam_pill) {
-         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill} {here_r5}." ;
-      }
-      : if (think_aid_route) {
-         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help {here_r6}." ;
-      }
-      : if (think_k_vroom) {
-         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around {here_r7}." ;
-      }
-      : if (think_why_trains) {
-         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight {here_r9}." ;
-      }
-      : if (think_wake_up) {
-         : print "You can {t_wake_up} {once_wake_up} {here_r8} you've defeated the wight {here_r9}." ;
-      }
+      : gosub "meta_think" ;
+      : done ;
    }
    : match "opt _;opts _;option _;options _" {
       : gosub "meta_options" ;
