@@ -454,7 +454,12 @@ locations {
          }
          : match "glow _;_ bold" {
             : set_boolean var = "done_already" {( point_glow_bold )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "0" ;
+            : set_false "first_half" ;
+            : match "glow _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -478,7 +483,12 @@ locations {
          }
          : match "dew _;_ nice" {
             : set_boolean var = "done_already" {( point_dew_nice )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "1" ;
+            : set_false "first_half" ;
+            : match "dew _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -512,7 +522,12 @@ locations {
          }
          : match "broke _;_ ode" {
             : set_boolean var = "done_already" {( point_broke_ode )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "2" ;
+            : set_false "first_half" ;
+            : match "broke _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
          : if (point_broke_ode) {
@@ -536,7 +551,12 @@ locations {
             }
             : match "reek _;_ odor" {
                : set_boolean var = "done_already" {( point_reek_odor )} ;
-               : gosub "say_half" ;
+               : set_integer var="tempint" "3" ;
+               : set_false "first_half" ;
+               : match "reek _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "reject_half" ;
                : done ;
             }
          }
@@ -563,7 +583,12 @@ locations {
          }
          : match "whee _;_ zoos" {
             : set_boolean var = "done_already" {( point_whee_zoos )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "5" ;
+            : set_false "first_half" ;
+            : match "whee _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
          : if (point_whee_zoos) {
@@ -579,7 +604,12 @@ locations {
             }
             : match "blurb _;_ lasting" {
                : set_boolean var = "done_already" {( point_blurb_lasting )} ;
-               : gosub "say_half" ;
+               : set_integer var="tempint" "6" ;
+               : set_false "first_half" ;
+               : match "blurb _" {
+                  : set_true "first_half" ;
+               }
+               : gosub "reject_half" ;
                : done ;
             }
          }
@@ -599,7 +629,12 @@ locations {
          }
          : match "carp _;_ arts" {
             : set_boolean var = "done_already" {( point_carp_arts )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "4" ;
+            : set_false "first_half" ;
+            : match "carp _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -630,7 +665,12 @@ locations {
          : match "scam _;_ pill" {
             : set_boolean var = "done_already" {( point_scam_pill )} ;
             : set_boolean var = "think_already" {( think_scam_pill && !point_scam_pill )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "7" ;
+            : set_false "first_half" ;
+            : match "scam _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -683,7 +723,12 @@ locations {
          : match "aid _;_ route" {
             : set_boolean var = "done_already" {( point_aid_route )} ;
             : set_boolean var = "think_already" {( think_aid_route && !point_aid_route )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "8" ;
+            : set_false "first_half" ;
+            : match "aid _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -713,7 +758,12 @@ locations {
          : match "k _;_ vroom" {
             : set_boolean var = "done_already" {( point_k_vroom )} ;
             : set_boolean var = "think_already" {( think_k_vroom && !point_k_vroom )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "9" ;
+            : set_false "first_half" ;
+            : match "aid _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -762,7 +812,12 @@ locations {
          : match "wake _;_ up" {
             : set_boolean var = "done_already" {( point_wake_up )} ;
             : set_boolean var = "think_already" {( think_wake_up && !point_wake_up )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "11" ;
+            : set_false "first_half" ;
+            : match "wake _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
@@ -799,7 +854,12 @@ locations {
          : match "why _;_ trains" {
             : set_boolean var = "done_already" {( point_why_trains )} ;
             : set_boolean var = "think_already" {( think_why_trains && !point_why_trains )} ;
-            : gosub "say_half" ;
+            : set_integer var="tempint" "10" ;
+            : set_false "first_half" ;
+            : match "why _" {
+               : set_true "first_half" ;
+            }
+            : gosub "reject_half" ;
             : done ;
          }
       }
