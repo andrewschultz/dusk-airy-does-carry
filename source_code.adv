@@ -449,6 +449,7 @@ locations {
             }
             : print "The globe begins to glow more boldly. You can see your way around a bit, but no exit yet. However, you discover a globe, older. Pfft, that's no problem. \"Glow, boulder!\" you yell. And a boulder behind the globe (older) does so. It begins to shake. You back up, and it and the globe explodes, revealing a way up!" ;
             : set_true "point_glow_bold" ;
+            : collection_modify { collection = "tried_combo" index -> (0) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -468,7 +469,7 @@ locations {
       on_command {
          : match "do nice" {
             : print {( "You resolve to be a decent person. This " + (point_dew_nice ? "on top of getting something from the Dune/Ice!" : "almost moves the {c_dune_ice}, but not quite. Perhaps you need more than just spiritual changes. \"Do\" does seem a bit vague.") )} ;
-			: done ;
+            : done ;
         }
          : match "dew nice" {
             : if (point_dew_nice) {
@@ -477,6 +478,7 @@ locations {
             }
             : print {( "The ice melts bit, leaving dew beneath it." + (point_reek_odor ? "" : " It might be nice to bottle, but you have no container yet.") )} ;
             : set_true "point_dew_nice" ;
+            : collection_modify { collection = "tried_combo" index -> (1) content -> ("true") } ;
             : gosub "add_point" ;
             : gosub "ale_fill_check" ;
             : done ;
@@ -511,6 +513,7 @@ locations {
             : print "While you contemplate this, a dudebroish fellow stops in, scratches his head, grumbles a bit, and goes to the computer to work on getting the Bro Code back in place. \"When they need a tough job, they call for the ... <RE-CODER<#88f>>! And my bottomless bottle of liquid nourishment!\"" ;
             : print "You really don't think the {d_bro_code} deserves to be built back up, so you need to figure out a way to neutralize the {c_re_coder}." ;
             : set_true "point_broke_ode" ;
+            : collection_modify { collection = "tried_combo" index -> (2) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -540,6 +543,7 @@ locations {
                : pocket "dump_ale" ;
                : set_true "ever_found_item" ;
                : set_true "point_reek_odor" ;
+               : collection_modify { collection = "tried_combo" index -> (3) content -> ("true") } ;
                : gosub "add_point" ;
                : done ;
             }
@@ -578,6 +582,7 @@ locations {
             : print "The wheeze ooze bubbles up, making one final big old wheeze, and then soars into the air like a geyser and pops. There is rumbling below, and then, surprisingly, life! All sorts of animals have been released from underground activity: {zoo_anim}. They sure do seem happy to see you. " ;
             : print "Then, a menacing noise. A {c_blur} -- thankfully, it's far away from the zoo, but it's still annoying." ;
             : set_true "point_whee_zoos" ;
+            : collection_modify { collection = "tried_combo" index -> (5) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -599,6 +604,7 @@ locations {
                }
                : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive.  Nothing too pompous of course. But it makes you happy and gives you confidence and ideas for other ways to seem slick in conversation." ;
                : set_true "point_blurb_lasting" ;
+               : collection_modify { collection = "tried_combo" index -> (6) content -> ("true") } ;
                : gosub "add_point" ;
                : done ;
             }
@@ -624,6 +630,7 @@ locations {
             }
             : print "While you're not sure what a bunch of renderings of fish could do, you sort of hope for them anyway. You get something unexpected: revelations for conversational tricks not only to make yourself seem more impressive than others, but to feel less unimpressive in the presence of people who puff themselves out a bit too much." ;
             : set_true "point_carp_arts" ;
+            : collection_modify { collection = "tried_combo" index -> (4) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -659,6 +666,7 @@ locations {
             : set_true "ever_found_item" ;
             : set_true "point_scam_pill" ;
             : set_false "think_scam_pill" ;
+            : collection_modify { collection = "tried_combo" index -> (7) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -711,6 +719,7 @@ locations {
             : destroy "dump_ale" ;
             : set_true "point_aid_route" ;
             : set_false "think_aid_route" ;
+            : collection_modify { collection = "tried_combo" index -> (8) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -752,6 +761,7 @@ locations {
             : pocket "tool" ;
             : set_true "ever_found_item" ;
             : destroy "coin" ;
+            : collection_modify { collection = "tried_combo" index -> (9) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -785,6 +795,7 @@ locations {
             }
             : set_true "point_wake_up" ;
             : set_false "think_wake_up" ;
+            : collection_modify { collection = "tried_combo" index -> (11) content -> ("true") } ;
             : gosub "add_point" ;
             : print "You don't wake up right away. Instead, you open a passage down to the Fake or Fey Core, where the people you aided from the route take over." ;
             : print "The next morning, you wake up early, and you realize it was a bit of a weird dream, but it was a heck of a lot better than the ones you used to have, ones you forgot you had, like being back in high school and having the principal inform you you got an F in the class you actually got an A in, and your protests only make things worse." ;
@@ -840,6 +851,7 @@ locations {
             : destroy "tool" ;
             : set_false "think_why_trains" ;
             : set_true "point_why_trains" ;
+            : collection_modify { collection = "tried_combo" index -> (10) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
          }
@@ -946,8 +958,8 @@ barriers {
 subroutines {
    add_point : subroutine {
       : print "<Your score has just gone up by a point!<#ff0>>" ;
-	  : increment "score" ;
-	  : update_graphic ;
+      : increment "score" ;
+      : update_graphic ;
    }
 
    reject_half : subroutine {
@@ -1007,8 +1019,8 @@ subroutines {
 
    meta_options : subroutine {
       : print "{this_g} has two options." ;
-	  : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ;
-	  : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
+      : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ;
+      : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
    }
 
    meta_think : subroutine {
@@ -1307,13 +1319,13 @@ on_command {
       : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "already" : "now") + " off." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
       : set_true "opt_see_lol" ;
       : set_true "see_lol_known" ;
-	  : done ;
+      : done ;
    }
    : match "seal all" {
       : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_see_lol} turns it on.") )} ;
       : set_false "opt_see_lol" ;
       : set_true "see_lol_known" ;
-	  : done ;
+      : done ;
    }
    : if (see_lol_known) {
       : match "see _" {
@@ -1460,7 +1472,7 @@ on_render {
    }
    : if (is_at "r7" && !point_k_vroom) {
       : overlay "ig_tool" x="107" y="14" ;
-	  : done ;
+      : done ;
    }
    : if (!indoors) {
       : if (score == 1) {
