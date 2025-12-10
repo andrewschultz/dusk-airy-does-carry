@@ -1017,10 +1017,28 @@ subroutines {
       }
    }
 
+   meta_about : subroutine {
+      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
+      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
+      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
+      : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
+      : print "{this_g} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
+      : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
+      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+   }
+
+   meta_credits : subroutine {
+      : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
+      : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
+      : print "Thanks to the administrators <Ruber Eaglenest<#0f0>>[https://rubereaglenest.itch.io], <Alyshkalia<#0f0>>[https://alyshkalia.itch.io] and <Passerine<#0f0>>[https://passerine.itch.io] for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to Chris Ainsley for creating <Adventuron<#0f0>>[https://adventuron.itch.io/]." ;
+   }
+
    meta_options : subroutine {
       : print "{this_g} has two options." ;
       : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ;
       : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
+      : set_true "read_options_yet" ;
    }
 
    meta_think : subroutine {
@@ -1209,19 +1227,12 @@ on_command {
       }
    }
    : match "about _" {
-      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
-      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
-      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
-      : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {g_wp} and {g_ut}." ;
-      : print "{this_g} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
-      : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
-      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+      : gosub "meta_about" ;
+      : done ;
    }
    : match "credits _;credit _" {
-      : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
-      : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
-      : print "Thanks to the administrators <Ruber Eaglenest<#0f0>>[https://rubereaglenest.itch.io], <Alyshkalia<#0f0>>[https://alyshkalia.itch.io] and <Passerine<#0f0>>[https://passerine.itch.io] for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
-      : print "Thanks to Chris Ainsley for creating <Adventuron<#0f0>>[https://adventuron.itch.io/]." ;
+      : gosub "meta_credits" ;
+      : done ;
    }
    : match "help _;hint _;hints _" {
       : if (!point_glow_bold) {
