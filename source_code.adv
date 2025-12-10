@@ -102,7 +102,7 @@ strings {
    once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
 
    # here / at variables (r0 = no need for options, but in there nevertheless)
-   here_r0 : dynamic_string {( is_at "r1" ? "here" : "at {r0_header}" )} ;
+   here_r0 : dynamic_string {( is_at "r0" ? "here" : "at {r0_header}" )} ;
    here_r1 : dynamic_string {( is_at "r1" ? "here" : "at {r1_header}" )} ;
    here_r2 : dynamic_string {( is_at "r2" ? "here" : "at {r2_header}" )} ;
    here_r3 : dynamic_string {( is_at "r3" ? "here" : "at {r3_header}" )} ;
@@ -1051,9 +1051,8 @@ subroutines {
                      : set_true "think_half_yet" ;
                   }
                   : print {( (part_word_score != 2 ? (collection_get{ collection -> ("first_words") index -> (counter) }) : "{noguess}") + " " + (part_word_score >= 2 ? (collection_get{ collection -> ("second_words") index -> (counter) }) : "{noguess}") + " " + (collection_get{ collection -> ("situations") index -> (counter) }) )} ;
-                  : set_true "think_half_yet" ;
                   : if (!solved_both_parts_nag && part_word_score == 3) {
-                     : print "{note_once}You have solved something in parts, but you haven't typed the complete command yet. If it doesn't work once you do,  you'll still see it here in {vd_think}." ;
+                     : print "{note_once}You have solved something in parts, but you haven't typed the complete command yet. If it doesn't work once you do, you'll still see what you need to do first here in {vd_think}." ;
                      : set_true "solved_both_parts_nag" ;
                   }
                }
@@ -1285,7 +1284,6 @@ on_command {
       : print "There are also metaverbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_versions} shows version history and release dates." ;
       : print {( "{vm_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) )} ;
       : print {( "{vm_options} shows two option commands that follow {this_g}'s mechanic." + (score == 0 && !read_options_yet ? " They may be spoilers or clues for the first puzzle." : "" ) )}  ;
-      : set_true "read_options_yet" ;
    }
    : match "take _;drop _" {
       : print "You don't need to TAKE or DROP anything here. It's all done for you." ;
