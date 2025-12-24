@@ -493,6 +493,8 @@ locations {
          }
          : match "do nice" {
             : print {( "You resolve to be a decent person. This " + (point_dew_nice ? "on top of getting something from the Dune/Ice!" : "almost moves the {c_dune_ice}, but not quite. Perhaps you need more than just spiritual changes. \"Do\" does seem a bit vague.") )} ;
+            : collection_modify { collection = "got_first" index -> (1) content -> ("true") ; }
+            : gosub "reject_half_note" ;
             : done ;
         }
          : match "dew nice" {
@@ -727,6 +729,11 @@ locations {
          : if (!point_aid_route) {
             : match "_ rout" {
                : print "Very, VERY close on the second word. 80%% in fact. But, to be pedantic, the rout will be just to the west." ;
+               : match "aid rout" {
+                  : print "It seems like you'll need aid, or an aide, though." ;
+                  : collection_modify { collection = "got_first" index -> (8) content -> ("true") ; }
+                  : gosub "reject_half_note" ;
+               }
                : done ;
             }
          }
@@ -900,6 +907,11 @@ locations {
          : match "y _" {
             : if (!point_why_trains) {
                : print "You don't need to say yes or take a trip to the Y. But that sure sounds right!" ;
+               : match "y trains" {
+                  : print "In particular, the trains must be right." ;
+                  : collection_modify { collection = "got_second" index -> (10) content -> ("true") ; }
+               }
+               : gosub "reject_half_note" ;
                : done ;
             } : else {
                : print "You engage in a relaxing bit of trainspotting before continuing your journey." ;
@@ -1041,13 +1053,17 @@ subroutines {
          } : else {
             : collection_modify { collection = "got_second" index -> (tempint) content -> ("true") ; }
          }
+         : gosub "reject_half_note" ;
+      }
+      : set_false "done_already" ;
+      : set_false "think_already" ;
+   }
+
+   reject_half_note : subroutine {
          : if (!note_half_limitations) {
             : print "{note_once}{this_g} spells out half-right guesses with {vd_think} by default. This option can be disabled with {vo_seal_all} or enabled with {vo_see_lol}." ;
             : set_true "note_half_limitations" ;
          }
-      }
-      : set_false "done_already" ;
-      : set_false "think_already" ;
    }
 
    ale_fill_check : subroutine {
