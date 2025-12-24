@@ -990,6 +990,24 @@ subroutines {
       }
    }
 
+   check_odd_verbs : subroutine {
+      : match "xyzzy _" {
+         : print "A hollow voice intones \"Our gaol: argh, ail!\" It's so spooky, you don't dare quibble over details of pronunciation." ;
+         : done ;
+      }
+      : mask {
+         : match "load -" {
+            : print "You hear a low \"Do load, ooh!\"" ;
+         }
+         : match "restore -" {
+            : print "You hear a tune. It could be called a re-load reel/ode, I guess." ;
+         }
+         : match "save -" {
+            : print "A ghostly apparition with \"Save? Illun', Say!\" Villain written on its front taunts your very reasonable precaution. But you don't need to listen to such meanies." ;
+         }
+      }
+   }
+
    check_options : subroutine {
       : match "hone aye;hone eye" {
          : print {( "Available exits are " + (opt_hone_aye ? "already" : "now") + " honed to ones you still need to use to win." )} ;
@@ -1007,6 +1025,41 @@ subroutines {
       }
       : match "ho _" { #noobfus
          : print "{command_stickler} {vo_ho_nigh}.";
+      }
+   }
+
+   check_standard_verbs : subroutine {
+      : match "sw _;se _;ne _;nw _" {
+         : print "Diagonal directions aren't used in {this_g}." ;
+         : done ;
+      }
+      : match "take _;drop _" {
+         : if (!take_drop_warn) {
+            : print "You never need to take or drop anything in {this_g}. Everything is implicitly taken or destroyed as used." ;
+            : set_true "take_drop_warn" ;
+         } : else {
+            : print "Take and drop aren't used in {this_g}." ;
+         }
+         : done ;
+      }
+      : match "z _;wait _" {
+         : print "\"Loaf, right? Lo, fright!\"" ;
+         : if (!wait_yet) {
+            : print {( "{note_once}This is just a silly general response" + ( score == 0 ? ", though it does provide a clue how to solve the first puzzle, in its own way" : "" ) + ". Waiting gives no penalty or benefit." )} ;
+            : set_true "wait_yet" ;
+         }
+      }
+      : match "map _;m _" {
+         : set_true "showing_map" ;
+         : clear_screen ;
+         : update_graphic "m_blank" ;
+         : if (!first_map_note) {
+            : print "{note_once}You can mouse-click or hit {key_enter} to return to the game. Arrows indicate one-way paths, and red lines show ones you don't need any more, if {vo_hone_aye} is active." ; #~
+            : set_true "first_map_note" ;
+         }
+         : press_any_key ;
+         : set_false "showing_map" ;
+         : redescribe ;
       }
    }
 
@@ -1178,21 +1231,7 @@ on_describe {
 ## Test VERB NOUN that the player types and executes conditional actions
 
 on_command {
-   : match "xyzzy _" {
-      : print "A hollow voice intones \"Our gaol: argh, ail!\" It's so spooky, you don't dare quibble over details of pronunciation." ;
-      : done ;
-   }
-   : mask {
-      : match "load -" {
-         : print "You hear a low \"Do load, ooh!\"" ;
-      }
-      : match "restore -" {
-         : print "You hear a tune. It could be called a re-load reel/ode, I guess." ;
-      }
-      : match "save -" {
-         : print "A ghostly apparition with \"Save? Illun', Say!\" Villain written on its front taunts your very reasonable precaution. But you don't need to listen to such meanies." ;
-      }
-   }
+   : gosub "check_odd_verbs" ;
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
    : match "i _" {
@@ -1225,25 +1264,8 @@ on_command {
       : done ;
    }
 
-   : match "map _;m _" {
-      : set_true "showing_map" ;
-      : clear_screen ;
-      : update_graphic "m_blank" ;
-      : if (!first_map_note) {
-         : print "{note_once}You can mouse-click or hit {key_enter} to return to the game. Arrows indicate one-way paths, and red lines show ones you don't need any more, if {vo_hone_aye} is active." ;
-         : set_true "first_map_note" ;
-      }
-      : press_any_key ;
-      : set_false "showing_map" ;
-      : redescribe ;
-   }
-   : match "z _;wait _" {
-      : print "\"Loaf, right? Lo, fright!\"" ;
-      : if (!wait_yet) {
-         : print "{note_once}This is just a silly general response. Waiting gives no penalty or benefit." ;
-         : set_true "wait_yet" ;
-      }
-   }
+   : gosub "check_standard_verbs" ;
+
    : match "about _" {
       : gosub "meta_about" ;
       : done ;
