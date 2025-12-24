@@ -230,6 +230,7 @@ integers {
 }
 
 booleans {
+   noun_based_noted : boolean "false" scope="survivor" ;
    # game state (noncritical)
    showed_first_note : boolean "false" ;
    warn_score_header : boolean "false" ;
@@ -1086,6 +1087,14 @@ subroutines {
          : set_false "showing_map" ;
          : redescribe ;
       }
+   }
+
+   note_noun_based : subroutine {
+      : if (noun_based_noted) {
+         : return ;
+      }
+      : print "{note_once}{this_g} tends to look at the noun more than the verb, so it will probably funnel most verbs to <X<#f80>>/<EXAMINE<#f80>>. There's enough verb guessing with the actual puzzles." ;
+      : set_true "noun_based_noted" ;
    }
 
    note_thinks : subroutine {
