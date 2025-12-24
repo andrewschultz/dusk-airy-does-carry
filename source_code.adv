@@ -21,23 +21,33 @@ game_information {
 ## Defines locations in the world
 
 strings {
-   # top level strings
+   # game specific strings
    this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
-   g_wp : string "<Why Pout<#0f0>>[https://andrewschultz.itch.io/jam/why-pout]" ;
-   g_ut : string "<Us Too<#0f0>>[https://andrewschultz.itch.io/jam/us-too]" ;
 
    # links
+   l_qt : string "<Quirky Test<#0f0>>[http://andrewschultz.itch.io/quirky-test]" ;
+   l_wp : string "<Why Pout<#0f0>>[http://andrewschultz.itch.io/why-pout]" ;
+   l_ut : string "<Us Too<#0f0>>[http://andrewschultz.itch.io/us-too]" ;
    l_cdsa : string "<Chez Dark Shade Ark<#0f0>>[http://andrewschultz.itch.io/chez-dark-shade-ark]" ;
    l_dadc : string "<Dusk, Airy, Does Carry<#0f0>>[http://andrewschultz.itch.io/dusk-airy-does-carry]" ;
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
+   l_ectocomp : string "<EctoComp<#0f0>>[http://itch.io/jam/ectocomp-2025]" ;
    l_ifcomp : string "<IFComp<#0f0>>[http://ifcomp.org]" ;
-   l_ectocomp : string "<EctoComp<#0f0>>[https://itch.io/jam/ectocomp-2025]" ;
-   command_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
 
-   # noting stuff
-   note_once : string "<ONE-TIME NOTE: <#f0f>>" ;
+   # EctoComp general strings
+   about_spoiler_flag : dynamic_string {( first_point ? "" : " It also contains names of similar games which may be a spoiler or hint for the first point." )} ;
+   command_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
+   conditional_score : dynamic_string {( thought_right > 0 ? "+{thought_right}" : "" )} ;
+   custom_unknown_verb_error : dynamic_string {( "Nothing comes of that. {this_g} is largely noun-based, and you can see the reduced verb list with {vm_verbs}." + (score > 0 ? "" : "All point-scoring commands are one-offs and may have a noun or adjective first.") )} ;
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
+   my_score : string "{score}{conditional_score}/{max_score}" ;
+   noguess_0 : string "<(unknown)<#888>>" ;
+   nospecial_custom : string "You see no specific item like that. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
+   note_once : string "<ONE-TIME NOTE:<#f0f>> " ;
    once_now : dynamic_string {( once_now_boolean ? "now" : "once" )} ;
+   thought_right_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( thought_right ) } )} ;
+   xme : string "<X ME<#0f0>>" ;
+   yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # game clue strings
    gb_done : string "<GLOW BOLD<#44f>>" ; #r0
@@ -72,35 +82,31 @@ strings {
    t_why_trains : string "<WHY TRAINS<#f80>>" ;
    t_wake_up : string "<WAKE UP<#f80>>" ;
 
-   thought_right_words : dynamic_string {( collection_get{ collection -> ("num_to_word") index -> ( thought_right ) } )} ;
-
-   # diagnostic(s)
-   vd_think : string "<THINK<#f80>>" ;
+   # diagnostic verbs
+   vd_hint : string "<HINT<#88f>>/<HINTS<#88f>>/<HELP<#88f>>" ;
+   vd_i : string "<I<#88f>>" ;
+   vd_inv : string "<INVENTORY<#88f>>" ;
+   vd_think : string "<THINK<#88f>>" ;
 
    # options
    vo_seal_all : string "<SEAL ALL<#f0f>>" ;
    vo_see_lol : string "<SEE LOL<#f0f>>" ;
+   opt_txt_see_seal : string "Remembering half-guessed phrases" ;
+
+   # HONE AYE option
    vo_hone_aye : string "<HONE AYE<#ff0>>/<HONE EYE<#ff0>>" ;
    vo_ho_nigh : string "<HO NIGH<#ff0>>" ;
-   opt_txt_see_seal : string "Remembering half-guessed phrases" ;
 
    # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
-   vm_hint : string "<HINT<#0f0>>/<HINTS<#0f0>>/<HELP<#0f0>>" ;
+   vm_history : string "<HISTORY<#f80>>" ;
    vm_options : string "<OPTIONS<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
-   vm_versions : string "<VERSIONS<#f80>>" ;
+
+   ####GAME SPECIFIC
 
    xtats : string "<X TATS<#f80>>" ;
-   xme : string "<X ME<#0f0>>" ;
-
-   # thinky variables / "once" strings
-   once_scam_pill : dynamic_string {( r5_ready ? "now" : "once" )} ;
-   once_aid_route : dynamic_string {( r6_ready ? "now" : "once" )} ;
-   once_k_vroom : dynamic_string {( r7_ready ? "now" : "once" )} ;
-   once_why_trains : dynamic_string {( point_k_vroom ? "now" : "once" )} ;
-   once_wake_up : dynamic_string {( point_why_trains ? "now" : "once" )} ;
 
    # here / at variables (r0 = no need for options, but in there nevertheless)
    here_r0 : dynamic_string {( is_at "r0" ? "here" : "at {r0_header}" )} ;
@@ -115,7 +121,6 @@ strings {
    here_r9 : dynamic_string {( is_at "r9" ? "here" : "at {r9_header}" )} ;
 
    # parser error stuff
-   custom_unknown_verb_error : string "Nothing comes of that. {this_g} has a reduced verb list, which you can see with {vm_verbs}, and all point-scoring commands are irregular." ;
    exits_err : dynamic_string {( is_at "r0" ? "{r0_cantgo}" :
       is_at "r1" ? "{r1_cantgo}" :
       is_at "r2" ? "{r2_cantgo}" :
@@ -126,10 +131,8 @@ strings {
       is_at "r7" ? "{r7_cantgo}" :
       is_at "r8" ? "{r8_cantgo}" :
       is_at "r9" ? "{r9_cantgo}" :
-      "You can't go that way. I should have a better message, but I don't."
+      "You can't go that way. Unfortunately, I missed a case here to give specifics."
       )} ;
-   nospecial_custom : string "You see no specific item like that--time limits mean I couldn't implement noncritical things. To examine a room, <LOOK<#0f0>>. Note that the parser may not recognize adjectives as synonyms, so using a noun works best." ;
-   yn_or_12_or_14 : dynamic_string {( (verb_is "save" || verb_is "load") ? "Please choose from 1 to 4." : in_number_choice ? "Please choose 1 or 2." : "Please choose YES/Y or NO/N." )}
 
    # items
    dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty. But the recoder mentioned it had extra capacity. What to fill it with?" )} ;
@@ -138,9 +141,7 @@ strings {
    # scenery reused
    zoo_anim : string "a hippopotamus, a panda bear, a lion, a giraffe, an elephant and a seal" ;
 
-   # basics
-   my_score : string "{score}{plusthink}/{max_score}" ;
-
+   #rooms: location description, header, "can't go" string
    r0_loc : dynamic_string {( point_glow_bold ? "Now that the globe (old) emanates a {d_glow_bold}, you can see a passage leading up." : "You can't see much here. A small {c_globe_old} gives off a very dim light. It seems to be your only hope to illuminate a way out of here. But how to operate it?" )} ;
    r0_header : string "<Raw Cold Rock, Old<#ff0>>" ;
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
@@ -183,8 +184,6 @@ strings {
 
    noguess : string "<(unknown)<#888>>" ;
 
-   # status line trickery
-   plusthink : dynamic_string {( think_any ? "+{thought_right}" : "" )}
 }
 
 integers {
