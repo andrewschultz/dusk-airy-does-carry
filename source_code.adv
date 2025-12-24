@@ -1164,6 +1164,7 @@ subroutines {
             : set_true "wait_yet" ;
          }
       }
+
       : match "map _;m _" {
          : set_true "showing_map" ;
          : clear_screen ;
@@ -1253,7 +1254,31 @@ subroutines {
       }
    }
 
+   meta_think_first : subroutine {
+      : if (point_glow_bold) {
+         : return ;
       }
+      : set_integer var="counter" "0" ;
+      : if (part_word_score > last_first_puzzle_score) {
+         : print {( "<NOTE<#ff0>>: you have figured out " + (part_word_score == 3 ? "<GLOW BOLD<#f80>> with separate commands, so you can just type it in. If you're not sure why, continue to {vd_think} for the explanation." : (part_word_score == 1 ? "<GLOW<#f80>> as the first word." : "<BOLD<#f80>> as the second word.") ) )} ;
+         : if (part_word_score < 3) {
+            : print "So I'll cut off the game mechanics hints this time, though if you type {vd_think} again, they will proceed." ;
+         }
+         : set_integer var="last_first_puzzle_score" {( part_word_score )} ;
+         : if (think_hint_funnel_note) {
+            : done ;
+         }
+      }
+      : if (!think_hint_funnel_note) {
+         : print "{note_once}small check before I give spoilers. Unless you've scored your first point or made progress towards it since your last {vd_think}, this will funnel into {vd_hint}." ;
+         : set_true "think_hint_funnel_note" ;
+         : done ;
+      }
+      : gosub "hint_help" ;
+      : done ;
+   }
+
+   meta_think_main : subroutine {
       : set_integer var="counter" "0" ;
       : set_false "think_half_yet" ;
       : if (opt_see_lol) {
@@ -1465,9 +1490,11 @@ on_command {
    }
 
    : match "think _" {
-      : gosub "meta_think" ;
-      : done ;
+      : gosub "meta_think_first" ;
+      : gosub "meta_think_conditionals" ;
+      : gosub "meta_think_main" ;
    }
+
    : match "opt _;opts _;option _;options _" {
       : gosub "meta_options" ;
       : done ;
