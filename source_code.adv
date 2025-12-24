@@ -37,6 +37,7 @@ strings {
    # noting stuff
    note_once : string "<ONE-TIME NOTE: <#f0f>>" ;
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
+   once_now : dynamic_string {( once_now_boolean ? "now" : "once" )} ;
 
    # game clue strings
    gb_done : string "<GLOW BOLD<#44f>>" ; #r0
@@ -1152,22 +1153,30 @@ subroutines {
       : set_true "read_options_yet" ;
    }
 
-   meta_think : subroutine {
+   meta_think_conditionals : subroutine {
       : print "You reflect on what you wanted to try, but you weren't prepared properly to go through it, and you still haven't. Yet." ;
       : if (think_scam_pill) {
-         : print "You can confidently ask for a {t_scam_pill} {once_scam_pill} you have the verbal skills to impress the {c_scamp_ill} {here_r5}." ;
+         : set_boolean var="once_now_boolean" {( r5_ready )} ;
+         : print "You can confidently ask for a {t_scam_pill} {once_now} you have the verbal skills to impress the {c_scamp_ill} {here_r5}." ;
       }
       : if (think_aid_route) {
-         : print "You can establish an {t_aid_route} {once_aid_route} you are able to help {here_r6}." ;
+         : set_boolean var="once_now_boolean" {( r6_ready )} ;
+         : print "You can establish an {t_aid_route} {once_now} you are able to help {here_r6}." ;
       }
       : if (think_k_vroom) {
-         : print "You can rock onomatopoeia with {t_k_vroom} {once_k_vroom} you have the motivation to look around {here_r7}." ;
+         : set_boolean var="once_now_boolean" {( r7_ready )} ;
+         : print "You can rock onomatopoeia with {t_k_vroom} {once_now} you have the motivation to look around {here_r7}." ;
       }
       : if (think_why_trains) {
-         : print "You can summon (or moan) {t_why_trains} {once_why_trains} you have something to tame the wight {here_r9}." ;
+         : set_boolean var="once_now_boolean" {( point_k_vroom )} ;
+         : print "You can summon (or moan) {t_why_trains} {once_now} you have something to tame the wight {here_r9}." ;
       }
       : if (think_wake_up) {
-         : print "You can {t_wake_up} {once_wake_up} {here_r8} you've defeated the wight {here_r9}." ;
+         : set_boolean var="once_now_boolean" {( point_why_trains )} ;
+         : print "You can {t_wake_up} {once_now} {here_r8} you've defeated the wight {here_r9}." ;
+      }
+   }
+
       }
       : set_integer var="counter" "0" ;
       : set_false "think_half_yet" ;
