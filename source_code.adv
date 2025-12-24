@@ -1172,10 +1172,22 @@ subroutines {
    }
 
    meta_credits : subroutine {
-      : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ;
-      : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ;
+      : print "Game-specific thanks:" ;
+      : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ; #~
+      : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ; #~
+      : gosub "meta_credits_general" ;
+   }
+
+   meta_credits_general : subroutine {
+      : print "" ;
+      : print "<GENERAL THANKS<#f80>>:" ;
       : print "Thanks to the administrators <Ruber Eaglenest<#0f0>>[https://rubereaglenest.itch.io], <Alyshkalia<#0f0>>[https://alyshkalia.itch.io] and <Passerine<#0f0>>[https://passerine.itch.io] for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
       : print "Thanks to Chris Ainsley for creating <Adventuron<#0f0>>[https://adventuron.itch.io/]." ;
+      : print "Blanket thanks to Python and its developers for scripts that helped me generate similar code (point scoring, etc.) quickly." ;
+      : if (!warn_generic_credit) {
+         : print "{note_once}you can see generic Adventuron credits with <*CREDITS<#f80>>." ;
+         : set_true "warn_generic_credit" ;
+      }
    }
 
    meta_options : subroutine {
