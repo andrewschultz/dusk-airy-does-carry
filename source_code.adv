@@ -1083,7 +1083,28 @@ subroutines {
       }
    }
 
+   meta_versions : subroutine {
+      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
+      : print "" ;
+      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but there's a -- oh, a poke at the sort of ending you should never write in static fiction." + (know_final_command ? " (As you already guessed, the \"It was all a dream\" sort of ending.)" : "" ) )} ;
+      : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {vo_hone_aye} and {vo_ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
+      : print "" ;
+      : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
+      : print "" ;
+      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for EctoComp." ;
+      : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
+      : gosub "meta_versions_addendum" ;
+   }
+
+   meta_versions_addendum : subroutine {
+      : print "" ;
+      : print "If you've found this elsewhere than Itch.io, the original version should be at {l_cdsa}." ;
+      : if (!warn_generic_versions) {
+         : print "{note_once}you can see generic Adventuron version information with <*VERSIONS<#f80>>." ;
+         : set_true "warn_generic_versions" ;
       }
+   }
+
    odd_dir_note : subroutine {
       : mask {
          : if (is_at "r9" || is_at "r0") {
@@ -1256,19 +1277,11 @@ on_command {
       }
       : print "Fill in later." ;
    }
+
    : match "history _;version _;versions _" {
-      : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
-      : print "" ;
-      : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but thre's a -- oh, a poke at the sort of ending you should never write in static fiction." + (won_yet ? " The \"It was all a dream\" sort of ending." : "") )} ;
-      : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {vo_hone_aye} and {vo_ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
-      : print "" ;
-      : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
-      : print "" ;
-      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for EctoComp." ;
-      : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
-      : print "" ;
-      : print "If you've found this elsewhere than Itch.io, the latest version should be at {l_dadc}." ;
+      : gosub "meta_versions" ;
    }
+
    : match "score _" {
       : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
       : if (thought_right > 0) {
