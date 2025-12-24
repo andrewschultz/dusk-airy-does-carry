@@ -187,11 +187,14 @@ strings {
 }
 
 integers {
+   # placemarking integers
+   counter : integer "0" ;
+   last_first_puzzle_score : integer "0" ;
+   part_word_score : dynamic_integer {( ((collection_get{ collection -> ("got_first") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
+   tempint : integer "0" ;
+
    score : integer "0" ;
    max_score : integer "12" ;
-
-   tempint : integer "0" ;
-   counter : integer "0" ;
 
    thought_right : dynamic_integer {(
       (think_scam_pill ? 1 : 0) +
@@ -200,8 +203,6 @@ integers {
       (think_why_trains ? 1 : 0) +
       (think_wake_up ? 1 : 0)
       )} ;
-
-   part_word_score : dynamic_integer {( ((collection_get{ collection -> ("got_first") index -> ( counter ) } == "true") ? 1 : 0) + ((collection_get{ collection -> ("got_second") index -> ( counter ) } == "true") ? 2 : 0) )} ; # this is a really bad hack, but I couldn't find a concise way to code things. Maybe I could use a dynamic boolean.
 
    tats_number : dynamic_integer {(
       is_at "r0" ? r0_hintnum :
