@@ -848,6 +848,17 @@ locations {
    }
    r9 : location "{r9_loc}" header="{r9_header}" graphic="r_blank"  {
       on_command {
+         : if (!point_why_trains) {
+            : match "_ chair;_ scorch;_ ere;_ score" {
+               : print {( "It looks dangerous. You don't want to disarm it unless you know what you're doing, and the wight isn't watching." + (point_k_vroom ? (think_why_trains ? "But you've guessed what to do before, and since then, you got that tool. Now might be the time!" : " At least you have a tool that might be able to help, but what to do and how to say it?" ) : " You don't even have any implement that might help you." ) )} ;
+               : gosub "note_noun_based" ;
+               : done ;
+            }
+            : match "_ wight" {
+               : print "The wight seems too tough to deal with directly." ;
+               : gosub "note_noun_based" ;
+               : done ;
+         }
          : match "why trains" {
             : if (point_why_trains) {
                : print "You think up more ways trains are good for society, especially if they run on clean fuel. But the infrastructure isn't there for any more y-trains at the moment." ;
@@ -866,6 +877,7 @@ locations {
             : set_true "point_why_trains" ;
             : collection_modify { collection = "tried_combo" index -> (10) content -> ("true") } ;
             : gosub "add_point" ;
+            : destroy "chair" ;
             : done ;
          }
          : match "y _" {
