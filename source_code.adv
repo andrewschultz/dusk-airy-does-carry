@@ -1083,11 +1083,8 @@ subroutines {
       }
    }
 
-   odd_dir_note : subroutine {
-      : match "se _;sw _;ne _;nw _" {
-         : print "You don't need to use diagonal directions. Only the four main cardinal directions, and (at the start) up/down." ;
-         : done ;
       }
+   odd_dir_note : subroutine {
       : mask {
          : if (is_at "r9" || is_at "r0") {
             : match "d _;u _" {
