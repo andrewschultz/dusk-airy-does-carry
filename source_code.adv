@@ -1412,15 +1412,16 @@ on_command {
    }
 
    : match "score _" {
-      : print "You've currently scored {score} of {max_score} total points. There are no bonus points." ;
+      : print "You've currently scored {score} of {max_score} total points." ;
       : if (thought_right > 0) {
          : print {( "You've also discovered {thought_right_words} command" + (thought_right > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
-      : if (!warn_score_header) {
-         : print "{note_once}This is tracked in the upper right." ;
-         : set_true "warn_score_header" ;
+      : if (!score_note) {
+         : print "{note_once}score information is tracked in the upper right. Also, {this_g} contains no hidden bonus points" ;
+         : set_true "score_note" ;
       }
    }
+
    : match "think _" {
       : gosub "meta_think" ;
       : done ;
