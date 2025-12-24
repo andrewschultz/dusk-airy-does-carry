@@ -469,6 +469,11 @@ locations {
    }
    r1 : location "{r1_loc}" header="{r1_header}" graphic="r_blank"  {
       on_command {
+         : match "_ ice" {
+            : print "You mutter to yourself, \"Say! Nice, sane ice!\"" ;
+            : gosub "note_noun_based" ;
+            : done ;
+         }
          : match "do nice" {
             : print {( "You resolve to be a decent person. This " + (point_dew_nice ? "on top of getting something from the Dune/Ice!" : "almost moves the {c_dune_ice}, but not quite. Perhaps you need more than just spiritual changes. \"Do\" does seem a bit vague.") )} ;
             : done ;
@@ -502,9 +507,12 @@ locations {
    }
    r2 : location "{r2_loc}" header="{r2_header}" graphic="r2_graphic"  {
       on_command {
-         : match "_ ice" {
-            : print "You mutter to yourself, \"Say! Nice, sane ice!\"" ;
-            : done ;
+         : if (!point_broke_ode) {
+            : match "_ code" {
+               : print "The actual content of the Bro Code isn't important. But it's annoying to have here. Stuff like \"No plots? NOPE! LOTS!\" is scrawled on it." ;
+               : gosub "note_noun_based" ;
+               : done ;
+            }
          }
          : match "broke ode" {
             : if (point_broke_ode) {
@@ -522,6 +530,7 @@ locations {
          : if (!point_broke_ode) {
             : match "_ bro;_ code" {
                : print "The {c_bro_code} seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
+               : gosub "note_noun_based" ;
                : done ;
             }
          }
@@ -552,6 +561,7 @@ locations {
             : if (!point_reek_odor) {
                : match "_ re;_ coder;_ recoder" {
                   : print "Working frantically, staring at the screen, trying to rebuild the {d_bro_code}. You have plenty of time to distract him from this daunting task, but you just need to find the right distraction." ;
+                  : gosub "note_noun_based" ;
                   : done ;
                }
             }
@@ -728,6 +738,7 @@ locations {
          : if (point_aid_route) {
             : match "_ blokes" {
                : print {( "The {i_blokes} " + ( point_why_trains ? "are glad to see you but know it's time to move on after your victory." : "cheer you on in your quest to defeat the wight. They'll provide backup when needed." ) )} ;
+               : gosub "note_noun_based" ;
                : done ;
             }
          }
@@ -1387,6 +1398,7 @@ on_command {
          : if (blurry_tats) {
             : print "It's a bit blurry, though, so maybe you're not ready to do whatever it is you need to do yet." ;
          }
+         : gosub "note_noun_based" ;
          : done ;
       }
    }
