@@ -1060,6 +1060,19 @@ subroutines {
       }
    }
 
+   hint_help : subroutine {
+      : if (!point_glow_bold) {
+         : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
+            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
+            : print "The globe (old) could be brighter. You need a combination of two words." ;
+            : print "The game title, {this_g}, is an example." ;
+            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
+            : print "{gb_done}. (The hints will cycle now.)" ;
+         }
+         : done ;
+      }
+   }
+
    reject_half : subroutine {
       : if (done_already) {
          : print "That's half of something you already got to work." ;
@@ -1420,16 +1433,7 @@ on_command {
       : done ;
    }
    : match "help _;hint _;hints _" {
-      : if (!point_glow_bold) {
-         : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
-            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
-            : print "The globe (old) could be brighter. You need a combination of two words." ;
-            : print "The game title, {this_g}, is an example." ;
-            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
-            : print "{gb_done}. (The hints will cycle now.)" ;
-         }
-         : done ;
-      }
+      : gosub "hint_help" ;
       : if (!me_x_yet) {
          : print "{xme} will give you a hint item which may be intuitive, but if not, come back here for an explanation." ;
       } : else {
