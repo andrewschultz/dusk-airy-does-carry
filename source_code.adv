@@ -962,6 +962,31 @@ subroutines {
       : update_graphic ;
    }
 
+   opt_see_seal : subroutine {
+      : match "see lol" {
+         : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "already" : "now") + " on." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
+         : set_true "opt_see_lol" ;
+         : set_true "see_lol_known" ;
+         : done ;
+      }
+      : match "seal all" {
+         : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_see_lol} turns it on.") )} ;
+         : set_false "opt_see_lol" ;
+         : set_true "see_lol_known" ;
+         : done ;
+      }
+      : if (see_lol_known) {
+         : match "see _" {
+            : print "{command_stickler} {vo_see_lol}." ;
+            : done ;
+         }
+         : match "seal _" {
+            : print "{command_stickler} {vo_seal_all}." ;
+            : done ;
+         }
+      }
+   }
+
    reject_half : subroutine {
       : if (done_already) {
          : print "That's half of something you already got to work." ;
@@ -1356,28 +1381,7 @@ on_command {
       }
    }
 
-   : match "see lol" {
-      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "already" : "now") + " off." + (see_lol_known ? "" : " {vo_seal_all} turns it off.") )} ;
-      : set_true "opt_see_lol" ;
-      : set_true "see_lol_known" ;
-      : done ;
-   }
-   : match "seal all" {
-      : print {( "{opt_txt_see_seal} is " + (opt_see_lol ? "now" : "already") + " off." + (see_lol_known ? "" : " {vo_see_lol} turns it on.") )} ;
-      : set_false "opt_see_lol" ;
-      : set_true "see_lol_known" ;
-      : done ;
-   }
-   : if (see_lol_known) {
-      : match "see _" {
-         : print "{command_stickler} {vo_see_lol}." ;
-         : done ;
-      }
-      : match "seal _" {
-         : print "{command_stickler} {vo_seal_all}." ;
-         : done ;
-      }
-   }
+   : gosub "opt_see_seal" ;
 
    : match "glow _;carp _;whee _;blurb _;broke _;reek _;dew _;do _;scam _;aid _;k _;why _" { #obfuscation
       : print "{custom_unknown_verb_error}" ;
