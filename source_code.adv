@@ -294,6 +294,7 @@ booleans {
    think_wake_up : boolean "false" ; #r8
 
    # cluing dynamic booleans
+   know_final_command : dynamic_boolean {( won_yet || (collection_get{ collection -> ("got_first") index -> ( 11 )} == "true" || think_wake_up ) )} ;
    thought_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
    blurry_tats : dynamic_boolean {(
    (is_at "r5" && (!r5_ready)) ||
@@ -890,6 +891,7 @@ locations {
                : print "The wight seems too tough to deal with directly." ;
                : gosub "note_noun_based" ;
                : done ;
+            }
          }
          : match "why trains" {
             : if (point_why_trains) {
@@ -911,6 +913,7 @@ locations {
             : collection_modify { collection = "tried_combo" index -> (10) content -> ("true") } ;
             : gosub "add_point" ;
             : destroy "chair" ;
+            : destroy "wight" ;
             : done ;
          }
          : match "y _" {
