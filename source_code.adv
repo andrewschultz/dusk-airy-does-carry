@@ -873,6 +873,13 @@ locations {
    }
    r9 : location "{r9_loc}" header="{r9_header}" graphic="r_blank"  {
       on_command {
+         : if (point_why_trains) {
+            : match "_ trains" {
+               : print "Train logistics are above your pay grade. The trains seem to be running okay, and they bring life to the landscape. That's good enough." ;
+               : gosub "note_noun_based" ;
+               : done ;
+            }
+         }
          : if (!point_why_trains) {
             : match "_ chair;_ scorch;_ ere;_ score" {
                : print {( "It looks dangerous. You don't want to disarm it unless you know what you're doing, and the wight isn't watching." + (point_k_vroom ? (think_why_trains ? "But you've guessed what to do before, and since then, you got that tool. Now might be the time!" : " At least you have a tool that might be able to help, but what to do and how to say it?" ) : " You don't even have any implement that might help you." ) )} ;
@@ -936,11 +943,21 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
+   # X ME
    phase_tats : object "{i_fspt}" ;
+
+   # r2
    dump_ale : object "{i_dpda} ({ale_details})" msg="{dump_ale_description}" ;
+
+   # r5
    coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
+
+   # r7
    tool : object "{i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
+
+   # r9
    chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
+   trains : object "the Y trains" msg="The trains you summoned are running well." conspicuous="false" ;
    wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" conspicuous="false" ;
 }
 
