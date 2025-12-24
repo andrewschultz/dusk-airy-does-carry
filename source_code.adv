@@ -294,7 +294,7 @@ booleans {
    think_wake_up : boolean "false" ; #r8
 
    # cluing dynamic booleans
-   think_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
+   thought_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
    blurry_tats : dynamic_boolean {(
    (is_at "r5" && (!r5_ready)) ||
    (is_at "r6" && (!r6_ready)) ||
@@ -1213,11 +1213,11 @@ subroutines {
       : set_integer var="counter" "0" ;
       : set_false "think_half_yet" ;
       : if (opt_see_lol) {
-         : while (counter < 12) {
+         : while (counter < max_score) {
             : if ((collection_get{ collection -> ("tried_combo") index -> ( counter )} == "false")) {
                : if (part_word_score > 0) {
                   : if (!think_half_yet) {
-                     : print {( (think_any ? "Also, here" : "Here") + " is what you know from partially correct guessing:" )} ;
+                     : print {( (thought_any ? "Also, here" : "Here") + " is what you know from partially correct guessing:" )} ;
                      : set_true "think_half_yet" ;
                   }
                   : print {( (part_word_score != 2 ? (collection_get{ collection -> ("first_words") index -> (counter) }) : "{noguess}") + " " + (part_word_score >= 2 ? (collection_get{ collection -> ("second_words") index -> (counter) }) : "{noguess}") + " " + (collection_get{ collection -> ("situations") index -> (counter) }) )} ;
@@ -1230,7 +1230,7 @@ subroutines {
             : increment "counter" ;
          }
       }
-      : if (!think_half_yet && !think_any) {
+      : if (!think_half_yet && !thought_any) {
          : print "There's nothing you've currently figured out only partially, whether it's the right phrase and the wrong time, or half of a phrase you need." ;
       }
    }
