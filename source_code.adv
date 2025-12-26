@@ -234,16 +234,17 @@ booleans {
    # game-state booleans (mostly did the player use a certain command) in all EctoComp games
    in_number_choice : boolean "true" ;
    inventory_note : boolean "false" scope="survivor" ;
+   map_x_to_look_note : boolean "false" scope="survivor" ;
    noun_based_noted : boolean "false" scope="survivor" ;
    score_note : boolean "false" scope="survivor";
    showed_first_note : boolean "false" scope="survivor" ;
    take_drop_warn : boolean "false" scope="survivor" ;
+   think_hint_funnel_note : boolean "false" scope="survivor" ;
    wait_yet : boolean "false" scope="survivor" ;
    warn_generic_credit : boolean "false" scope="survivor" ;
    warn_generic_versions : boolean "false" scope="survivor" ;
    win_warn : boolean "false" scope="survivor" ;
    won_yet : boolean "false" scope="survivor" ;
-   think_hint_funnel_note : boolean "false" scope="survivor" ;
 
    # option booleans in all EctoComp games
    opt_see_lol : boolean "true" scope="survivor" ;
@@ -1548,6 +1549,13 @@ on_tick {
       : print "{note_once}{vm_about} will give general game information. {vm_verbs} will describe {this_g}'s stripped-down parser." ;
       : set_true "showed_first_note" ;
       : done ;
+   }
+   : if (!map_x_to_look_note) {
+      : match "x -" {
+         : print "{note_once}<X<#0f0>> by itself will map to examining yourself. It was that or redescribing, but <L<#0f0>> does that." ;
+         : set_true "map_x_to_look_note" ;
+         : done ;
+      }
    }
    : match "i _" {
       : if (me_x_yet) {
