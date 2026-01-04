@@ -1347,16 +1347,8 @@ subroutines {
       : print "" ;
       : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for EctoComp." ;
       : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
-      : gosub "meta_versions_addendum" ;
-   }
-
-   meta_versions_addendum : subroutine {
       : print "" ;
-      : print "If you've found this elsewhere than Itch.io, the original version should be at {l_cdsa}." ;
-      : if (!warn_generic_versions) {
-         : print "{note_once}you can see generic Adventuron version information with <*VERSIONS<#f80>>." ;
-         : set_true "warn_generic_versions" ;
-      }
+      : print "If you've found this elsewhere than Itch.io, the original version should be at {l_dadc}." ;
    }
 
    odd_dir_note : subroutine {
