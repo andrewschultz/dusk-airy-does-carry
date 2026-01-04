@@ -1366,8 +1366,10 @@ subroutines {
    }
 
    one_time_inventory_note : subroutine {
+      : if (!inventory_note) {
+         : print "{note_once}you don't need to use any inventory item explicitly in {this_g}. The right magic phrase will do so and then remove your item from inventory." ;
+      }
       : set_true "inventory_note" ;
-      : print "{note_once}you don't need to use any inventory item explicitly in {this_g}. The right magic phrase will do so and then remove your item from inventory." ;
       : done ;
    }
 
