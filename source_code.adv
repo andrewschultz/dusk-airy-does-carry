@@ -1146,10 +1146,12 @@ subroutines {
             : print "Since you're choosing this option, and you're done here, I'll make a note of that. You can exit, but you can't come back." ;
          }
          : set_true "opt_hone_aye" ;
+         : done ;
       }
       : match "ho nigh" {
-         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisited." )} ;
+         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisit." )} ;
          : set_false "opt_hone_aye" ;
+         : done ;
       }
       : match "hone _" { #noobfus
          : print "{command_stickler} {vo_hone_aye}.";
