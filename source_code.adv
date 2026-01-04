@@ -1273,19 +1273,17 @@ subroutines {
    }
 
    meta_think_first : subroutine {
-      : if (point_glow_bold) {
+      : if (score != 0) {
          : return ;
       }
       : set_integer var="counter" "0" ;
       : if (part_word_score > last_first_puzzle_score) {
-         : print {( "<NOTE<#ff0>>: you have figured out " + (part_word_score == 3 ? "<GLOW BOLD<#f80>> with separate commands, so you can just type it in. If you're not sure why, continue to {vd_think} for the explanation." : (part_word_score == 1 ? "<GLOW<#f80>> as the first word." : "<BOLD<#f80>> as the second word.") ) )} ;
-         : if (part_word_score < 3) {
-            : print "So I'll cut off the game mechanics hints this time, though if you type {vd_think} again, they will proceed." ;
+         : print {( "<NOTE<#ff0>>: you have figured out " + (part_word_score == 3 ? (collection_get{ collection -> ("first_words") index -> (0) }) + " " + (collection_get{ collection -> ("second_words") index -> (0) }) + " with separate commands, so you can just type it in. If you're not sure why, {vd_think} will funnel to {vd_hint} for an explanation." : (part_word_score == 1 ? (collection_get{ collection -> ("first_words") index -> (0) }) + " as the first word." : (collection_get{ collection -> ("second_words") index -> (0) }) + " as the second word.") ) )} ;
+         : if (part_word_score < 3 && !think_hint_funnel_note) {
+            : print "If you type {vd_think} again, your command will be funneled to {vd_hint} with potential spoilers for the first puzzle." ;
          }
-         : set_integer var="last_first_puzzle_score" {( part_word_score )} ;
-         : if (think_hint_funnel_note) {
-            : done ;
-         }
+         : set_true "think_hint_funnel_note" ;
+		 : done ;
       }
       : if (!think_hint_funnel_note) {
          : print "{note_once}small check before I give spoilers. Unless you've scored your first point or made progress towards it since your last {vd_think}, this will funnel into {vd_hint}." ;
