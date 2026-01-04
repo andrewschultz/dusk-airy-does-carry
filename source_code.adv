@@ -1321,10 +1321,20 @@ subroutines {
    }
 
    meta_verbs : subroutine {
+      : print "{this_g} uses the four compass directions, along with <UP<#0f0>> and <DOWN<#0f0>> and <IN<#0f0>> and <OUT<#0f0>>. You need to <X<#0f0>>/<EXAMINE<#0f0>> some items you find. They're in your {vd_inv}, which you can also see with <I<#0f0>>." ;
       : print "To complete {this_g}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
+      : print "<TAKE<#0f0>> and <DROP<#0f0>> are disabled, as the game picks up and removes items for you as needed. {vd_i} still shows them." ;
       : print "There are also meta-verbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_history} shows version history and release dates." ;
       : print {( "{vd_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) )} ;
       : print {( "{vm_options} shows two option commands that follow {this_g}'s mechanic." + (score == 0 && !read_options_yet ? " They may be spoilers or clues for the first puzzle." : "" ) )}  ;
+      : gosub "meta_verbs_star_help_onetime" ;
+   }
+
+   meta_verbs_star_help_onetime : subroutine {
+      : if (!star_help_noted) {
+         : print "{note_once}<*HELP<#0f0>> gives a list of common Adventuron verbs, but it is only so useful here." ;
+         : set_true "star_help_noted" ;
+      }
    }
 
    meta_versions : subroutine {
