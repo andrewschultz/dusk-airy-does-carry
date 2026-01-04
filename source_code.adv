@@ -151,7 +151,7 @@ strings {
    r0_cantgo : dynamic_string {( point_glow_bold ? "The only constructive way out is up." : "It's too dark to see. Bumping around is dangerous." )} ;
 
    r1_header : dynamic_string {( point_dew_nice ? "<Dew (Nice)<#ff0>>" : "{c_dune_ice}" )} ;
-   r1_loc : dynamic_string {( "It's nice and peaceful here, really in touch with nature, with water flowing on one hand and dunes on the other. But the {c_dune_ice} also blocks any passage except back east. " + (point_dew_nice ? ( progress_ale_full ? "You already got enough dew, though." : "Some of the ice has thawed, so you can get a bit of dew once you have a container.") : "") )} ;
+   r1_loc : dynamic_string {( "It's nice and peaceful here, really in touch with nature, with water flowing on one hand and dunes on the other. But the {c_dune_ice} also blocks any passage except back east. " + (point_dew_nice ? ( progress_ale_full ? "You already got enough dew, though, so there's nothing else to do here." : "Some of the ice has thawed, so you can get a bit of dew once you have a container.") : "") )} ;
    r1_cantgo : string "You can only go back east." ;
 
    r2_header : string "<Comp-Lots-Com Plots<#ff0>>" ;
@@ -168,11 +168,11 @@ strings {
 
    r5_header : string "<The \"Scamp, Thus\" Camp<#ff0>>" ;
    r5_loc : string "This camp is at a bit of a crossroads, with passages west and north and east." ;
-   r5_cantgo : string "The only blocked way is back south." ;
+   r5_cantgo : string "{go_nwe}" ;
 
    r6_header : dynamic_string {( point_aid_route ? "<Aid Route<#ff0>>" : "{c_a_drought}" )} ;
    r6_loc : dynamic_string {( point_aid_route ? "This aid route runs east and west, with a passage north, too." : "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here. {c_a_drought} needn't last forever." )} ;
-   r6_cantgo : string "The only blocked way is back south." ;
+   r6_cantgo : string "{go_nwe}" ;
 
    r7_header : string "{c_cave_room}" ;
    r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. It looks pretty handy as well. You sense you need to show you have the energy and ability to use it right. The only exit is back south." )} ;
@@ -183,8 +183,8 @@ strings {
    r8_cantgo : string "This is a north-south passage." ;
 
    r9_header : dynamic_string {( point_why_trains ? "<Why-Trains<#ff0>>" : "{c_wr1}/{c_wr2}" )} ;
-   r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A {c_wr1} here as {c_wr2} fall. It stands next to its scorch-ere-score chair, an intimidating throne indeed!" )} ;
-   r9_cantgo : string "You can go any of the four main directions, or back down." ;
+   r9_loc : dynamic_string {( point_why_trains ? "It's both more peaceful and more lively here with the wight gone. The trains are fostering all kind of commerce and personal interconnection, and that's good for society and so forth. Plus it's just more colorful." : "A {c_wr1} here as {c_wr2} fall. It stands next to its {i_sesc}, an intimidating throne indeed!" )} ;
+   r9_cantgo : string "{go_nwe}. Well, back down, too, though that wouldn't be constructive." ;
 
    noguess : string "{noguess_0}" ;
 
@@ -894,7 +894,7 @@ locations {
          }
          : if (!point_why_trains) {
             : match "_ chair;_ scorch;_ ere;_ score" {
-               : print {( "It looks dangerous. You don't want to disarm it unless you know what you're doing, and the wight isn't watching." + (point_k_vroom ? (think_why_trains ? "But you've guessed what to do before, and since then, you got that tool. Now might be the time!" : " At least you have a tool that might be able to help, but what to do and how to say it?" ) : " You don't even have any implement that might help you." ) )} ;
+               : print {( "It looks dangerous. You don't want to disarm it unless you know what you're doing, and the wight isn't watching." + (point_k_vroom ? (think_why_trains ? " But you've guessed what to do before, and since then, you got that tool. Now might be the time!" : " At least you have a tool that might be able to help, but what to do and how to say it?" ) : " You don't even have any implement that might help you." ) )} ;
                : gosub "note_noun_based" ;
                : done ;
             }
@@ -910,7 +910,7 @@ locations {
                : done ;
             }
             : if (!point_k_vroom) {
-               : print "You don't have the energy yet." ;
+               : print "That might distract the wight, but you don't have any way to take advantage of the distraction yet." ;
                : set_true "think_why_trains" ;
                : gosub "note_thinks" ;
                : done ;
@@ -958,19 +958,19 @@ locations {
 # Defines things in the world (scenery cannot be carried)
 objects {
    # X ME
-   phase_tats : object "{i_fspt}" ;
+   phase_tats : object "some {i_fspt}" ;
 
    # r2
-   dump_ale : object "{i_dpda} ({ale_details})" msg="{dump_ale_description}" ;
+   dump_ale : object "some {i_dpda} ({ale_details})" msg="{dump_ale_description}" ;
 
    # r5
-   coin : object "{i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
+   coin : object "a {i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
 
    # r7
-   tool : object "{i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
+   tool : object "a {i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
 
    # r9
-   chair : object "a scorch-ere-score chair" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
+   chair : object "a {i_sesc}" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
    trains : object "the Y trains" msg="The trains you summoned are running well." conspicuous="false" ;
    wight : object "the wight" msg="Voltage springs from the chair. It seems to be giving the wight energy." at="r9" conspicuous="false" ;
 }
@@ -1077,7 +1077,7 @@ subroutines {
    hint_help : subroutine {
       : if (!point_glow_bold) {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
-            : print "The initial puzzle is the only one that has a specific solution. You can get hints from {tats_hint}." ;
+            : print "The initial puzzle is the only one that has specific in-game help. Repeat this command for the specific help to begin. In general, though, you can get different indirect hints from {tats_hint}." ;
             : print "The globe (old) could be brighter. You need a combination of two words." ;
             : print "The game title, {this_g}, is an example." ;
             : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
@@ -1260,7 +1260,7 @@ subroutines {
       }
       : if (think_k_vroom) {
          : set_boolean var="once_now_boolean" {( r7_ready )} ;
-         : print "You can rock onomatopoeia with {t_k_vroom} {once_now} you have the motivation to look around {here_r7}." ;
+         : print "You can rock onomatopoeia with {t_k_vroom} {once_now} you have the purpose and means to take the tool {here_r7}." ;
       }
       : if (think_why_trains) {
          : set_boolean var="once_now_boolean" {( point_k_vroom )} ;
@@ -1438,7 +1438,7 @@ on_command {
    : gosub "odd_dir_note" ;
    : match "i _" {
       : if (actually_carried == 0) { # This may not be strictly necessary, but I want this code in for reference later, if I want to track "never carried/currently not carrying/no need to carry more"
-         : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : ( ever_found_item ? "You aren't carrying anything, but there's more to find." : "You haven't found anything worth using yet." ) )} ;
+         : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : ( ever_found_item ? "You aren't carrying anything, but there's more to find." : "You haven't found any item(s) worth using yet." ) )} ;
          : gosub "one_time_inventory_note" ;
          : done ;
       }
@@ -1491,7 +1491,7 @@ on_command {
             : print "First words range from 1 to 6 letters. Second words range from 2 to 7. This is the final clue. The clues will now cycle." ;
          }
       }
-      : print "Fill in later." ;
+      : gosub "meta_verbs_star_help_onetime" ;
    }
 
    : match "history _;version _;versions _" {
@@ -1504,7 +1504,7 @@ on_command {
          : print {( "You've also discovered {thought_right_words} command" + (thought_right > 1 ? "s" : "" ) + " you can re-use in the future with stronger preparation." )} ;
       }
       : if (!score_note) {
-         : print "{note_once}score information is tracked in the upper right. Also, {this_g} contains no hidden bonus points" ;
+         : print "{note_once}score information is tracked in the upper right. Also, {this_g} contains no hidden bonus points." ;
          : set_true "score_note" ;
       }
    }
@@ -1524,7 +1524,7 @@ on_command {
    }
    : match "x me;x myself" {
       : if (!me_x_yet) {
-         : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them fey stats/phase-tats." ;
+         : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them {i_fspt}." ;
          : pocket "phase_tats" ;
          : set_true "me_x_yet" ;
       } : else {
