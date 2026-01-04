@@ -24,8 +24,9 @@ strings {
    # game specific strings
    this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
    about_game_specific : string "" ;
+   about_map_notes : string "{this_g} has ten rooms, in a symmetrical triangular shape, with the first being below ground. The map looks like a short branching tree or bush. I wanted to keep it simple, so navigating it did not distract from the puzzles." ;
    placing : string "13th" ;
-   go_nwe : say "You can go north, east or west." ;
+   go_nwe : string "You can go north, east or west." ;
 
    # links
    l_qt : string "<Quirky Test<#0f0>>[http://andrewschultz.itch.io/quirky-test]" ;
@@ -670,7 +671,7 @@ locations {
             : done ;
          }
          : match "_ car;_ cars;_ parts" {
-            : print {( "You need no transportation. " + point_carp_arts ? "You already got something from them." : "Perhaps they could be put in a different form." )} ;
+            : print {( "You need no transportation. " + (point_carp_arts ? "You already got something from them." : "Perhaps they could be put in a different form.") )} ;
          }
          : match "carp _;_ arts" {
             : set_boolean var = "done_already" {( point_carp_arts )} ;
@@ -708,7 +709,7 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
-         if (!point_scam_pill) {
+         : if (!point_scam_pill) {
             : match "_ scamp;_ ill" {
                : print "You won't win a battle of wits, but maybe you'll schmooze enough to get something." ;
             }
@@ -1149,7 +1150,7 @@ subroutines {
          : done ;
       }
       : match "ho nigh" {
-         : print {( "Exits are " + (opt_hone_aye ? "already" : "now") + " all available, even ones you don't need to revisit." )} ;
+         : print {( "Exits are " + (opt_hone_aye ? "now" : "already") + " all available, even ones you don't need to revisit." )} ;
          : set_false "opt_hone_aye" ;
          : done ;
       }
@@ -1286,7 +1287,7 @@ subroutines {
             : print "If you type {vd_think} again, your command will be funneled to {vd_hint} with potential spoilers for the first puzzle." ;
          }
          : set_true "think_hint_funnel_note" ;
-		 : done ;
+         : done ;
       }
       : if (!think_hint_funnel_note) {
          : print "{note_once}small check before I give spoilers. Unless you've scored your first point or made progress towards it since your last {vd_think}, this will funnel into {vd_hint}." ;
