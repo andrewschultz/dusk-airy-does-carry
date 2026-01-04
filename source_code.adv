@@ -23,6 +23,9 @@ game_information {
 strings {
    # game specific strings
    this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
+   about_game_specific : string "" ;
+   placing : string "13th" ;
+   go_nwe : say "You can go north, east or west." ;
 
    # links
    l_qt : string "<Quirky Test<#0f0>>[http://andrewschultz.itch.io/quirky-test]" ;
@@ -38,7 +41,7 @@ strings {
    about_spoiler_flag : dynamic_string {( first_point ? "" : " It also contains names of similar games which may be a spoiler or hint for the first point." )} ;
    command_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
    conditional_score : dynamic_string {( thought_right > 0 ? "+{thought_right}" : "" )} ;
-   custom_unknown_verb_error : dynamic_string {( "Nothing comes of that. {this_g} is largely noun-based, and you can see the reduced verb list with {vm_verbs}." + (score > 0 ? "" : "All point-scoring commands are one-offs and may have a noun or adjective first.") )} ;
+   custom_unknown_verb_error : dynamic_string {( "Nothing comes of that. {this_g} is largely noun-based, and you can see the reduced verb list with {vm_verbs}." + (score > 0 ? "" : " All point-scoring commands are one-offs and may have a noun or adjective first.") )} ; #~
    key_enter : string "the <ENTER<#f88>>/<RETURN<#f88>> key" ;
    my_score : string "{score}{conditional_score}/{max_score}" ;
    noguess_0 : string "<(unknown)<#888>>" ;
@@ -52,11 +55,11 @@ strings {
    # game clue strings
    gb_done : string "<GLOW BOLD<#44f>>" ; #r0
    c_globe_old : string "<globe (old)<#88f>>" ;
-   d_glow_bold : string "<glow (bold)<#ccc>>" ;
+   d_glow_bold : string "<glow (bold)<#db9>>" ;
    c_re_coder : string "<re-coder<#88f>>" ;
-   c_dune_ice : dynamic_string {( point_dew_nice ? "<dune/ice<#ccc>>" : "<dune/ice<#88f>>" )} ;
+   c_dune_ice : dynamic_string {( point_dew_nice ? "<dune/ice<#db9>>" : "<dune/ice<#88f>>" )} ;
    c_bro_code : string "<Bro Code<#88f>>" ;
-   d_bro_code : string "<Bro Code<#ccc>>" ;
+   d_bro_code : string "<Bro Code<#db9>>" ;
    c_blur : string "<blur, blasting<#88f>>" ;
    c_car_parts : dynamic_string {( point_carp_arts ? "<car parts<#ff0>>" : "<car parts<#88f>>" )} ;
    c_scamp_ill : string "<scamp, ill<#88f>>" ;
@@ -69,11 +72,12 @@ strings {
    tats_hint : dynamic_string {( me_x_yet ? "{xtats}" : "something you can find with {xme}" )} ;
 
    # item strings
-   i_blokes : string "<'Stable Oaks, Stay' Blokes<#ccc>>" ;
-   i_coin : string "<coy nickel coin, ickle<#ccc>>" ;
-   i_dpda : string "<Dumb-Pale-Dump Ale<#ccc>>" ;
-   i_fspt : string "<Fey Stats Phase Tats<#ccc>>" ;
-   i_tool : string "<Tool O' \"Too-Low\"<#ccc>>" ;
+   i_blokes : string "<'Stable Oaks, Stay' Blokes<#db9>>" ;
+   i_coin : string "<coy nickel coin, ickle<#db9>>" ;
+   i_dpda : string "<Dumb-Pale-Dump Ale<#db9>>" ;
+   i_fspt : string "<Fey Stats Phase Tats<#db9>>" ;
+   i_sesc : string "<scorch-ere-score chair<#db9>>" ;
+   i_tool : string "<Tool O' \"Too-Low\"<#db9>>" ;
 
    # thinky strings
    t_scam_pill : string "<SCAM PILL<#f80>>" ;
@@ -83,10 +87,10 @@ strings {
    t_wake_up : string "<WAKE UP<#f80>>" ;
 
    # diagnostic verbs
-   vd_hint : string "<HINT<#88f>>/<HINTS<#88f>>/<HELP<#88f>>" ;
-   vd_i : string "<I<#88f>>" ;
-   vd_inv : string "<INVENTORY<#88f>>" ;
-   vd_think : string "<THINK<#88f>>" ;
+   vd_hint : string "<HINT<#f0f>>/<HINTS<#f0f>>/<HELP<#f0f>>" ; #~
+   vd_i : string "<I<#f0f>>" ;
+   vd_inv : string "<INVENTORY<#f0f>>" ;
+   vd_think : string "<THINK<#f0f>>" ;
 
    # options
    vo_seal_all : string "<SEAL ALL<#f0f>>" ;
@@ -100,7 +104,7 @@ strings {
    # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
-   vm_history : string "<HISTORY<#f80>>" ;
+   vm_history : string "<HISTORY<#f80>> / <VERSION(S)<#f80>>" ;
    vm_options : string "<OPTIONS<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
 
