@@ -1209,13 +1209,17 @@ subroutines {
    }
 
    meta_about : subroutine {
-      : print "{this_g} was written for {l_ectocomp} Petite Mort 2025." ;
-      : print "I used Python scripts to generate a lot of the code to keep the development time under 4 hours." ;
-      : print "I'm grateful to the organizers for not having image creation time count against these four hours." ;
-      : print "{this_g} has the same mechanic as two games I wrote in Inform 7: {l_wp} and {l_ut}." ;
-      : print "{this_g} is meant to be a fairly straightforward game with ten rooms and twelve points to score." ;
-      : print "Every point scoring command is an unusual verb, which it is indicated by the location, or something in the location." ;
-      : print "Some text is color-coded. <Green<#0f0>> is a clickable link, and <Orange<#f80>> or purple indicates a verb you can use. <Lavender<#88f>> text clues what to focus on." ;
+      : print "{this_g} is one of three simplified-parser Adventuron games I submitted to EctoComp 2025 Petite Mort (four hours or less of coding.) It placed {placing} of 32 entries.";
+      : print "I used Python scripts to generate a lot of the code to keep the development time under those four hours, and I'm grateful to the organizers for not having image creation time count against these four hours." ;
+      : print "" ;
+      : print "Each puzzle requires a two-word command that riffs on the location or something in location. {this_g} tracks when you've guessed one word right with {vd_think}.{about_game_specific}" ;
+      : print "{this_g} uses a color-coding scheme for game text. Diagnostic verbs are <purple<#f0f>>, while physical verbs are <orange<#f80>>. Puzzle text is <violet<#88f>>, while text that's just for amusement is <tan<#db9>>. Links in <green<#0f0>> open a new tab." ;
+      : print "" ;
+      : print "{about_map_notes}" ;
+      : print "" ;
+      : print "For thanks, {vm_credits}." ;
+      : print {( "For a more detailed history, {vm_history}.{about_spoiler_flag}" )} ;
+      : print "For verbs to use, {vm_verbs}." ;
    }
 
    meta_credits : subroutine {
