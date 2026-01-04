@@ -497,6 +497,11 @@ locations {
             : gosub "note_noun_based" ;
             : done ;
          }
+         : match "_ dune" {
+            : print "It just sits there. It's not, like, a dune ow-do-now or dune i-do-nigh." ;
+            : gosub "note_noun_based" ;
+            : done ;
+         }
          : match "do nice" {
             : print {( "You resolve to be a decent person. This " + (point_dew_nice ? "on top of getting something from the Dune/Ice!" : "almost moves the {c_dune_ice}, but not quite. Perhaps you need more than just spiritual changes. \"Do\" does seem a bit vague.") )} ;
             : collection_modify { collection = "got_first" index -> (1) content -> ("true") ; }
@@ -533,8 +538,8 @@ locations {
    r2 : location "{r2_loc}" header="{r2_header}" graphic="r2_graphic"  {
       on_command {
          : if (!point_broke_ode) {
-            : match "_ code" {
-               : print "The actual content of the Bro Code isn't important. But it's annoying to have here. Stuff like \"No plots? NOPE! LOTS!\" is scrawled on it." ;
+            : match "_ bro;_ code" {
+               : print "The actual content of the Bro Code isn't important. But it's annoying to have here. Stuff like \"No plots? NOPE! LOTS!\" is scrawled on it. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
                : gosub "note_noun_based" ;
                : done ;
             }
@@ -551,13 +556,6 @@ locations {
             : collection_modify { collection = "tried_combo" index -> (2) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
-         }
-         : if (!point_broke_ode) {
-            : match "_ bro;_ code" {
-               : print "The {c_bro_code} seems firmly in place. You see no cracks in its reasoning, which is kind of depressing, because it feels simplistic. But they must be there!" ;
-               : gosub "note_noun_based" ;
-               : done ;
-            }
          }
          : match "broke _;_ ode" {
             : set_boolean var = "done_already" {( point_broke_ode )} ;
@@ -671,6 +669,9 @@ locations {
             : gosub "add_point" ;
             : done ;
          }
+         : match "_ car;_ cars;_ parts" {
+            : print {( "You need no transportation. " + point_carp_arts ? "You already got something from them." : "Perhaps they could be put in a different form." )} ;
+         }
          : match "carp _;_ arts" {
             : set_boolean var = "done_already" {( point_carp_arts )} ;
             : set_integer var="tempint" "4" ;
@@ -706,6 +707,11 @@ locations {
             : collection_modify { collection = "tried_combo" index -> (7) content -> ("true") } ;
             : gosub "add_point" ;
             : done ;
+         }
+         if (!point_scam_pill) {
+            : match "_ scamp;_ ill" {
+               : print "You won't win a battle of wits, but maybe you'll schmooze enough to get something." ;
+            }
          }
          : match "scam _;_ pill" {
             : set_boolean var = "done_already" {( point_scam_pill )} ;
