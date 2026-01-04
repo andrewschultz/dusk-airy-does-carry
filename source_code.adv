@@ -242,11 +242,11 @@ booleans {
    noun_based_noted : boolean "false" scope="survivor" ;
    score_note : boolean "false" scope="survivor";
    showed_first_note : boolean "false" scope="survivor" ;
+   star_help_noted : boolean "false" scope="survivor" ;
    take_drop_warn : boolean "false" scope="survivor" ;
    think_hint_funnel_note : boolean "false" scope="survivor" ;
    wait_yet : boolean "false" scope="survivor" ;
    warn_generic_credit : boolean "false" scope="survivor" ;
-   warn_generic_versions : boolean "false" scope="survivor" ;
    win_warn : boolean "false" scope="survivor" ;
    won_yet : boolean "false" scope="survivor" ;
 
@@ -1083,6 +1083,7 @@ subroutines {
             : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
             : print "{gb_done}. (The hints will cycle now.)" ;
          }
+         : gosub "meta_verbs_star_help_onetime" ;
          : done ;
       }
    }
@@ -1130,6 +1131,7 @@ subroutines {
          }
          : match "restore -" {
             : print "You hear a tune. It could be called a re-load reel/ode, I guess." ;
+            : set_sentence "load" ;
          }
          : match "save -" {
             : print "A ghostly apparition with \"Save? Illun', Say!\" Villain written on its front taunts your very reasonable precaution. But you don't need to listen to such meanies." ;
@@ -1178,7 +1180,6 @@ subroutines {
             : set_true "wait_yet" ;
          }
       }
-
       : match "map _;m _" {
          : set_true "showing_map" ;
          : clear_screen ;
@@ -1243,7 +1244,7 @@ subroutines {
 
    meta_options : subroutine {
       : print "{this_g} has two options." ;
-      : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ;
+      : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ; #~
       : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
       : set_true "read_options_yet" ;
    }
@@ -1492,6 +1493,7 @@ on_command {
          }
       }
       : gosub "meta_verbs_star_help_onetime" ;
+      : done ;
    }
 
    : match "history _;version _;versions _" {
@@ -1522,7 +1524,7 @@ on_command {
    : match "verbs _;verb _" {
       : gosub "meta_verbs" ;
    }
-   : match "x me;x myself" {
+   : match "x me;x myself;x -" {
       : if (!me_x_yet) {
          : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them {i_fspt}." ;
          : pocket "phase_tats" ;
