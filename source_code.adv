@@ -140,7 +140,7 @@ strings {
       )} ;
 
    # items
-   dump_ale_description : dynamic_string {( point_dew_nice ? "Full of dew, ready to hydrate." : "Well, actually, it's empty. But the recoder mentioned it had extra capacity. What to fill it with?" )} ;
+   dump_ale_description : dynamic_string {( progress_ale_full ? "Full of dew, ready to hydrate." : "Well, actually, it's empty. But the recoder mentioned it had extra capacity. What to fill it with?" )} ;
    ale_details : dynamic_string {( (progress_ale_full ? "full" : "empty" ) )} ;
 
    # scenery reused
@@ -509,7 +509,12 @@ locations {
             : gosub "reject_half_note" ;
             : done ;
         }
-         : match "dew nice" {
+        : if (point_dew_nice) {
+           : match "_ dew" {
+              : print {( progress_ale_full ? "You've gotten the dew you need." : "There's so much dew, maybe it could be shared somewhere else that needs it." )} ;
+           }
+        }
+        : match "dew nice" {
             : if (point_dew_nice) {
                : print {( "There " + (progress_ale_full ? "was" : "is") + " already enough dew to collect if and when you need it." )} ;
                : done ;
