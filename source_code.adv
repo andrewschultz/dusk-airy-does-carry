@@ -750,7 +750,7 @@ locations {
          }
          : if (!point_aid_route) {
             : match "_ rout" {
-               : print "Very, VERY close on the second word. 80%% in fact. But, to be pedantic, the rout will be just to the west." ;
+               : print "Very, VERY close on the second word. 80%%, in fact. But, to be pedantic, the rout will be just to the west." ;
                : match "aid rout" {
                   : print "It seems like you'll need aid, or an aide, though." ;
                   : collection_modify { collection = "got_first" index -> (8) content -> ("true") ; }
@@ -1220,7 +1220,7 @@ subroutines {
 
    note_thinks : subroutine {
       : if (!think_note_yet) {
-         : print "{note_once}{vd_think} will track any command that will score points at a later time. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
+         : print "{note_once}{vd_think} will track any command that you need to retry later, after preparation. Also, the status line in the upper left will show +1 or more, for commands you've guessed right but still need prep for." ;
          : set_true "think_note_yet" ;
       }
    }
@@ -1324,7 +1324,7 @@ subroutines {
                   }
                   : print {( (part_word_score != 2 ? (collection_get{ collection -> ("first_words") index -> (counter) }) : "{noguess}") + " " + (part_word_score >= 2 ? (collection_get{ collection -> ("second_words") index -> (counter) }) : "{noguess}") + " " + (collection_get{ collection -> ("situations") index -> (counter) }) )} ;
                   : if (!solved_both_parts_nag && part_word_score == 3) {
-                     : print "{note_once}You have figured each half of a point-scoring command, but you haven't typed them both together. That still might not work if you haven't prepared by solving other puzzles, but if that's the case, {vd_think} will remind you with contest until it does." ;
+                     : print "{note_once}You have figured each half of a point-scoring command, but you haven't typed them both together. That still might not work if you haven't prepared by solving other puzzles, but if that's the case, {vd_think} will remind you with context until it does." ;
                      : set_true "solved_both_parts_nag" ;
                   }
                }
@@ -1338,11 +1338,11 @@ subroutines {
    }
 
    meta_verbs : subroutine {
-      : print "{this_g} uses the four compass directions, along with <UP<#0f0>> and <DOWN<#0f0>> and <IN<#0f0>> and <OUT<#0f0>>. You need to <X<#0f0>>/<EXAMINE<#0f0>> some items you find. They're in your {vd_inv}, which you can also see with <I<#0f0>>." ;
-      : print "To complete {this_g}, you only need the four compass directions (well, the exit from the first room is up) and the twelve special commands clued by descriptions." ;
-      : print "<TAKE<#0f0>> and <DROP<#0f0>> are disabled, as the game picks up and removes items for you as needed. {vd_i} still shows them." ;
+      : print "{this_g} uses the four compass directions, along with <UP<#0f0>> and <DOWN<#0f0>> and <IN<#0f0>> and <OUT<#0f0>>." ;
+      : print "<TAKE<#0f0>> and <DROP<#0f0>> are disabled, as the game picks up and removes items for you as needed. {vd_inv}, which can be abbreviated with {vd_i}, still shows them. You can <X<#0f0>>/<EXAMINE<#0f0>> these items if you wish." ;
+      : print "To complete {this_g}, you only need to move about the map and find the twelve special commands clued by descriptions." ;
       : print "There are also meta-verbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_history} shows version history and release dates." ;
-      : print {( "{vd_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) )} ;
+      : print {( "{vd_think} notes commands you've figured but couldn't quite use yet. {vd_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) + " {vd_score}, or the upper right header, tracks your score." )} ;
       : print {( "{vm_options} shows two option commands that follow {this_g}'s mechanic." + (score == 0 && !read_options_yet ? " They may be spoilers or clues for the first puzzle." : "" ) )}  ;
       : gosub "meta_verbs_star_help_onetime" ;
    }
@@ -1362,7 +1362,7 @@ subroutines {
       : print "" ;
       : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
       : print "" ;
-      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for EctoComp." ;
+      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for {l_ectocomp} 2025 Petite Mort, where it placed {placing}." ;
       : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
       : print "" ;
       : print "If you've found this elsewhere than Itch.io, the original version should be at {l_dadc}." ;
