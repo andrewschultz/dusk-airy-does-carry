@@ -649,6 +649,10 @@ locations {
                : gosub "add_point" ;
                : done ;
             }
+            : match "_ hippo;_ lion;_ seal;_ panda;_ bear;_ giraffe;_ elephant" {
+               : print "You have fun time with one animal and then can't resist being fair and having fun with the rest. It's a worthwhile relaxing diversion." ;
+               : done ;
+            }
             : match "blurb _;_ lasting" {
                : set_boolean var = "done_already" {( point_blurb_lasting )} ;
                : set_integer var="tempint" "6" ;
@@ -875,6 +879,10 @@ locations {
             }
             : set_true "won_yet" ;
             : win_game ;
+         }
+         : match "_ cup" {
+            : print {( "The cup, well, it's just sort of THERE. You can't move it. " + (think_wake_up ? "You figured what to do with it." : "There's something important to do with it, though, to end things." ) )} ;
+            : done ;
          }
          : match "wake _;_ up" {
             : set_boolean var = "done_already" {( point_wake_up )} ;
@@ -1445,6 +1453,12 @@ on_command {
    : gosub "check_odd_verbs" ;
    : gosub "check_options" ;
    : gosub "odd_dir_note" ;
+   : if (is_carried "dump_ale") {
+      : match "_ ale" {
+         : set_boolean var="once_now_boolean" {( progress_ale_full )} ;
+         : print "You don't need to drink it by yourself. Perhaps you'll want to share it, {once_now} it's full." ;
+      }
+   }
    : match "i _" {
       : if (actually_carried == 0) { # This may not be strictly necessary, but I want this code in for reference later, if I want to track "never carried/currently not carrying/no need to carry more"
          : print {( point_why_trains ? "You are as empty-handed as you started. Time to go back home!" : ( ever_found_item ? "You aren't carrying anything, but there's more to find." : "You haven't found any item(s) worth using yet." ) )} ;
