@@ -89,8 +89,9 @@ strings {
 
    # diagnostic verbs
    vd_hint : string "<HINT<#f0f>>/<HINTS<#f0f>>/<HELP<#f0f>>" ; #~
-   vd_i : string "<I<#f0f>>" ;
+   vd_i : string "<I<#f0f>> / <INV<#f0f>>" ;
    vd_inv : string "<INVENTORY<#f0f>>" ;
+   vd_score : string "<SCORE<#f0f>>" ;
    vd_think : string "<THINK<#f0f>>" ;
 
    # options
@@ -1249,7 +1250,7 @@ subroutines {
    meta_credits_general : subroutine {
       : print "" ;
       : print "<GENERAL THANKS<#f80>>:" ;
-      : print "Thanks to the administrators <Ruber Eaglenest<#0f0>>[https://rubereaglenest.itch.io], <Alyshkalia<#0f0>>[https://alyshkalia.itch.io] and <Passerine<#0f0>>[https://passerine.itch.io] for holding {l_ectocomp}, as well as former administrators like JJ Guest and Duncan Bowsman." ;
+      : print "Thanks to the administrators <Alyshkalia<#0f0>>[https://alyshkalia.itch.io], <Passerine<#0f0>>[https://passerine.itch.io], and <Ruber Eaglenest<#0f0>>[https://rubereaglenest.itch.io] for holding {l_ectocomp}, as well as former administrators like <Duncan Bowsman<#0f0>>[https://stringwizard.itch.io] and <JJ Guest<#0f0>>[https://j-j-guest.itch.io/]." ;
       : print "Thanks to Chris Ainsley for creating <Adventuron<#0f0>>[https://adventuron.itch.io/]." ;
       : print "Blanket thanks to Python and its developers for scripts that helped me generate similar code (point scoring, etc.) quickly." ;
       : if (!warn_generic_credit) {
@@ -1261,7 +1262,7 @@ subroutines {
    meta_options : subroutine {
       : print "{this_g} has two options." ;
       : print "{vo_hone_aye} and {vo_ho_nigh} toggle blocking passage to rooms you're done with." ; #~
-      : print "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." ;
+      : print {( "{vo_see_lol} and {vo_seal_all} toggle whether {vd_think} will show specific words you've guessed right." + (read_options_yet ? "" : " The default is {vo_see_lol}, which records those guesses." ) )} ;
       : set_true "read_options_yet" ;
    }
 
@@ -1333,7 +1334,7 @@ subroutines {
          }
       }
       : if (!think_half_yet && !thought_any) {
-         : print "There's nothing you've currently figured out only partially, whether it's the right phrase and the wrong time, or half of a phrase you need." ;
+         : print "There are no point-scoring commands you've only figured partially. That includes both full phrases you figured before solving other puzzles they depended on and half-phrases you figured with the {vo_see_lol} option active." ;
       }
    }
 
