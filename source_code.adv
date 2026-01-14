@@ -972,8 +972,7 @@ locations {
 
 # Defines things in the world (scenery cannot be carried)
 objects {
-   # X ME
-   phase_tats : object "some {i_fspt}" ;
+   # note PHASE TATS are implicitly understood object
 
    # r2
    dump_ale : object "some {i_dpda} ({ale_details})" msg="{dump_ale_description}" ;
@@ -1550,7 +1549,6 @@ on_command {
    : match "x me;x myself;x -" {
       : if (!me_x_yet) {
          : print "Weird. You see some numbers on your arm that seem to morph a bit. Perhaps they can help in some way. Let's call them {i_fspt}." ;
-         : pocket "phase_tats" ;
          : set_true "me_x_yet" ;
       } : else {
          : print "Nothing on you but the tats which can give hints." ;
