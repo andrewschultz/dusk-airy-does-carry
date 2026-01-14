@@ -532,7 +532,7 @@ locations {
                : print {( "There " + (progress_ale_full ? "was" : "is") + " already enough dew to collect if and when you need it." )} ;
                : done ;
             }
-            : print {( "The ice melts bit, leaving dew beneath it." + (point_reek_odor ? "" : " It might be nice to bottle, but you have no container yet.") )} ;
+            : print {( "The ice melts a bit, leaving dew beneath it." + (point_reek_odor ? "" : " It might be nice to bottle, but you have no container yet.") )} ;
             : set_true "point_dew_nice" ;
             : collection_modify { collection = "tried_combo" index -> (1) content -> ("true") } ;
             : gosub "add_point" ;
@@ -850,7 +850,7 @@ locations {
             : set_boolean var = "think_already" {( think_k_vroom && !point_k_vroom )} ;
             : set_integer var="tempint" "9" ;
             : set_false "first_half" ;
-            : match "aid _" {
+            : match "k _" {
                : set_true "first_half" ;
             }
             : gosub "reject_half" ;
