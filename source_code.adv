@@ -1118,9 +1118,10 @@ subroutines {
       : if (!point_glow_bold) {
          : cycle key = "help_first" predictable_order = "true" skip_interval = "0" {
             : print "The initial puzzle is the only one that has specific in-game help. Repeat this command for the specific help to begin. In general, though, you can get different indirect hints from {tats_hint}." ;
-            : print "The globe (old) could be brighter. You need a combination of two words." ;
-            : print "The game title, {this_g}, is an example." ;
-            : print "It's two words strung together with the same pronunciation. Do this with the globe." ;
+            : print "The globe (old) could be brighter. You need a combination of two words. There's a reason old isn't the first word." ;
+            : print "The game title, {this_g}, gives a clue what is required." ;
+            : print "So does the first room name, {r0_header}." ;
+            : print "You are looking for two words strung together with the same pronunciation globe (old)." ;
             : print "{gb_done}. (The hints will cycle now.)" ;
          }
          : gosub "meta_verbs_star_help_onetime" ;
