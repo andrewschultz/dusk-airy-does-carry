@@ -631,7 +631,7 @@ locations {
             : match "_ zeus" {
                : print "Zeus, if he exists, is probably too busy to help you. What sounds like Zeus? Maybe a bit more friendly and a bit less omnipotent?" ;
                : match "whee zeus" {
-                  : print "But feeling upbeat seems to make the ooze shudder. So you should keep that." ;
+                  : print "But feeling upbeat when trying to minimize the ooze seems to work nicely. So you must be halfway there." ;
                   : collection_modify { collection = "got_first" index -> (5) content -> ("true") ; }
                }
                : done ;
@@ -665,7 +665,7 @@ locations {
                   : print "Once the blurb got in your brain, it was already sure to last." ;
                   : done ;
                }
-               : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive. Nothing too pompous of course. But it makes you happy and gives you confidence and ideas for other ways to seem slick in conversation." ;
+               : print "Staring at the blur, you figure out a pretty catchy jingle, both for visiting the zoo and for making yourself seem kind of impressive. Nothing too pompous of course.\nYou take the parts you like and leave the bad stuff.\nThis makes you happy and gives you confidence and ideas for other ways to seem slick in conversation." ;
                : set_true "point_blurb_lasting" ;
                : collection_modify { collection = "tried_combo" index -> (6) content -> ("true") } ;
                : gosub "add_point" ;
