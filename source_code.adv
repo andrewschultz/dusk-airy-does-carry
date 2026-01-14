@@ -66,6 +66,7 @@ strings {
    c_car_parts : dynamic_string {( point_carp_arts ? "<car parts<#ff0>>" : "<car parts<#88f>>" )} ;
    c_scamp_ill : string "<scamp, ill<#88f>>" ;
    c_a_drought : string "<A drought<#88f>>" ;
+   c_eh_drought : string "<Eh, drought<#88f>>" ;
    c_wheeze : string "<wheeze-ooze<#88f>>" ;
    c_cave_room : dynamic_string {( point_k_vroom ? "<cave room<#ff0>>" : "<cave room<#88f>>" )} ;
    c_whey_cup : string "<whey cup<#88f>>" ;
@@ -175,8 +176,8 @@ strings {
    r5_loc : string "This camp is at a bit of a crossroads, with passages west and north and east." ;
    r5_cantgo : string "{go_nwe}" ;
 
-   r6_header : dynamic_string {( point_aid_route ? "<Aid Route<#ff0>>" : "{c_a_drought}" )} ;
-   r6_loc : dynamic_string {( point_aid_route ? "This aid route runs east and west, with a passage north, too." : "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here. {c_a_drought} needn't last forever." )} ;
+   r6_header : dynamic_string {( point_aid_route ? "<Aid Route<#ff0>>" : "{c_a_drought} (\"{c_eh_drought}\")" )} ;
+   r6_loc : dynamic_string {( point_aid_route ? "This aid route runs east and west, with a passage north, too." : "On this dry land, there's passage north and east and west to perhaps more habitable areas. But maybe you can change what's here. {c_eh_drought}, you muse ... {c_a_drought} needn't last forever. " )} ;
    r6_cantgo : string "{go_nwe}" ;
 
    r7_header : string "{c_cave_room}" ;
