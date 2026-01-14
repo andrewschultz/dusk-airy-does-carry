@@ -25,6 +25,7 @@ strings {
    this_g : string "<Dusk, Airy, Does Carry<#f80>>" ;
    about_game_specific : string "" ;
    about_map_notes : string "{this_g} has ten rooms, in a symmetrical triangular shape, with the first being below ground. The map looks like a short branching tree or bush. I wanted to keep it simple, so navigating it did not distract from the puzzles." ;
+   first_point_compare : string "the only visible object nearby" ;
    placing : string "13th" ;
    go_nwe : string "You can go north, east or west." ;
 
@@ -1324,7 +1325,10 @@ subroutines {
          : print {( "<NOTE<#ff0>>: you have figured out " + (part_word_score == 3 ? (collection_get{ collection -> ("first_words") index -> (0) }) + " " + (collection_get{ collection -> ("second_words") index -> (0) }) + " with separate commands, so you can just type it in. If you're not sure why, {vd_think} will funnel to {vd_hint} for an explanation." : (part_word_score == 1 ? (collection_get{ collection -> ("first_words") index -> (0) }) + " as the first word." : (collection_get{ collection -> ("second_words") index -> (0) }) + " as the second word.") ) )} ;
          : if (part_word_score < 3 && !think_hint_funnel_note) {
             : print "If you type {vd_think} again, your command will be funneled to {vd_hint} with potential spoilers for the first puzzle." ;
+         } : else_if (part_word_score < 3) {
+            : print "Compare that word with {first_point_compare}, and you may find another word that fits." ;
          }
+         : set_integer var="last_first_puzzle_score" {( part_word_score )} ;
          : set_true "think_hint_funnel_note" ;
          : done ;
       }
