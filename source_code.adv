@@ -40,7 +40,7 @@ strings {
    l_talp : string "<Text Adventure Literacy Jam 2025<#0f0>>[https://itch.io/jam/talp2025]" ;
 
    # EctoComp general strings
-   about_spoiler_flag : dynamic_string {( first_point ? "" : " It also contains names of similar games which may be a spoiler or hint for the first point." )} ;
+   about_spoiler_flag : dynamic_string {( first_point ? "" : " The history also contains names of similar games which may be a spoiler or hint for the first point." )} ;
    command_stickler : string "I'm going to be a stickler and enforce the spirit of the game on you and make you type " ;
    conditional_score : dynamic_string {( thought_right > 0 ? "+{thought_right}" : "" )} ;
    custom_unknown_verb_error : dynamic_string {( "Nothing comes of that. {this_g} is largely noun-based, and you can see the reduced verb list with {vm_verbs}." + (score > 0 ? "" : " All point-scoring commands are one-offs and may have a noun or adjective first.") )} ; #~
@@ -161,7 +161,7 @@ strings {
    r1_cantgo : string "You can only go back east." ;
 
    r2_header : string "<Comp-Lots-Com Plots<#ff0>>" ;
-   r2_loc : dynamic_string {( "A small techie-corp office.\n" + ( point_reek_odor ? "The area is empty now that you disposed of the recoder." : point_broke_ode ? "A {c_re_coder} sits here programming now, trying frantically to reconstruct the {d_bro_code} from a broke ode." : " You're here alone for the moment. A {c_bro_code} is on the wall." ) + "\nThe only viable exit is south." )} ;
+   r2_loc : dynamic_string {( "A small techie-corp office.\n" + ( point_reek_odor ? "The area is empty now that you disposed of the recoder." : point_broke_ode ? "A {c_re_coder} sits here programming now, trying frantically to reconstruct the {d_bro_code} from a broke ode." : "You're here alone for the moment. A {c_bro_code} is on the wall." ) + "\nThe only viable exit is south." )} ;
    r2_cantgo : string "You can only go back south. Okay, you could go further into the office, but that'd get you arrested." ;
 
    r3_header : dynamic_string {( point_whee_zoos ? "<Whee! Zoos!<#ff0>>" : "{c_wheeze}" )} ;
@@ -181,7 +181,7 @@ strings {
    r6_cantgo : string "{go_nwe}" ;
 
    r7_header : string "{c_cave_room}" ;
-   r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground, and you can't just waltz in and take it. It looks pretty handy as well. You sense you need to show you have the energy and ability to use it right. The only exit is back south." )} ;
+   r7_loc : dynamic_string {( point_k_vroom ? "This cave is empty now you got the {i_tool}. There don't seem to be any secret passages, so south is the only way." : "Here in this cave you see a handy looking tool, specifically a {i_tool}, in the center. Maybe it's not totally an Excalibur in the stone sort of thing, but it does seem like it's stuck to the ground. How to remove it is part of the mystery of this otherwise-plain {c_cave_room}.\n" + (think_k_vroom ? "You figured what to say to get it, but you weren't prepared then." : tool_examined ? "Examining it gave some clue of the sort of words or things needed to acquire it." : "It might be worth examining the tool to see how to pry it away.") + " The only exit is back south." )} ;
    r7_cantgo : string "You can only go back south." ;
 
    r8_header : string "<Fail-And-Fey Land<#ff0>>" ;
@@ -694,7 +694,7 @@ locations {
                : print "You gained no further insight into linguistic gymnastics. You found everything pretty much the first time." ;
                : done ;
             }
-            : print "While you're not sure what a bunch of renderings of fish could do, you sort of hope for them anyway. You get something unexpected: revelations for conversational tricks not only to make yourself seem more impressive than others, but to feel less unimpressive in the presence of people who puff themselves out a bit too much." ;
+            : print "While you're not sure what a bunch of renderings of fish could do, you sort of hope for them anyway. You get something unexpected: revelations for conversational tricks not only to make yourself seem more impressive than others, but to feel less unimpressive in the presence of people who puff themselves out a bit too much.\nMaybe it is more to prevent carping than to be able to carp, but it's still more practical than some painting!" ;
             : set_true "point_carp_arts" ;
             : collection_modify { collection = "tried_combo" index -> (4) content -> ("true") } ;
             : gosub "add_point" ;
@@ -729,7 +729,7 @@ locations {
                : done ;
             }
             : print "You walk up to the scamp. Thanks to the blurb (lasting) and carp arts, any lack of confidence is buried. You say you're ready to help help other people, at least people who are willing to help themselves, and if not, well, they deserve to get scammed, and if they learn something from how they get scammed, that is helping them in a way, too, unless they're unwilling to reflect how they should've done better." ;
-            : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it. So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
+            : print "\"I like how you talk,\" the scamp says. \"You know, I'd like to get you started in our company. But there's talking and doing. Before you get your first bottle of scam pills, you'll need to show that you can be an entrepreneur building something from something useless. Like this coin! Someone told me it was useful in the right situation, but I always found it useless. They said it required a certain something, and it would take someone with something special to do something with it.\n\"So you think you're not completely boring, right? Maybe you can do something with it.\" Next thing you know, a coin's in your hand and the scamp's back in the big tent, saying, \"Don't come back without results!\"" ;
             : print "You look at the coin. It is a {i_coin}." ;
             : pocket "coin" ;
             : set_true "ever_found_item" ;
@@ -1154,7 +1154,7 @@ subroutines {
 
    ale_fill_check : subroutine {
       : if (can_fill_ale) {
-         : print "With the dew flowing and the empty {i_dpda}, you have an idea. You can fill the {i_dpda} with dew to see if, indeed, it really does have increased capacity! It most certainly does." ;
+         : print "With the dew flowing and the empty {i_dpda}, you have an idea. You can fill the {i_dpda} with dew to see if, indeed, it really does have increased capacity!\nIt most certainly does. You now have a full bottle of ale." ;
          : set_true "progress_ale_full" ;
       }
    }
@@ -1268,6 +1268,7 @@ subroutines {
       : print "Game-specific thanks:" ;
       : print "Thanks to <Allyson Gray<#0f0>>[https://zophobas-morio.itch.io/] for testing." ; #~
       : print "Thanks to <Wade Clarke<#0f0>>[https://wade-clarke.itch.io] for finding bugs during the comp." ; #~
+      : print "Thanks to <Hidnook<#0f0>>[https://hidnook.itch.io] for testing release 3." ; #~
       : gosub "meta_credits_general" ;
    }
 
@@ -1366,9 +1367,9 @@ subroutines {
       : print "{this_g} uses the four compass directions, along with <UP<#0f0>> and <DOWN<#0f0>> and <IN<#0f0>> and <OUT<#0f0>>." ;
       : print "<TAKE<#0f0>> and <DROP<#0f0>> are disabled, as the game picks up and removes items for you as needed. {vd_inv}, which can be abbreviated with {vd_i}, still shows them. You can <X<#0f0>>/<EXAMINE<#0f0>> these items if you wish." ;
       : print "To complete {this_g}, you only need to move about the map and find the twelve special commands clued by descriptions." ;
-      : print "There are also meta-verbs: {vm_about} gives general information, {vm_credits} gives credits, and {vm_history} shows version history and release dates." ;
       : print {( "{vd_think} notes commands you've figured but couldn't quite use yet. {vd_hint} gives " + ( !point_glow_bold ? "progressive hints to get the first point." : "an explanation of how to interpret hints from {tats_hint}." ) + " {vd_score}, or the upper right header, tracks your score." )} ;
       : print {( "{vm_options} shows two option commands that follow {this_g}'s mechanic." + (score == 0 && !read_options_yet ? " They may be spoilers or clues for the first puzzle." : "" ) )}  ;
+      : print "You can learn about {this_g}'s creation with {vm_about}, {vm_credits} and {vm_history}." ;
       : gosub "meta_verbs_star_help_onetime" ;
    }
 
@@ -1597,7 +1598,7 @@ on_command {
       : done ;
    }
    : if (me_x_yet) {
-      : match "_ tats;_ fey;_ phase;_ stats" {
+      : match "_ tats;_ fey;_ phase;_ stats;_ phase-tats;_ fey-stats" {
          : if (tats_number == 0) {
             : print "The tats show nothing." ;
             : done ;
