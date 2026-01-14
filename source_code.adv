@@ -79,6 +79,7 @@ strings {
    i_fspt : string "<Fey Stats Phase Tats<#db9>>" ;
    i_sesc : string "<scorch-ere-score chair<#db9>>" ;
    i_tool : string "<Tool O' \"Too-Low\"<#db9>>" ;
+   dynamic_tool_description : dynamic_string {( point_k_vroom || think_k_vroom ? "The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. You figured the phrase to summon it, and hopefully you'll figure how to use it when the time comes." : "It is encrusted, not with scary profound ancient letters, but slang and onomatopoeia and acronyms too numerous to list here. Which is a relief, sort of. You probably won't need any ten-letter words." )} ;
 
    # thinky strings
    t_scam_pill : string "<SCAM PILL<#f80>>" ;
@@ -299,6 +300,10 @@ booleans {
    think_k_vroom : boolean "false" ; #r7
    think_why_trains : boolean "false" ; #r9
    think_wake_up : boolean "false" ; #r8
+
+   # fiddly stuff with tool clueing
+   tool_examined : boolean "false" ;
+   tried_y : boolean "false" ;
 
    # cluing dynamic booleans
    know_final_command : dynamic_boolean {( won_yet || (collection_get{ collection -> ("got_first") index -> ( 11 )} == "true" || think_wake_up ) )} ;
@@ -981,7 +986,7 @@ objects {
    coin : object "a {i_coin}" msg="Well, you can't say it doesn't have truth in advertising. Whatever joker designed it must not have thought things out too clearly. Or maybe they did, hoping the flaw would make it worth a million bucks or something down the line. But if they did, why, they didn't think out holding onto it too clearly. Still, it's yours now, and hopefully it's useful somewhere." ;
 
    # r7
-   tool : object "a {i_tool}" msg="The {i_tool} is an odd combination of a saw, spoon, saw, corkscrew, knife, wrench and pen. Hopefully you'll figure how to use it when the time comes." at="r7" conspicuous="false" ;
+   tool : object "a {i_tool}" msg="(description in main on_command)" at="r7" conspicuous="false" ;
 
    # r9
    chair : object "a {i_sesc}" msg="Voltage springs from the chair. It seems to be giving the wight energy. Perhaps with the proper tools, you could dismantle it." at="r9" conspicuous="false" ;
@@ -1457,6 +1462,12 @@ on_command {
       : match "_ ale" {
          : set_boolean var="once_now_boolean" {( progress_ale_full )} ;
          : print "You don't need to drink it by yourself. Perhaps you'll want to share it, {once_now} it's full." ;
+      }
+   }
+   : if (is_carried "tool" || (is_at "r7" && !point_k_vroom)) {
+      : match "_ tool;_ handy;_ low;_ too" {
+         : print "{dynamic_tool_description}" ;
+         : set_true "tool_examined" ;
       }
    }
    : match "i _" {
