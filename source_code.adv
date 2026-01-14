@@ -37,6 +37,7 @@ strings {
    l_gsgr : string "<Go-Strange-Ghost Range<#0f0>>[http://andrewschultz.itch.io/go-strange-ghost-range]" ;
    l_ectocomp : string "<EctoComp<#0f0>>[http://itch.io/jam/ectocomp-2025]" ;
    l_ifcomp : string "<IFComp<#0f0>>[http://ifcomp.org]" ;
+   l_talp : string "<Text Adventure Literacy Jam 2025<#0f0>>[https://itch.io/jam/talp2025]" ;
 
    # EctoComp general strings
    about_spoiler_flag : dynamic_string {( first_point ? "" : " It also contains names of similar games which may be a spoiler or hint for the first point." )} ;
@@ -107,9 +108,10 @@ strings {
    # meta-verbs
    vm_about : string "<ABOUT<#f80>>" ;
    vm_credits : string "<CREDITS<#f80>>" ;
-   vm_history : string "<HISTORY<#f80>> / <VERSION(S)<#f80>>" ;
+   vm_history : string "<HISTORY<#f80>>" ;
    vm_options : string "<OPTIONS<#f80>>" ;
    vm_verbs : string "<VERBS<#f80>>" ;
+   vm_versions : string "<VERSION(S)<#f80>>" ;
 
    ####GAME SPECIFIC
 
@@ -1359,16 +1361,19 @@ subroutines {
       }
    }
 
-   meta_versions : subroutine {
+   meta_history : subroutine {
       : print {( "{this_g} came about after {l_gsgr} and {l_cdsa}, as I figured I had enough ideas to make a third EctoComp Petite Mort game with a quality baseline. But I wanted to try something new technically. This is " + ( won_yet ? "the sky slowly getting brighter in each outside room with each point you claim." : "revealed on winning." ) )} ;
-      : print "" ;
       : print {( "It's probably the least Halloweeny of the lot, given that it's leftovers from two other stories, but there's a -- oh, a poke at the sort of ending you should never write in static fiction." + (know_final_command ? " (As you already guessed, the \"It was all a dream\" sort of ending.)" : "" ) )} ;
       : print "I also wanted the map to be a bit easier to memorize than {l_cdsa}'s, as well as the puzzle logic structure, so I could implement {vo_hone_aye} and {vo_ho_nigh} in-comp. They have the same number of rooms, but I think this is easier to navigate." ;
-      : print "" ;
       : print "So, yes, each of {this_g} and {l_cdsa} and {l_dadc} had unique features for EctoComp that I merged into all of them post-comp." ;
-      : print "" ;
+      : print "Predecessors include {l_wp} and {l_ut} with the same mechanic, both written in Inform 7 for {l_ifcomp} 2024 and 2025, respectively. {l_qt}, my first Adventuron game and a {l_talp} entrant, has a different twist, but while writing it, I made code-generation scripts which helped development time stay under four hours here." ;
+      : print "{vm_versions} gives information about release dates." ;
+   }
+
+   meta_versions : subroutine {
       : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for {l_ectocomp} 2025 Petite Mort, where it placed {placing}." ;
       : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
+      : print "Version 3, which focused on a more expansive THINK and general narrative tweaks, was published on January 14, 2025." ;
       : print "" ;
       : print "If you've found this elsewhere than Itch.io, the original version should be at {l_dadc}." ;
    }
@@ -1529,7 +1534,11 @@ on_command {
       : done ;
    }
 
-   : match "history _;version _;versions _" {
+   : match "history _" {
+      : gosub "meta_history" ;
+   }
+
+   : match "version _;versions _" {
       : gosub "meta_versions" ;
    }
 
