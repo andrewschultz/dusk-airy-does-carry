@@ -1390,9 +1390,9 @@ subroutines {
    }
 
    meta_versions : subroutine {
-      : print "Version 1 was written starting September 23, 2025. It was published October 30, 2025 for {l_ectocomp} 2025 Petite Mort, where it placed {placing}." ;
-      : print "Version 2 was published after EctoComp finished, on November 30, 2025." ;
-      : print "Version 3, which focused on a more expansive THINK and general narrative tweaks, was published on January 14, 2025." ;
+      : print "<Version 1<#ff0>> was written starting September 23, 2025. It was published October 30, 2025 for {l_ectocomp} 2025 Petite Mort, where it placed {placing}." ;
+      : print "<Version 2<#ff0>> was published after EctoComp finished, on November 30, 2025." ;
+      : print "<Version 3<#ff0>> was published January 14, 2026. Its main feature is to track half-right guesses, but it also has general improvements thanks to testers' feedback. I don't foresee any other major versions." ;
       : print "" ;
       : print "If you've found this elsewhere than Itch.io, the original version should be at {l_dadc}." ;
    }

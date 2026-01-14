@@ -1,5 +1,19 @@
 Fixes/development log
 
+Version 3.0.0 published to Itch December 14, 2025
+--features synced with my other two EctoComp 2025 games, with lots of code reorganization
+  --this includes responses to standard verbs like Z, TAKE, DROP, LOAD, SAVE, RESTORE, RESTART as well as in-game MAPs
+--many more nouns/adjectives implemented, with note that the parser is noun-based and you don't need to use lots of verbs on a noun
+--THINK now tracks half-figured puzzles and notifies you if you got one half, then another
+--THINK funnels to HINT (for first puzzle) before first point unless you've made progress on first point
+--INVENTORY upgrade to indicate your friends, since this game has no items
+--OPTIONS verb now split off
+--more explanation of one-letter puzzle(s)
+--cued preferred pronunciation of one room better
+--VERSIONS/HISTORY split off
+--X - now maps to X ME, with a note
+--*HELP/*CREDITS standard Adventuron commands noted
+
 Version 2.0.0 published to Itch December 2, 2025
 --fixed graphical bug where X COIN ruined all future graphics
 --in-game MAP, with red lines if HONE AYE is active
