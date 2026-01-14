@@ -310,7 +310,7 @@ booleans {
 
    # cluing dynamic booleans
    know_final_command : dynamic_boolean {( won_yet || (collection_get{ collection -> ("got_first") index -> ( 11 )} == "true" || think_wake_up ) )} ;
-   thought_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up )} ;
+   thought_any : dynamic_boolean {( think_scam_pill || think_aid_route || think_k_vroom || think_why_trains || think_wake_up || (tried_y && !point_k_vroom && !think_k_vroom) )} ;
    blurry_tats : dynamic_boolean {(
    (is_at "r5" && (!r5_ready)) ||
    (is_at "r6" && (!r6_ready)) ||
@@ -318,6 +318,10 @@ booleans {
    (is_at "r8" && (!point_why_trains)) ||
    (is_at "r9" && !point_k_vroom)
    )} ;
+
+   need_k_cue : dynamic_boolean {( !tried_y && k_cue_available )} ;
+   k_in_think : dynamic_boolean {( tried_y && k_cue_available )} ;
+   k_cue_available : dynamic_boolean {( (collection_get{collection -> ("got_first") index -> (9)} == "false" ) && (collection_get{collection -> ("tried_combo") index -> (9)} == "false" ) && !point_k_vroom && !think_k_vroom )} ;
 
    # cluing temporary booleans
 
@@ -952,10 +956,15 @@ locations {
          }
          : match "y _" {
             : if (!point_why_trains) {
-               : print "You don't need to say yes or take a trip to the Y. But that sure sounds right!" ;
+               : print "You don't need to say yes or take a trip to the Y. But that sure sounds right! You find yourself asking, what reason would I have? Maybe in not quite so many words." ;
                : match "y trains" {
-                  : print "In particular, the trains must be right." ;
+                  : print "And the trains, themselves, must be right." ;
                   : collection_modify { collection = "got_second" index -> (10) content -> ("true") ; }
+
+               }
+               : if (need_k_cue) {
+                  : print "Perhaps a one-letter solution would work elsewhere. This information will be stored in {vd_think}." ;
+                  : set_true "tried_y" ;
                }
                : gosub "reject_half_note" ;
                : done ;
@@ -1558,6 +1567,9 @@ on_command {
       : gosub "meta_think_first" ;
       : gosub "meta_think_conditionals" ;
       : gosub "meta_think_main" ;
+      : if (k_in_think) {
+         : print "You tried Y with the trains, but perhaps it was the wrong place to use a one-letter abbreviation." ;
+      }
    }
 
    : match "opt _;opts _;option _;options _" {
