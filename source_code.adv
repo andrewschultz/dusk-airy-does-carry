@@ -627,6 +627,14 @@ locations {
                : print "You look at the ooze and name it oi-lose oil/ooze." ;
                : done ;
             }
+            : match "_ zeus" {
+               : print "Zeus, if he exists, is probably too busy to help you. What sounds like Zeus? Maybe a bit more friendly and a bit less omnipotent?" ;
+               : match "whee zeus" {
+                  : print "But feeling upbeat seems to make the ooze shudder. So you should keep that." ;
+                  : collection_modify { collection = "got_first" index -> (5) content -> ("true") ; }
+               }
+               : done ;
+            }
          }
          : match "whee zoos" {
             : if (point_whee_zoos) {
